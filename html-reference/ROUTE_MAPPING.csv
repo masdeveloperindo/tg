@@ -1,0 +1,21 @@
+﻿HTML File,Area,URL Laravel Target,Komponen Utama
+index.html,Dokumentasi,Indeks referensi,Tidak termasuk route aplikasi
+01-beranda.html,Publik,/,"Hero, katalog, promo IB"
+02-detail-produk.html,Publik,/produk/{slug},Satu halaman preview+performa+harga+FAQ
+03-broker-publik.html,Publik,/broker,Broker IB dan estimasi
+04-checkout.html,Client,/checkout/{slug},Checkout singkat
+05-pesanan.html,Client,/pesanan/{kode},"Telegram pribadi, salin detail, menunggu admin"
+06-client-dashboard.html,Client,/member,"Status pesanan, key/unduhan dan rebate opsional"
+07-client-produk.html,Client,/member/produk,"Lisensi, unduhan, key"
+08-client-broker-ib.html,Client,/member/rebate/akun,"Broker IB Saya, akun dan status verifikasi"
+09-client-hasil-rebate.html,Client,/member/rebate,"Saldo, hasil per broker/periode"
+10-client-pencairan.html,Client,/member/penarikan,"Ajukan pencairan, riwayat, kurs"
+11-admin-dashboard.html,Admin,/admin,Tugas Hari Ini
+12-admin-pesanan.html,Admin,/admin/pesanan,"Konfirmasi manual setelah cek mutasi, modal"
+13-admin-verifikasi-ib.html,Admin,/admin/akun-trading,Verifikasi/tolak referral
+14-admin-input-rebate.html,Admin,/admin/rebate,Input rebate manual cek duplikasi
+15-admin-pencairan.html,Admin,/admin/penarikan,"Proses, dibayar, tolak, ref transfer"
+16-admin-produk.html,Admin,/admin/produk/{id}/edit,Editor produk 1 halaman bertab
+17-admin-lisensi.html,Admin,/admin/lisensi,Monitoring lisensi dan anomali
+18-komponen-modal-loading.html,Sistem UI,Komponen bersama,Modal loading validasi progress asli FileReader
+19-admin-pengaturan.html,Admin,/admin/pengaturan,"Username Telegram pribadi, kurs dan minimum pencairan"

@@ -1,0 +1,22 @@
+erDiagram
+  users ||--o{ orders : creates
+  users ||--o{ licenses : owns
+  products ||--o{ orders : ordered_as
+  products ||--o{ licenses : licensed_as
+  products ||--o{ product_versions : has
+  products ||--o{ product_media : shows
+  products ||--o{ product_performances : reports
+  orders ||--o| licenses : issues_or_renews
+  licenses ||--o{ license_logs : verifies
+  licenses ||--o{ license_activations : activates
+  licenses ||--o{ license_flags : may_flag
+  licenses ||--o{ license_account_change_requests : changes
+  users ||--o{ trading_accounts : links
+  brokers ||--o{ trading_accounts : hosts
+  trading_accounts ||--o{ rebate_entries : earns
+  users ||--|| wallets : locks
+  users ||--o{ withdrawals : requests
+  orders ||--o{ refunds : may_refund
+  users ||--o{ activity_logs : acts
+  guides ||--o{ guide_steps : has
+  articles ||--o{ article_images : has

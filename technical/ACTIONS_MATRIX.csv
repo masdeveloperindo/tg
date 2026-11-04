@@ -1,0 +1,24 @@
+﻿id,action,role_policy,validation_state_transition,transaction_idempotency,modal_feedback,test_id
+A01,Checkout createOrder,Client login; product published/sale_enabled,MT5 akun+server+real/demo; price snapshot; idempotency token; new order waiting,"orders UNIQUE(user_id,idempotency_key); transaksi",Loading tombol; setelah commit ke detail order; tidak create dua kali,T-ORD-01
+A02,AdminOrder confirmPayment,Admin+TOTP/re-auth; OrderPolicy.confirm,"waiting & now<expires_at → paid; bukti dana dicek, reference/note wajib",lock order; create/renew license atomik; return existing saat retry,"Modal kode/nominal/akun, checkbox dana sudah masuk; loading asli; hasil dari DB",T-ORD-02
+A03,AdminOrder rejectOrder,Admin; policy reject,waiting → rejected; alasan wajib,"lock order, audit",Modal alasan dan confirm,T-ORD-03
+A04,AdminRefund recordRefund,Admin+TOTP/re-auth,order paid; refund initiated → completed hanya setelah transfer manual,row lock; refunds idempotency per order,Modal nominal/metode/bukti; modal hasil,T-REF-01
+A05,AdminLicense suspend/revoke/reactivate,Admin+TOTP/re-auth,active ↔ suspended; active/suspended → revoked terminal (tidak reaktivasi revoked tanpa prosedur baru),"lock license; audit, invalidate cache",Modal alasan dan dampak offline grace,T-LIC-01
+A06,ClientLicense requestAccountChange,Pemilik license,"account baru format MT5; pending request, bukan langsung mengubah license",enforce one pending per license transaction; audit,Modal ringkas,T-LIC-02
+A07,AdminLicense decideAccountChange,Admin+reauth,pending → approved/rejected; approve update triple setelah cek uniqueness,lock license+request; check conflicting unique; audit,Modal account before/after,T-LIC-03
+A08,AdminIb saveBroker,Admin,"nama, https referral allowlisted, rate+date valid","CRUD transactional, audit",Form inline+toast; hapus jika bereferensi historis → disable,T-IB-01
+A09,ClientIb attachAccount,Client login,"broker aktif, akun unik dan bukti; create pending",unique broker+account; audit,Tombol loading,T-IB-02
+A10,AdminIb approve/reject,Admin,pending → approved/rejected; alasan bukti bila reject,lock account; audit,"Modal broker, akun, hasil pemeriksaan",T-IB-03
+A11,AdminRebate recordEntry,Admin+reauth untuk koreksi negatif besar,akun IB approved; period YYYY-MM; lot >=0; USD signed; unique reference,lock wallet; insert immutable; validate available >=0; audit,Modal ringkasan+loading; sukses tampil di client setelah commit,T-REB-01
+A12,AdminRebate correctEntry,Admin+reauth,entri asal tetap; koreksi append row signed dengan correction_of_id,lock wallet; unique new reference; reconciliation,Modal nominal delta dan alasan; no update/delete,T-REB-02
+A13,ClientPayout requestWithdrawal,Pemilik wallet; aktif IB,"amount > minimum, <=available; snapshot kurs, tujuan dienkripsi; status requested",lock wallet; idempotency; reserved from amount; audit,"Modal USD/IDR/tujuan, loading, cek-status timeout",T-PAY-01
+A14,AdminPayout markProcessing,Admin,requested → processing,lock wallet+withdrawal; audit,"Modal ringkas, update status",T-PAY-02
+A15,AdminPayout markPaid,Admin+TOTP/re-auth,requested/processing → paid; bank ref + waktu transfer nyata wajib,lock wallet+withdrawal; idempotent; paid once,Modal rekening masked + jumlah + bukti; status server,T-PAY-03
+A16,AdminPayout reject,Admin+TOTP/re-auth,requested/processing → rejected; alasan wajib; release reserve once,lock wallet+withdrawal; audit,Modal alasan; saldo client update sesudah commit,T-PAY-04
+A17,ClientPayout cancel,Pemilik; requested only,"requested → cancelled, release reserve once",lock wallet+withdrawal; audit,Modal konfirmasi sederhana,T-PAY-05
+A18,AdminContent publish/disable,Admin,produk/FAQ/panduan/testimoni/pengumuman valid; testimoni wajib consent,audit; sanitasi; no false profit,confirm untuk publish publik dan hapus; inline upload percent,T-CMS-01
+A19,AdminSettings update,Admin+TOTP/re-auth sensitif,"Telegram username format, kurs/min payout/harga valid; tidak ada bot token",settings encrypted+audit,Modal saat ubah konfigurasi finansial,T-SET-01
+A20,AdminUser resetPassword/disable,Admin+TOTP/re-auth,"verifikasi identitas manual; revoke sesi, must_change_password=1; disabled user tidak login","audit, rate limit",Modal data client masked dan alasan,T-AUTH-01
+A21,AdminAnomaly review/ignore,Admin,new → reviewed/ignored; catatan wajib,"row lock, audit","Modal alasan, status terlihat",T-ANM-01
+A22,Member downloadVersion,LicensePolicy.download pemilik,"lisensi active, belum expired, version milik produk",signed URL max 5 min + recheck policy di GET,Spinner/progress browser; error jelas,T-FILE-01
+A23,AdminAsset uploadImage/uploadEx5,Admin,"type/size/path, random name, checksum, anti-XSS; EX5 disk privat",file atomic finalization + DB version record; audit,"Upload % nyata dari Livewire upload event, lalu status server tanpa persen palsu",T-UP-01
