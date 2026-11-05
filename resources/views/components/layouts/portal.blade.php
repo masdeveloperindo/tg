@@ -12,6 +12,7 @@
         ]
         : [
             ['label' => 'Area saya', 'items' => [['route' => 'member', 'label' => 'Ringkasan', 'active' => 'member']]],
+            ['label' => 'Pesanan', 'items' => [['route' => 'member.pesanan', 'label' => 'Pesanan saya', 'active' => ['member.pesanan', 'pesanan.kode']]]],
             ['label' => 'Akun', 'items' => [['route' => 'member.profile', 'label' => 'Profil & kata sandi', 'active' => ['member.profile', 'password.change']]]],
         ];
 @endphp

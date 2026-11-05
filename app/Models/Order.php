@@ -28,6 +28,11 @@ class Order extends DomainModel
         ];
     }
 
+    public function checkoutQuote(): BelongsTo
+    {
+        return $this->belongsTo(CheckoutQuote::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

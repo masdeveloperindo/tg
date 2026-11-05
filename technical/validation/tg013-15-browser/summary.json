@@ -1,0 +1,14 @@
+{
+  "passed": 8,
+  "checks": [
+    "Login returns to checkout with persistent owned intent",
+    "Lost response after commit resolves original intent via GET without resubmission",
+    "Clipboard contains actual invoice snapshot; chat is plain personal link without POST or payload",
+    "Denied clipboard permission offers selected manual copy without fake success",
+    "Retry intent and order history show one waiting order",
+    "Checkout and invoice fit viewport 360",
+    "Checkout and invoice fit viewport 768",
+    "Checkout and invoice fit viewport 1280"
+  ],
+  "javascriptErrors": []
+}

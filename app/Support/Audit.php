@@ -12,6 +12,7 @@ final class Audit
     public static function record(User $actor, string $action, Model $subject, array $summary): void
     {
         $schemas = [
+            'order.created' => ['coverage_year'],
             'product.created' => ['content_changed'],
             'product.updated' => ['content_changed'],
             'product.status_changed' => ['status'],
@@ -38,7 +39,7 @@ final class Audit
                 'before_sha256', 'after_sha256' => is_string($value) && preg_match('/^[a-f0-9]{64}$/', $value) === 1,
                 'role' => in_array($value, ['client', 'admin'], true),
                 'status' => in_array($value, ['active', 'disabled', 'draft', 'published', 'archived'], true),
-                'resource_id', 'step_count', 'sessions_revoked', 'version_count', 'media_count', 'faq_count', 'performance_count' => is_int($value) && $value >= 0,
+                'coverage_year', 'resource_id', 'step_count', 'sessions_revoked', 'version_count', 'media_count', 'faq_count', 'performance_count' => is_int($value) && $value >= 0,
                 default => is_bool($value),
             };
             if ($valid) {

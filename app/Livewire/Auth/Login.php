@@ -21,6 +21,11 @@ class Login extends Component
             $this->reset('password');
         }
 
+        if ($user->role !== UserRole::Admin && ! $user->must_change_password) {
+            $this->redirectIntended(route('member'));
+
+            return;
+        }
         $this->redirectRoute($user->role === UserRole::Admin
             ? ($user->totp_enabled_at ? 'admin.2fa.challenge' : 'admin.2fa.setup')
             : ($user->must_change_password ? 'password.change' : 'member'));

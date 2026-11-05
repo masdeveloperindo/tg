@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Orders\SaleInfo;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductAssetController;
 use App\Http\Controllers\PublishedAssetController;
@@ -8,6 +9,7 @@ use App\Livewire\Catalog\Brokers;
 use App\Livewire\Catalog\Detail;
 use App\Livewire\Catalog\Products;
 use App\Livewire\Home;
+use App\Livewire\Orders\CheckoutPage;
 use App\Livewire\Products\Editor;
 use App\Livewire\Products\Index;
 use App\Models\User;
@@ -35,7 +37,10 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
     Route::get('/password/change', Auth\ChangePassword::class)->name('password.change');
 
     Route::middleware('client')->group(function (): void {
-        Route::view('/member', 'auth.member')->name('member');
+        Route::get('/checkout/{slug}', CheckoutPage::class)->name('checkout.slug');
+        Route::get('/pesanan/{kode}', App\Livewire\Orders\Detail::class)->name('pesanan.kode');
+        Route::get('/member/pesanan', App\Livewire\Orders\Index::class)->name('member.pesanan');
+        Route::get('/member', fn () => view('auth.member', ['renewals' => app(SaleInfo::class)->renewals()]))->name('member');
         Route::get('/member/profil', Auth\ChangePassword::class)->name('member.profile');
     });
 

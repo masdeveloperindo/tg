@@ -20,9 +20,10 @@
             @if($product?->description)<details><summary>Pratinjau deskripsi tersimpan</summary><div class="editor-prose">{!! \App\Support\SafeHtml::clean($product->description) !!}</div></details>@endif
         </section>
         <section id="panel-price" role="tabpanel" aria-labelledby="tab-price" x-show="tab === 'price'" x-cloak>
-            <h2>Harga dasar</h2><p class="auth-hint">Gunakan nominal yang disetujui owner. Nilai ini belum merupakan kuotasi checkout/harga kalender.</p>
+            <h2>Harga dasar</h2><p class="auth-hint">Gunakan nominal yang disetujui owner. Simulasi memakai harga produk tersimpan dan aturan aktif. Perubahan berlaku untuk kuotasi baru.</p>
             <x-ui.editor-field model="form.base_price_idr" label="Harga awal (IDR)" inputmode="decimal" />
             <x-ui.editor-field model="form.minimum_price_idr" label="Harga minimum (IDR)" inputmode="decimal" />
+            @if($product)<x-ui.button wire:click="simulateCalendar">Simulasi harga 12 bulan</x-ui.button><ol>@foreach($calendarPrices as $month=>$amount)<li>Bulan {{ $month }}: {{ \App\Support\OrderDisplay::money($amount) }}</li>@endforeach</ol>@endif
         </section>
         <section id="panel-seo" role="tabpanel" aria-labelledby="tab-seo" x-show="tab === 'seo'" x-cloak>
             <h2>SEO produk</h2><x-ui.editor-field model="form.seo_title" label="Judul SEO (opsional)" maxlength="191" /><x-ui.editor-field model="form.seo_description" label="Deskripsi SEO (opsional)" type="textarea" maxlength="320" />

@@ -39,6 +39,10 @@ class DomainForeignKeyTest extends TestCase
             $expected[$table.'.'.$column] = ['tg_test', $referencedTable, 'id', $deleteRule];
         }
 
+        foreach ([['checkout_quotes', 'user_id', 'users'], ['checkout_quotes', 'product_id', 'products'], ['checkout_quotes', 'renewal_license_id', 'licenses'], ['orders', 'checkout_quote_id', 'checkout_quotes']] as [$table, $column, $target]) {
+            $expected[$table.'.'.$column] = ['tg_test', $target, 'id', 'RESTRICT'];
+        }
+
         $actual = [];
         foreach ($metadata as $foreignKey) {
             $key = $foreignKey->table_name.'.'.$foreignKey->column_name;

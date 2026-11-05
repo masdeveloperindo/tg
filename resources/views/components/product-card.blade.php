@@ -5,5 +5,5 @@
     @if($picture)<img src="{{ $picture['url'] }}" alt="{{ $cover->alt_text }}" width="{{ $picture['width'] }}" height="{{ $picture['height'] }}" loading="lazy">@endif
     <p class="eyebrow">{{ $product->type->value === 'ea' ? 'EXPERT ADVISOR' : 'INDIKATOR' }}</p><h3><a href="{{ route('produk.slug', $product->slug) }}">{{ $product->name }}</a></h3>
     @if($product->description)<p>{{ \App\Support\PublicContent::text($product->description, 170) }}</p>@endif
-    <p class="auth-hint">Penjualan belum dibuka.</p><a class="auth-secondary" href="{{ route('produk.slug', $product->slug) }}">Lihat detail <x-ui.icon name="arrow-right" /></a>
+    <x-product-price :product="$product" /><a class="auth-secondary" href="{{ route('produk.slug', $product->slug) }}">Lihat detail <x-ui.icon name="arrow-right" /></a>
 </article>

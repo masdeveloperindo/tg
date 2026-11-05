@@ -29,7 +29,7 @@ class DomainSchemaTest extends TestCase
         $this->assertStringStartsWith('8.4.', DB::selectOne('SELECT VERSION() AS version')->version);
         $this->assertCount(30, DomainRecords::TABLES);
         $tables = Schema::getTableListing(DB::connection()->getDatabaseName(), false);
-        $expected = array_merge(DomainRecords::TABLES, ['cache', 'cache_locks', 'migrations', 'sessions']);
+        $expected = array_merge(DomainRecords::TABLES, ['cache', 'cache_locks', 'migrations', 'sessions', 'checkout_quotes']);
         sort($tables);
         sort($expected);
         $this->assertSame($expected, $tables);

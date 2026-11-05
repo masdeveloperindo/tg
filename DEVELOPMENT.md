@@ -1,6 +1,6 @@
 # Development lokal — Trader Garuda
 
-Panduan ini mencakup TG-004–TG-012: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
+Panduan ini mencakup TG-004–TG-015: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
 
 ## Prasyarat
 
@@ -175,3 +175,17 @@ Gambar maksimal2MiB, PDF bukti maksimal5MiB dan EX5 maksimal20MiB. Format gate E
 `/produk` dan `/produk/{slug}` hanya menampilkan published. Unpublish/arsip menutup halaman dan endpoint gambar berikutnya. File versi EA, laporan PDF asli dan consent ulasan tetap privat. `/broker` memakai mitra aktif/efektif; isi `TG_BROKER_REFERRAL_HOSTS` dengan hostname HTTPS persis yang disetujui owner/legal bila pendaftaran sudah siap. Nilai default kosong; `.env` existing tidak diubah. Estimasi rebate adalah informasi, bukan saldo.
 
 Fixture browser publik memakai `tests/Browser/seed-catalog.php` dan `tests/Browser/catalog.cjs`; database tg_test dan storage e2e terpisah. Prosedur dan hasil: [`technical/validation/TG012.md`](technical/validation/TG012.md). Harga kalender/kuotasi dan order belum aktif; berikutnya TG-013.
+
+## Harga, checkout dan Telegram TG-013–TG-015
+
+Konfigurasi owner dibaca dari Setting.value_encrypted (cast enkripsi), tanpa nilai produksi bawaan:
+
+- checkout.pricing: JSON dengan monthly_discount_pct (string desimal 0–100), rounding_increment_idr (string desimal positif), rounding_mode (nearest/up/down), quote_minutes (integer1–60), payment_minutes (integer1–10080).
+- checkout.payment_methods: array 1–10 objek dengan id slugunik, label,account_holder,account_number semuanya string; instructions opsional. Gunakan data yang disetujui owner, jangan fixture. Pengaturan UI owner menyeluruh mengikuti TG-034.
+- telegram_admin_username: username pribadi, boleh diawali@ atau URL https://t.me/username tanpa query/fragment; fallback TG_TELEGRAM_USERNAME. Format tidak membuktikan akun manusia, sehingga owner tetap memastikan akun pribadinya benar.
+
+Sales flag aplikasi tetapfalse. Checkout memerlukan product published/sale_enabled, PoC gate, versi aktif sudah dirilis dengan ukuran/checksum file cocok, konfigurasi harga/pembayaran dan Telegram valid. Indikator memiliki gate terpisah. Jangan membuka penjualan hanya karena fixture/unit test lulus.
+
+Migration additive menambah checkout_quotes dan kolom order. Harga/coverage/payment disimpan sebagai snapshot server. Quote expired atau data renewal berubah memerlukan kuotasi baru; respons hilang memakai URL intent yang sama untuk Cek Status. Jangan mengirim ulang mutasi dengan UUID baru otomatis. Tidak ada bank transfer/API Telegram yang dijalankan aplikasi.
+
+Rincian hasil dan browser test-only router: [`technical/validation/TG013-TG015.md`](technical/validation/TG013-TG015.md). PHP memerlukan BCMath; Docker development sudah menyediakannya dan Composer mendeklarasikannya.

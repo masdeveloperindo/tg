@@ -63,10 +63,16 @@ class DomainMigrationTest extends TestCase
         // The base TestCase verifies tg_test before any destructive command.
         try {
             $this->artisan('migrate:fresh', ['--force' => true])->assertSuccessful();
-            $this->assertCount(34, $this->tables());
+            $this->assertCount(35, $this->tables());
             $this->assertSame(1, $this->renewalForeignKeyCount());
 
-            // The last migration must detach the cycle without dropping history tables.
+            // The newest migration removes quote references before the original cyclic FK.
+            $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
+            $this->assertFalse(Schema::hasTable('checkout_quotes'));
+            $this->assertFalse(Schema::hasColumn('orders', 'checkout_quote_id'));
+            $this->assertSame(1, $this->renewalForeignKeyCount());
+
+            // The deferred domain migration then detaches the cycle without dropping history.
             $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
             $this->assertTrue(Schema::hasTable('orders'));
             $this->assertTrue(Schema::hasTable('licenses'));
@@ -80,7 +86,7 @@ class DomainMigrationTest extends TestCase
             $this->assertSame(['migrations'], $this->tables());
 
             $this->artisan('migrate', ['--force' => true])->assertSuccessful();
-            $this->assertCount(34, $this->tables());
+            $this->assertCount(35, $this->tables());
             $this->assertSame(1, $this->renewalForeignKeyCount());
         } finally {
             RefreshDatabaseState::$migrated = false;

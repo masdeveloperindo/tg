@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-012 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-015 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -101,15 +101,15 @@ Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Ad
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-011. **Gate:** G-19,G-27.
   - **Selesai jika:** Route publik PRD aktif, metadata SEO & risk disclaimer tampil; satu halaman detail produk memuat preview + track record.
 
-- [ ] **TG-013 — Mesin harga kalender, kuotasi dan renewal** `P0`
+- [x] **TG-013 — Mesin harga kalender, kuotasi dan renewal** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006,TG-011,TG-001. **Gate:** G-08.
   - **Selesai jika:** Tes Januari/Februari/Desember, minimum/pembulatan, expired 31 Des WIB, quote snapshot dan renewal lulus.
 
-- [ ] **TG-014 — Checkout client dan halaman pesanan** `P0`
+- [x] **TG-014 — Checkout client dan halaman pesanan** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-007,TG-012,TG-013. **Gate:** G-06,G-08.
   - **Selesai jika:** Client isi akun MT5 sekali; nominal, metode bayar dan akses sampai 31 Desember jelas; order belum lunas tidak menampilkan key.
 
-- [ ] **TG-015 — Tautan Telegram pribadi + Salin Detail Pesanan** `P0`
+- [x] **TG-015 — Tautan Telegram pribadi + Salin Detail Pesanan** `P0`
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-014,TG-001. **Gate:** G-05.
   - **Selesai jika:** Tautan membuka chat ke @username admin, client mengirim bukti manual; tidak ada bot/webhook, pesan otomatis ataupun perubahan status pesanan.
 
@@ -304,3 +304,5 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 | TG-011 | DONE | `feat/laravel-foundation` | 301 tests/2467 assertions;17 tes produk dan9 alur browser PASS; `technical/validation/TG011.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |
 
 | TG-012 | DONE | `feat/laravel-foundation` | 311 tests/2566 assertions;12 browser cases, published-only/SEO/privacy; `technical/validation/TG012.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |
+
+| TG-013–TG-015 | DONE (software) | `feat/laravel-foundation` | 331 tests/2692 assertions; dua worker MySQL,8 browser checks; `technical/validation/TG013-TG015.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |

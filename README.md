@@ -1,6 +1,6 @@
 # Trader Garuda — GitHub + Codex starter (v1.7.1 software-only)
 
-**Progres terkini (5 November 2026):** TG-004–TG-012 selesai; 311 tes PHP (2.566 assertion) lulus. Lihat [DEVELOPMENT.md](DEVELOPMENT.md) dan [bukti validasi terkini](technical/validation/TG012.md). Keterangan starter di bawah merupakan baseline paket awal; aplikasi belum siap transaksi.
+**Progres terkini (5 November 2026):** TG-004–TG-015 selesai secara software; 331 tes PHP (2.692 assertion) lulus. Lihat [DEVELOPMENT.md](DEVELOPMENT.md) dan [bukti validasi terkini](technical/validation/TG013-TG015.md). Keterangan starter di bawah merupakan baseline paket awal; aplikasi belum siap transaksi.
 
 **Lingkup software development saja:** baca `SCOPE_OF_WORK.md`. VPS, DNS, TLS, Nginx, firewall, cron host, backup fisik, dan deployment adalah tanggung jawab pihak infrastruktur.  
 **Silakan mulai coding dengan paket ini.** Ini **tidak** menyatakan aplikasi sudah go-live. Implementasi, QA, keamanan aplikasi, dan handoff dikerjakan mengikuti 44 task hingga `SOFTWARE_ACCEPTANCE.md` lulus. Go-live aktual menunggu infra/owner.
@@ -46,6 +46,6 @@ Keterangan starter dan status di atas menggambarkan **paket spesifikasi awal**. 
 
 Workflow lokal memakai PHP 8.4, Composer 2, Node.js 24 dan MySQL 8.4. Container development disediakan untuk dependency lokal; ini tidak mencakup deployment atau operasi infrastruktur produksi. Schema/model lisensi dan ledger tersedia lewat TG-006, beserta autentikasi/TOTP TG-007; workflow transaksi, API lisensi dan integrasi EA MT5 belum diimplementasikan. Jangan gunakan untuk transaksi nyata.
 
-Bukti database TG-006: [migrasi, constraint, model dan hasil pengujian](technical/validation/TG006.md). Autentikasi dan otorisasi TG-007 juga selesai; TG-008 (layout/design system) juga selesai; TG-009 (modal/loading/error/toast) selesai; TG-010 (audit/error aman) selesai; TG-011 (editor produk) selesai; TG-012 (katalog/detail publik) selesai; berikutnya TG-013 (harga kalender/kuotasi). TG-001–TG-003 masih menunggu owner/legal/source EA.
+Bukti database TG-006: [migrasi, constraint, model dan hasil pengujian](technical/validation/TG006.md). Autentikasi dan otorisasi TG-007 juga selesai; TG-008 (layout/design system) juga selesai; TG-009 (modal/loading/error/toast) selesai; TG-010 (audit/error aman) selesai; TG-011 (editor produk) selesai; TG-012 (katalog/detail publik) selesai; TG-013–TG-015 (harga kalender/checkout/Telegram manual) selesai; berikutnya TG-016 (konfirmasi pembayaran admin). TG-001–TG-003 masih menunggu owner/legal/source EA.
 
 Bukti TG-007: [autentikasi, TOTP, recovery dan reset manual](technical/validation/TG007.md). Admin pertama dibuat manual melalui `docker compose run --rm app php artisan tg:create-admin`; tidak ada akun/password bawaan.

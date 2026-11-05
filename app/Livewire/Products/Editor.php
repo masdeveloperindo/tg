@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Products;
 
+use App\Actions\Orders\CalendarPricing;
+use App\Actions\Orders\CheckoutSettings;
 use App\Actions\Products\ManageProducts;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
@@ -30,6 +32,8 @@ class Editor extends Component
 
     public array $steps = [];
 
+    public array $calendarPrices = [];
+
     public $image;
 
     public $versionFile;
@@ -56,6 +60,14 @@ class Editor extends Component
                 $this->steps[] = ['body' => $step->body, 'media_id' => $product->media()->where('disk_path', $step->image_path)->value('id')];
             }
         }
+    }
+
+    public function simulateCalendar(): void
+    {
+        $product = $this->product();
+        $rules = app(CheckoutSettings::class)->pricing();
+        $prices = app(CalendarPricing::class)->simulate($product, $rules, now('Asia/Jakarta')->year);
+        $this->calendarPrices = array_map(fn ($row) => $row['amount_idr'], $prices);
     }
 
     public function save(ManageProducts $products): void

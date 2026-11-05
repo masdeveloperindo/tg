@@ -655,3 +655,11 @@ Pseudo urutan: validasi auth → `DB::transaction` → lock wallets (buat idempo
 - `RebateEntry`/`ActivityLog` menolak update/delete/upsert/increment melalui Eloquent, termasuk jalur quiet dan `updateOrInsert`. Ini batas aplikasi; raw SQL/Query Builder eksplisit dapat melewati model dan hanya boleh dipakai jalur terotorisasi yang tidak menulis ulang histori. Tidak ada klaim trigger database immutable atau alur saldo selesai.
 - Uji dua koneksi membuktikan baris wallet dapat menjadi anchor `FOR UPDATE`; perhitungan available, semua jalur credit/reserve/pay dan uji race transaksi utuh tetap TG-025/TG-027/TG-039.
 - Rollback/reset yang direhearsal hanya memakai database test kosong. Jangan menjalankan reset/rollback tabel finansial pada data bernilai sebagai bagian setup development.
+
+## Ekstensi TG-013–TG-015 — receipt checkout
+
+Baseline30 tabel domain diperluas dengan checkout_quotes: UUID primary key, FK user/product/renewal_license, amount_idr DECIMAL(20,2)>0, coverage_year, coverage_expires_at dan expires_at DATETIME(6) UTC, payment_minutes1..10080, pricing_snapshot JSON, payment_details encrypted array dan created_at DATETIME(6). Model append-only melindungi field receipt; belum ada pemangkasan receipt finansial otomatis.
+
+orders menambah checkout_quote_id UUID nullable/UNIQUE/FK RESTRICT dan payment_method_id VARCHAR(64) nullable. Order lama tetap valid. Jumlah tabel saat ini35 termasuk 4 framework; 42 FK. Empat FK baru diverifikasi bersama kontrak FK baseline. Rollback melepas referensi order→quote sebelum menghapus quotes, lalu migration deferred domain melepaskan siklus order/lisensi. Tes fresh/rollback/reset/remigrate PASS.
+
+Intent UUID adalah pengenal receipt privat, bukan license key. Receipt dipilih dengan user_id server; unique order per quote dan per user/intent melengkapi row lock user→quote→product→license. Payment snapshot tidak masuk audit atau serialisasi model umum. History finansial/retensi tetap keputusan owner/legal.

@@ -36,6 +36,12 @@ class Register extends Component
             $this->reset('password', 'password_confirmation');
         }
 
+        if ($user->role === UserRole::Client) {
+            $this->redirectIntended(route('member'));
+
+            return;
+        }
+
         $this->redirectRoute($user->role === UserRole::Admin
             ? ($user->totp_enabled_at ? 'admin.2fa.challenge' : 'admin.2fa.setup')
             : 'member');

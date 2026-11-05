@@ -1,7 +1,7 @@
 <div><x-site-header /><main id="konten" class="shell section product-detail" tabindex="-1">
     <p><a class="auth-text-link" href="{{ route('produk') }}">Katalog produk</a> / {{ $product->name }}</p>
     <p class="eyebrow">{{ $product->type->value === 'ea' ? 'EXPERT ADVISOR / MT5' : 'INDIKATOR / MT5' }}</p><h1>{{ $product->name }}</h1>
-    <p class="auth-notice">Penjualan belum dibuka. Produk ini belum dapat dipesan.</p>
+    <x-product-price :product="$product" />
     @if($product->description)<section aria-label="Deskripsi produk" class="editor-prose">{!! \App\Support\SafeHtml::clean($product->description) !!}</section>@endif
     @php($preview = $product->media->where('section', \App\Enums\MediaSection::Preview))
     @php($tutorial = $product->media->where('section', \App\Enums\MediaSection::Tutorial))

@@ -96,3 +96,11 @@ Retensi telemetry90hari/IP raw terenkripsi30hari tersedia melalui command dry-ru
 **TG-012: DONE.** Katalog/detail published-only, preview/cara pakai/track record/FAQ/changelog/ulasan dalam satu halaman, metadata SEO dan disclaimer. Broker aktif/efektif dengan allowlist link dan estimasi BCMath tanpa mutasi saldo. Data kosong disembunyikan; file EA/PDF/consent tetap privat; penjualan belum dibuka.
 
 **311 tests/2566 assertions PASS**,179 file lint, build dan12 kasus browser PASS pada360/768/1280 tanpa error JS. Bukti: [`TG012.md`](technical/validation/TG012.md). TG-011 sudah dipush sebagai `70d29c5`; status push TG-012 mengikuti Git. Berikutnya TG-013. Owner/legal/EA dan gate produksi tetap belum selesai.
+
+## Progres 5 November 2026 — TG-013–TG-015
+
+**DONE untuk implementasi software.** Harga kalender BCMath, pembulatan/minimum, renewalH-30, quote receipt immutable dan tujuan transfer terenkripsi; checkout/riwayat/detail owner-only; Telegram personal dan clipboard manual. Intent di URL privat memulihkan order lama saat respons hilang, tanpa membuat order baru. Row lock+unique+audit diuji dengan dua worker independen.
+
+**331 tes / 2.692 assertion PASS**,195 file lint, build, Composer metadata dan8 pemeriksaan browser PASS. Migration additive diterapkan ke development; tidak ada reset/data bisnis nyata. Bukti: [`TG013-TG015.md`](technical/validation/TG013-TG015.md).
+
+Keputusan UX: server MT5 dan real/demo diminta satu kali karena schema/API wajib, sedangkan renewal memakai akun lama. PoC/sales gate tetapfalse; harga/aturan/rekening/Telegram owner belum diisi. Konfirmasi pembayaran dan penerbitan key belum termasuk group ini. Berikutnya TG-016. **SOFTWARE READY FOR HANDOFF:NO;GO-LIVE:NO.**

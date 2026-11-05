@@ -7,6 +7,7 @@
         </div>
         <x-ui.badge tone="success">Akun aktif</x-ui.badge>
     </section>
+    @if(!empty($renewals))<x-ui.panel title="Perpanjang akses">@foreach($renewals as $renewal)<article><h2>{{ $renewal['name'] }}</h2><p>Akun MT5 {{ $renewal['mt5_account'] }} · {{ \App\Support\OrderDisplay::money($renewal['amount_idr']) }} · Akses sampai 31 Desember {{ $renewal['coverage_year'] }}</p><x-ui.button :href="route('checkout.slug', ['slug' => $renewal['slug'], 'renewal' => $renewal['license_id']])">Perpanjang</x-ui.button></article>@endforeach</x-ui.panel>@endif
     <div class="portal-grid">
         <x-ui.panel title="Layanan sedang disiapkan" eyebrow="INFORMASI LAYANAN">
             <x-ui.empty-state title="Pemesanan belum dibuka">
