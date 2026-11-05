@@ -89,7 +89,7 @@ class LayoutTest extends TestCase
 
         $this->assertPrivate($response, $document);
         $this->assertPortalNavigation($document, $activeRoute, [
-            'home', 'admin', 'admin.clients', 'admin.reauth', 'password.change',
+            'home', 'admin', 'admin.produk', 'admin.clients', 'admin.reauth', 'password.change',
         ]);
         $this->assertSame(0, $document->query('//a[@href="'.route('member').'"]')->length);
     }

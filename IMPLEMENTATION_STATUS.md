@@ -84,3 +84,9 @@ Suite penuh 278 tests/2298 assertions PASS; setelah integrasi dialog native, 85 
 Retensi telemetry90hari/IP raw terenkripsi30hari tersedia melalui command dry-run/apply batch; audit tidak dihapus. Default baru daily14file; konfigurasi existing dipertahankan. Scheduler mengikuti TG-035.
 
 **284 tes PASS / 2358 assertions**, lint163 file PASS; enam tes khusus setelah penyesuaian view/default rotasi juga PASS. Bukti: [`TG010.md`](technical/validation/TG010.md). Berikutnya TG-011. Perubahan lokal belum dipush/PR. Input owner/legal/source EA masih menunggu; software belum siap handoff/go-live.
+
+## Progres 5 November 2026 — TG-011 / Fase2
+
+**TG-011: DONE.** Editor produk tujuh tab, policy admin/TOTP dan file privat, sanitasi HTML, gambar re-encode, versi/checksum/satu aktif, FAQ/tutorial serta metadata performa dengan audit editor/waktu/hash. Publikasi/arsip melalui modal; sale_enabled tetapfalse. Tidak ada angka performa buatan atau produk produksi dibuat.
+
+**301 tests/2467 assertions PASS**,172 file lint, Vite build dan9 alur browser PASS pada360/768/1280. Tes produk akhir17PASS/101assertions. Runtime GD dan upload20MiB/post24MiB disiapkan dalam Docker development. Bukti: [`TG011.md`](technical/validation/TG011.md). Push fondasi TG-004–TG-010 sebelumnya berhasil sebagai `8cfcd1d`; pekerjaan Fase2 mengikuti branch yang sama. Berikutnya TG-012. Input owner/legal/EA dan PoC terminal tetap eksternal; software belum siap handoff/go-live.

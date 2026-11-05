@@ -1,6 +1,6 @@
 # Development lokal — Trader Garuda
 
-Panduan ini mencakup TG-004–TG-008: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
+Panduan ini mencakup TG-004–TG-011: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
 
 ## Prasyarat
 
@@ -161,3 +161,11 @@ Komponen bersama dan reproduksi pemeriksaan kegagalan browser: [`technical/valid
 Semua request memperoleh `X-Request-ID` dari server; sertakan referensi itu saat melaporkan error. Pesan/context log bebas disensor oleh allowlist, sehingga event baru harus memakai metadata aman. Activity audit autentikasi memakai `App\Support\Audit` dalam transaksi mutasi yang sama. Lihat [`technical/validation/TG010.md`](technical/validation/TG010.md).
 
 `docker compose run --rm app php artisan tg:prune-license-logs` hanya menampilkan dry run. Opsi `--apply` menerapkan retensi telemetry90hari/IP terenkripsi30hari; audit tetap dipertahankan. Scheduler belum diaktifkan (TG-035). Default baru `LOG_STACK=daily`; `.env` existing dengan `single` tetap perlu disesuaikan operator untuk rotasi14file. Tidak ada secret atau `.env` existing yang diubah dalam task ini.
+
+## Produk TG-011
+
+Admin terverifikasi mengelola produk melalui `/admin/produk` dan satu editor bertab. Semua file berada di disk privat; endpoint gambar/file/preview memerlukan admin. Publikasi konten tidak membuka penjualan. Editor memakai HTML sederhana yang disanitasi, bukan embed/script. Harga dasar harus berasal dari keputusan owner; hasil uji wajib berasal dari sumber nyata.
+
+Rebuild image app setelah perubahan Dockerfile: GD menyediakan re-encode JPG/PNG/WebP; PHP harus membaca upload20M/post24M. File INI disalin dengan mode0644 agar terbaca oleh user non-root. `.env` existing tetap dipertahankan. Temporary upload Livewire saat ini admin-only dengan batas20MiB; use case upload client berikutnya memerlukan kebijakan tersendiri.
+
+Gambar maksimal2MiB, PDF bukti maksimal5MiB dan EX5 maksimal20MiB. Format gate EX5 saat ini ketat dan hanya diuji memakai fixture biner; validasi file EA nyata/terminal tetap memerlukan TG-003/TG-020. File tidak dieksekusi server. Versi historis dan bukti asli dipertahankan saat presentasi dihapus. Lihat [`technical/validation/TG011.md`](technical/validation/TG011.md) untuk alur browser, hasil aktual dan batasnya.

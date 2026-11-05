@@ -1,0 +1,14 @@
+{
+  "passed": 9,
+  "results": [
+    "Create product through Livewire UI; sales remain disabled",
+    "FAQ, tutorial and actual image upload/re-encode/save",
+    "Performance metadata with absent metrics preserved",
+    "Private version upload/checksum and modal activation",
+    "Publish confirmation, Escape cancellation and server result",
+    "All seven tabs fit viewport 360",
+    "All seven tabs fit viewport 768",
+    "All seven tabs fit viewport 1280",
+    "Keyboard tabs and no JavaScript errors"
+  ]
+}

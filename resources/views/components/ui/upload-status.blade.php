@@ -1,4 +1,6 @@
-<div {{ $attributes }} x-data="{ state: 'idle', progress: 0 }"
+@props(['field' => null])
+<div {{ $attributes }} x-data="{ state: 'idle', progress: 0, field: @js($field) }"
+    @upload-validated.window="if ($event.detail.fields?.includes(field)) { state = 'idle'; progress = 0 }"
     x-on:livewire-upload-start="state = 'uploading'; progress = 0"
     x-on:livewire-upload-progress="if (state === 'uploading') progress = Math.max(0, Math.min(100, Number($event.detail.progress) || 0))"
     x-on:livewire-upload-finish="state = 'processing'"

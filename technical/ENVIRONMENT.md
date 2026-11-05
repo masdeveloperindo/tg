@@ -43,3 +43,5 @@ PHPUnit memaksa database `tg_test`, mengosongkan `DB_URL` dan memeriksa target s
 Dependensi eksternal tetap: data owner dan keputusan harga/rekening/Telegram (TG-001), persetujuan legal/IB (TG-002), source EA berizin dan terminal MT5 untuk PoC (TG-003/TG-020), serta staging/domain API lama/secret produksi/storage fisik dari pihak infra. Penjualan lisensi dan indikator tetap nonaktif selama PoC belum terbukti; fondasi tidak mengirim pesan Telegram atau menerima pembayaran.
 
 Layout bersama TG-008 dan pemeriksaan Chromium 360/768/1280 tersedia; lihat `DESIGN_SYSTEM.md` dan `validation/TG008.md`. Server e2e wajib memakai `--no-reload` agar override environment database dipertahankan; prosedur terisolasi ada di `../DEVELOPMENT.md`.
+
+TG-011 memerlukan ekstensi GD (dideklarasikan Composer) untuk re-encode gambar; Docker development menyediakannya. PHP upload_max_filesize20M/post_max_size24M dan temporary upload admin-only sudah diselaraskan; lihat `validation/TG011.md`. File INI di image harus terbaca oleh user non-root.

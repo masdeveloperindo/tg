@@ -1,0 +1,22 @@
+
+   PASS  Tests\Feature\ProductEditorTest
+  ✓ product creation sanitizes description keeps decimals and ignores s… 2.73s
+  ✓ product prices slug and published slug are validated                 0.02s
+  ✓ empty description cannot be published and unknown status is rejecte… 0.02s
+  ✓ guest client unverified and disabled admin cannot open editor or mu… 0.04s
+  ✓ livewire editor creates product and locked id cannot be forged       0.06s
+  ✓ livewire actions reauthorize after admin session expires             0.03s
+  ✓ image upload is reencoded private and client filename cannot select… 0.03s
+  ✓ disguised image svg and malicious video hosts are rejected           0.02s
+  ✓ ex5 upload checksum and only one active version are enforced         0.03s
+  ✓ script disguised as ex5 is rejected and database failure removes ne… 0.02s
+  ✓ faq and tutorial are sanitized and can be updated without duplicate… 0.03s
+  ✓ performance preserves optional null values and records editor and c… 0.03s
+  ✓ cross product resource ids cannot be changed activated or removed    0.03s
+  ✓ media and version metadata can be edited without replacing the sour… 0.09s
+  ✓ performance pdf and equity are private and media removal is scoped…  0.03s
+  ✓ temporary upload and preview endpoints require admin authentication  0.02s
+  ✓ sanitizer removes xss namespaces comments styles and event handlers  0.01s
+
+  Tests:    17 passed (101 assertions)
+  Duration: 3.33s

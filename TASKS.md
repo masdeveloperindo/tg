@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-010 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-011 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -93,7 +93,7 @@ Buat basis Laravel, database, autentikasi, desain dan sistem feedback yang bisa 
 
 Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Admin cek mutasi → Key terbit.
 
-- [ ] **TG-011 — CRUD produk, media, versi EA dan satu editor detail** `P1`
+- [x] **TG-011 — CRUD produk, media, versi EA dan satu editor detail** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-006,TG-008. **Gate:** G-19.
   - **Selesai jika:** Admin mengelola deskripsi, tutorial, performa backtest/forward test, FAQ, versi, screenshot; data kosong tidak ditampilkan dan statistik tidak direkayasa.
 
@@ -300,3 +300,5 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 | TG-009 | DONE | `feat/laravel-foundation` (working tree) | Komponen feedback, 278 suite PASS + 85 Auth/Layout setelah integrasi modal; 5 skenario browser PASS; `technical/validation/TG009.md` | Chromium + MySQL lokal | 2026-11-05 |
 
 | TG-010 | DONE | `feat/laravel-foundation` (working tree) | 284 tests / 2358 assertions; redaksi, korelasi request, error dan retensi; `technical/validation/TG010.md` | MySQL lokal | 2026-11-05 |
+
+| TG-011 | DONE | `feat/laravel-foundation` | 301 tests/2467 assertions;17 tes produk dan9 alur browser PASS; `technical/validation/TG011.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |

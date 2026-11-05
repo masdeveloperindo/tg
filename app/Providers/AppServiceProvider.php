@@ -13,6 +13,7 @@ use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Features\SupportFileUploads\FilePreviewController;
 use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilePreviewController::$middleware = [
+            'web', 'auth', 'active', 'admin.session', 'auth.session', 'password.changed', 'admin.role', 'admin.2fa', 'private.response',
+        ];
         Livewire::addPersistentMiddleware([
             Authenticate::class,
             AuthenticateSession::class,
