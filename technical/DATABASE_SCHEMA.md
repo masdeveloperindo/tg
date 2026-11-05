@@ -4,7 +4,7 @@
 
 **Model uang:** IDR `DECIMAL(20,2)`; USD `DECIMAL(20,4)`; lot `DECIMAL(18,4)`; kurs `DECIMAL(20,6)`. Penghitungan server menggunakan decimal/string math dan `ROUND_HALF_UP` terdokumentasi, tidak memakai `float`. Semua timestamp DB UTC `DATETIME(6)`; tampilan WIB. Semua PK `BIGINT UNSIGNED` auto increment kecuali disebut lain; timestamps `created_at, updated_at` wajib jika ada di tabel.
 
-**MVP:** 30 tabel domain (26 dari PRD awal + 4 tambahan `wallets`, `api_nonces`, `admin_recovery_codes`, `pages`). Tabel bawaan Laravel (`sessions`, `cache`, `cache_locks`, `password_reset_tokens` bila diperlukan) terpisah, mengikuti versi framework. Tidak ada tabel Telegram bot/webhook. Rancangan ini **belum migration Laravel yang dieksekusi**; task TG-006 harus merealisasikannya dan menjalankan tes.
+**MVP:** 30 tabel domain (26 dari PRD awal + 4 tambahan `wallets`, `api_nonces`, `admin_recovery_codes`, `pages`). Tabel bawaan Laravel (`sessions`, `cache`, `cache_locks`, `password_reset_tokens` bila diperlukan) terpisah, mengikuti versi framework. Tidak ada tabel Telegram bot/webhook. Kontrak ini sudah direalisasikan oleh TG-006 dalam 30 migration domain dan satu migration FK tertunda; fresh migrate/rollback/remigrate serta constraint telah diuji di MySQL 8.4. Bukti: [`validation/TG006.md`](validation/TG006.md). Workflow transaksi tetap task berikutnya.
 
 **Aturan relasi:** master/history keuangan umumnya `ON DELETE RESTRICT`; account dinonaktifkan, tidak dihapus untuk menghindari jejak finansial hilang. Kunci yang semestinya unik harus diberlakukan di DB. Status menggunakan `VARCHAR` + `CHECK` pada MySQL 8.4; Laravel validator/enum yang sama. Kolom bernama `_enc` memakai Laravel encryption dan disensor dari serialisasi API. UUID idempotency divalidasi.
 
@@ -641,7 +641,17 @@ Pseudo urutan: validasi auth → `DB::transaction` → lock wallets (buat idempo
 
 ## 6. Definition of Done — TG-006, TG-025, TG-027
 
-[ ] 30 migration domain, seeder staging aman (bukan produksi), FK/unique/check nyata, fresh migrate + rollback rehearsal PASS.
+[x] 30 migration domain, FK/unique/check nyata, fresh migrate + rollback rehearsal PASS. Seeder default tetap kosong; fixture sintetis hanya di test, bukan produksi.
 [ ] Dua akun client tidak dapat saling melihat/ubah data; satu checkout tidak menciptakan dua lisensi; kasus concurrent wallet tidak minus.
 [ ] Semua money test tidak memakai floating point; pending/rejected/paid saldo cocok dalam uji rekonsiliasi.
-[ ] File migration/schema ter-review dan query indexes tercatat.
+[x] File migration/schema ter-review dan enam profil query indexes diuji dengan EXPLAIN; bukti TG-006 di `validation/TG006.md`.
+
+## 7. Catatan implementasi TG-006
+
+- Domain memiliki 30 tabel; framework session/cache terpisah. Migration ke-31 memasang `orders.renewal_license_id` setelah kedua tabel tersedia; rollback melepas FK tersebut sebelum tabel domain dihapus.
+- VARCHAR CHECK enum membandingkan byte dengan `CAST(... AS BINARY)`, sehingga uppercase/aksen tidak lolos karena kolasi `ai_ci`. Enum PHP memakai token yang sama. UUID/idempotency intent tetap perlu validasi action, bukan sekadar CHAR(36).
+- Model menyimpan DECIMAL sebagai string, memakai tanggal immutable dan menormalisasi datetime berzona ke UTC tanpa menggeser kalender DATE. Semua field waktu domain memakai DATETIME(6).
+- Cast terenkripsi dan hidden diterapkan untuk field sensitif. Policy pemilik/admin, redaksi isi audit dan reautentikasi dilakukan task TG-007/TG-010 dan action terkait; relasi model bukan otorisasi.
+- `RebateEntry`/`ActivityLog` menolak update/delete/upsert/increment melalui Eloquent, termasuk jalur quiet dan `updateOrInsert`. Ini batas aplikasi; raw SQL/Query Builder eksplisit dapat melewati model dan hanya boleh dipakai jalur terotorisasi yang tidak menulis ulang histori. Tidak ada klaim trigger database immutable atau alur saldo selesai.
+- Uji dua koneksi membuktikan baris wallet dapat menjadi anchor `FOR UPDATE`; perhitungan available, semua jalur credit/reserve/pay dan uji race transaksi utuh tetap TG-025/TG-027/TG-039.
+- Rollback/reset yang direhearsal hanya memakai database test kosong. Jangan menjalankan reset/rollback tabel finansial pada data bernilai sebagai bagian setup development.

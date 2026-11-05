@@ -4,7 +4,7 @@
 
 ## Pilihan yang harus didukung aplikasi
 
-- Laravel 13, Livewire 4, Tailwind CSS 4; PHP minimal 8.3; MySQL 8.4 LTS (InnoDB/utf8mb4). Tim software membuat migration dan query, bukan memasang layanan DB.
+- Laravel 13, Livewire 4, Tailwind CSS 4; fondasi project memakai PHP 8.4 sesuai `composer.json`/lockfile (framework sendiri mendeklarasikan `^8.3`); MySQL 8.4 LTS (InnoDB/utf8mb4). Tim software membuat migration dan query, bukan memasang layanan DB produksi.
 - Parameter `APP_URL`, `APP_ENV`, `APP_DEBUG`, driver session/cache, dan disk storage dibaca dari `.env`; tidak hardcoded. Staging/produksi disediakan pihak infra.
 - `SESSION_DRIVER=database`, `CACHE_STORE=database`, `QUEUE_CONNECTION=sync` untuk MVP; tidak wajib Redis/worker.
 - Semua transaksi dan API lisensi tetap sah tanpa menunggu job Scheduler; tanggal kedaluwarsa diverifikasi on-request.
@@ -31,3 +31,15 @@ Gunakan `../.env.example` (tanpa secret asli). APP_URL adalah parameter, bukan p
 - Smoke test pada staging **apabila disediakan** tim infra. Jika belum tersedia, tandai sebagai dependensi eksternal, bukan task untuk memasang server.
 
 Baca `../RELEASE_HANDOFF.md` untuk formulir serah terima.
+
+## Workflow development fondasi
+
+Lihat [`DEVELOPMENT.md`](../DEVELOPMENT.md) untuk setup lokal teruji, build, startup dan pengujian. `bash scripts/setup-local.sh` menyiapkan dependency development dalam container terisolasi, bukan provisioning host/produksi. Image MySQL lokal membuat database aplikasi `tg` dan database test `tg_test`; tidak ada port DB yang dipublikasikan ke host.
+
+`.env.example` tidak memuat nilai rahasia. Helper hanya membuat `.env` jika belum ada, dengan `APP_KEY` dan password DB acak tanpa mencetak nilainya; konfigurasi existing dipertahankan. Default session/cache database, queue sync, disk lokal privat; `TG_PRIVATE_STORAGE_PATH` dapat mengubah lokasi privat tanpa perubahan kode. Cookie secure harus diaktifkan ketika memakai HTTPS staging/produksi. Waktu koneksi MySQL dan aplikasi UTC; zona tampilan Asia/Jakarta.
+
+PHPUnit memaksa database `tg_test`, mengosongkan `DB_URL` dan memeriksa target sebelum migration/reset. Sejak TG-006, tabel framework `sessions`, `cache` dan `cache_locks` disertai 30 tabel domain dan satu migration FK tertunda; bukti di `validation/TG006.md`. Autentikasi/TOTP sudah tersedia melalui TG-007; lihat `validation/TG007.md`. Jangan mengarahkan test ke database produksi atau data penting.
+
+Dependensi eksternal tetap: data owner dan keputusan harga/rekening/Telegram (TG-001), persetujuan legal/IB (TG-002), source EA berizin dan terminal MT5 untuk PoC (TG-003/TG-020), serta staging/domain API lama/secret produksi/storage fisik dari pihak infra. Penjualan lisensi dan indikator tetap nonaktif selama PoC belum terbukti; fondasi tidak mengirim pesan Telegram atau menerima pembayaran.
+
+Layout bersama TG-008 dan pemeriksaan Chromium 360/768/1280 tersedia; lihat `DESIGN_SYSTEM.md` dan `validation/TG008.md`. Server e2e wajib memakai `--no-reload` agar override environment database dipertahankan; prosedur terisolasi ada di `../DEVELOPMENT.md`.

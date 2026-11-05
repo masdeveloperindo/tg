@@ -75,3 +75,15 @@ S-09 backup terenkripsi dipulihkan di staging, saldo dan key valid sama dengan s
 S-10 CSP, cookies, rate limits, error pages, DEBUG off diperiksa pada staging.
 
 **Gate:** jangan sebut aman/go-live sebelum semua pengujian P0 memiliki laporan PASS yang benar-benar diambil dari aplikasi Laravel dan terminal EA, bukan dari HTML demo.
+
+## Implementasi TG-010 (5 November 2026)
+
+- Middleware menerbitkan UUID server per request, mengabaikan ID dari header client; `X-Request-ID`, error JSON/HTML dan activity audit memakai korelasi yang sama. Metadata request mencatat actor ID dan status HTTP; status HTTP200 Livewire tidak berarti suatu validasi bisnis berhasil.
+- `App\Support\Audit` memakai schema metadata per action autentikasi; field tambahan, array arbitrer, password, kontak, rekening, key dan alasan bebas tidak disalin. Hasil sukses hanya dicatat dalam transaksi mutasi yang sama. Action baru wajib menambah schema dan tes; service ini tidak memberi otorisasi otomatis.
+- Semua channel logging yang dideklarasikan memakai tap allowlist. Pesan arbitrer menjadi `application.event`; exception object, stack trace, nested context dan extra dibuang. Hanya UUID request, actor/subject ID integer serta status integer yang diterima. Ini sengaja membatasi diagnosis ke event/korelasi; jangan menaruh secret dalam pesan atau memasang processor baru tanpa review.
+- Exception handler tidak meneruskan exception report mentah; HTML/JSON generik tetap aman ketika APP_DEBUG=true. Error403/404/419/429/503 mempertahankan status HTTP, `Retry-After`/`Allow` yang relevan, private/no-store/noindex. Validasi dan redirect login tetap memakai alur framework. Daftar input yang tidak boleh di-flash mencakup credential/OTP/key/rekening.
+- `php artisan tg:prune-license-logs` default dry run. `--apply` menghapus telemetry lebih tua90hari dan mengosongkan IP raw terenkripsi lebih tua30hari, dalam batch1000 dengan transaksi/lock. Batas tanggal bersifat strict-before dan diuji; tidak menghapus activity audit, termasuk yang berusia lebih dari5tahun. Keputusan retensi audit/legal hold tetap milik owner/legal.
+- Default baru memakai log daily14file. `.env` existing tetap dipertahankan: bila `LOG_STACK=single`, ubah menjadi `daily` untuk rotasi file otomatis. Retensi sink eksternal/berkas log lama ditangani operator; tidak ada penghapusan otomatis di luar telemetry aplikasi.
+- Command retensi belum dijadwalkan otomatis: integrasi Laravel Scheduler adalah TG-035; cron host milik infra. Command `--apply` hanya dijalankan pada database test selama validasi TG-010.
+
+Bukti: [`validation/TG010.md`](validation/TG010.md). Tidak merupakan kelulusan seluruh G-21 atau audit produksi.

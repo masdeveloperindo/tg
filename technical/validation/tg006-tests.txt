@@ -1,0 +1,192 @@
+ Container tg-db-1  Running
+
+   INFO  Configuration cache cleared successfully.
+
+
+   PASS  Tests\Feature\DatabaseFoundationTest
+  ✓ framework tables remain available on mysql 84                        2.94s
+  ✓ database cache persists across store instances                       0.02s
+  ✓ database lock rejects a second owner until released                  0.01s
+  ✓ home request persists a guest database session                       0.03s
+
+   PASS  Tests\Feature\DomainForeignKeyTest
+  ✓ the complete foreign key set matches the schema contract             0.01s
+  ✓ each foreign key rejects a missing parent with data set "recovery c… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "version pr… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "media prod… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.28s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order user… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order prod… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order rene… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order conf… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license us… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license pr… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license is… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "activation… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "log licens… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "flag licen… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "flag revie… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "wallet use… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate tra… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate cor… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate aut… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "refund ord… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "refund act… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "announceme… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "article im… 0.01s
+  ✓ each foreign key rejects a missing parent with data set " f a q pro… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "guide prod… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "step guide… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "testimonia… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "setting up… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "activity a… 0.01s
+
+   PASS  Tests\Feature\DomainIndexTest
+  ✓ mysql uses the required indexes on representative history            0.40s
+
+   PASS  Tests\Feature\DomainMigrationTest
+  ✓ wallet anchor excludes a second mysql connection until the lock is…  1.03s
+  ✓ empty database migrates rolls back and migrates again with circular… 5.56s
+
+   PASS  Tests\Feature\DomainModelTest
+  ✓ every domain model maps to its contract table and loads microsecond… 2.48s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ decimal casts keep money lots and exchange rates as exact strings    0.01s
+  ✓ user creation normalizes email hashes password and does not mass as… 0.48s
+  ✓ core relationships follow owner product order license and rebate fo… 0.02s
+  ✓ timezone aware datetime assignments store utc microseconds without…  0.02s
+  ✓ history models reject instance and bulk mutation including update o… 0.01s
+  ✓ history models reject instance and bulk mutation including update o… 0.01s
+  ✓ append only models allow new rows with created at and no updated at  0.01s
+
+   PASS  Tests\Feature\DomainSchemaTest
+  ✓ all thirty domain tables exist on mysql 84 with transactional unico… 0.02s
+  ✓ default seeding does not create demo accounts business data or secr… 0.01s
+  ✓ money lots rates and performance numbers have the exact decimal pre… 0.01s
+  ✓ all domain timestamps are datetime with microseconds and created on… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero u… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero e… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero r… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "revers… 0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ generated active version uniqueness allows many inactive versions a… 0.02s
+  ✓ license uniqueness survives revocation and renewal references the e… 0.02s
+  ✓ idempotency and rebate source keys are scoped to the declared owner  0.02s
+  ✓ signed rebate corrections preserve the original entry                0.01s
+  ✓ financial history blocks parent deletion but optional logs keep the… 0.02s
+
+   PASS  Tests\Feature\FoundationTest
+  ✓ home displays an honest empty state                                  0.04s
+  ✓ home is a renderable livewire component                              0.01s
+  ✓ foundation uses the required safe runtime configuration              0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "ad… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "me… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "lo… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "re… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "lo… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "he… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "de… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "pr… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set " t… 0.01s
+
+  Tests:    171 passed (1294 assertions)
+  Duration: 15.18s

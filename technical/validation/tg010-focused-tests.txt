@@ -1,0 +1,11 @@
+
+   PASS  Tests\Feature\SafeAuditTest
+  ✓ request ids are server generated and correlate with safe logs        2.55s
+  ✓ configured logger discards messages nested objects and secret value… 0.01s
+  ✓ debug errors are generic in html and json and keep http status       0.03s
+  ✓ audit only persists typed approved metadata and stable correlation   0.21s
+  ✓ audit failure rolls back with the business transaction               0.01s
+  ✓ retention is dry run by default and preserves audit and boundary ro… 0.02s
+
+  Tests:    6 passed (60 assertions)
+  Duration: 2.93s

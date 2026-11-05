@@ -1,0 +1,29 @@
+ Container tg-db-1  Running
+
+   INFO  Configuration cache cleared successfully.
+
+
+   PASS  Tests\Feature\DatabaseFoundationTest
+  ✓ framework migrations run on mysql 84 without creating domain tables  0.21s
+  ✓ database cache persists across store instances                       0.02s
+  ✓ database lock rejects a second owner until released                  0.01s
+  ✓ home request persists a guest database session                       0.03s
+
+   PASS  Tests\Feature\FoundationTest
+  ✓ home displays an honest empty state                                  0.01s
+  ✓ home is a renderable livewire component                              0.01s
+  ✓ foundation uses the required safe runtime configuration              0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "ad… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "me… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "lo… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "re… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "lo… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "he… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "de… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "pr… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set " t… 0.01s
+
+  Tests:    18 passed (48 assertions)
+  Duration: 0.45s

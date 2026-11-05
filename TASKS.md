@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Status awal:** SEMUA TASK BELUM DIKERJAKAN (referensi HTML adalah demo, bukan kode produksi).  
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-010 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -33,7 +33,7 @@
 | 4 Konten & operasional | Pengalaman client tetap ringan; semua kompleksitas operasional diletakkan di panel admin. | 7 |
 | 5 QA, staging & rilis | Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguhan diterima. | 7 |
 
-**Total: 44 task.** Semua berstatus TODO sampai ada bukti implementasi.
+**Total: 44 task.** Status terkini mengikuti checklist dan bukti progres di bawah; baseline awal adalah TODO.
 
 ## Fase 0 Keputusan & persiapan
 
@@ -51,7 +51,7 @@ Tetapkan hanya informasi eksternal yang benar-benar diperlukan; jangan menebak d
   - **Pemilik peran:** Owner + MQL5 Dev. **Dependensi:** —. **Gate:** G-10,G-11,G-12.
   - **Selesai jika:** Ada source EA yang dapat dimodifikasi/izin integrasi, kontrak verifikasi disepakati; indikator tetap tidak dapat dibeli sampai PoC lulus.
 
-- [ ] **TG-004 — Definisikan kontrak lingkungan aplikasi dan siapkan workflow development lokal** `P0`
+- [x] **TG-004 — Definisikan kontrak lingkungan aplikasi dan siapkan workflow development lokal** `P0`
   - **Pemilik peran:** Lead Dev. **Dependensi:** —. **Gate:** G-01.
   - **Selesai jika:** aplikasi dapat dikembangkan/ditest secara lokal dengan dependency yang terdokumentasi, `.env.example` aman, pilihan driver/APP_URL dapat diatur tanpa hard-code; kebutuhan staging/domain lama tertulis sebagai handoff ke infra, bukan dikerjakan developer.
   - **Artefak teknis wajib:** `technical/ENVIRONMENT.md`, `.env.example`, `SCOPE_OF_WORK.md`, daftar kebutuhan eksternal kepada infra.
@@ -60,31 +60,31 @@ Tetapkan hanya informasi eksternal yang benar-benar diperlukan; jangan menebak d
 
 Buat basis Laravel, database, autentikasi, desain dan sistem feedback yang bisa digunakan modul lain.
 
-- [ ] **TG-005 — Bootstrap Laravel 13 / Livewire 4 / Tailwind 4** `P0`
+- [x] **TG-005 — Bootstrap Laravel 13 / Livewire 4 / Tailwind 4** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-004. **Gate:** G-01.
   - **Selesai jika:** Aplikasi jalan dari fresh clone; .env.example tanpa rahasia; build & test smoke dapat dijalankan.
   - **Artefak teknis wajib:** `.env.example` aman dan test fresh clone + database migration.
 
-- [ ] **TG-006 — Migrations, relasi, indeks dan constraint DB** `P0`
+- [x] **TG-006 — Migrations, relasi, indeks dan constraint DB** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-005. **Gate:** G-01,G-07,G-14,G-15.
   - **Selesai jika:** Fresh migrate dan rollback tervalidasi; angka keuangan/lot pakai DECIMAL; uniqueness penting ditegakkan DB.
   - **Artefak teknis wajib:** `technical/DATABASE_SCHEMA.md` (30 domain tables), migration+FK/check/unique/rollback test, `technical/ERD.mmd`.
 
-- [ ] **TG-007 — Register/login client, admin TOTP, policies dan rate limit** `P0`
+- [x] **TG-007 — Register/login client, admin TOTP, policies dan rate limit** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006. **Gate:** G-03,G-04.
   - **Selesai jika:** Auth sukses; client A tidak bisa mengakses data client B; admin TOTP/recovery diuji; reset password via admin tercatat.
   - **Artefak teknis wajib:** `technical/SECURITY_BASELINE.md` dan test role/owner access, rate limiter, TOTP/recovery.
 
-- [ ] **TG-008 — Layout dan design system sesuai referensi HTML** `P1`
+- [x] **TG-008 — Layout dan design system sesuai referensi HTML** `P1`
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-005. **Gate:** G-18,G-26.
   - **Selesai jika:** Forest Green/Lime/Warm Bone/Coral; tema terang; menu mobile; responsif lebar 360,768,1280.
 
-- [ ] **TG-009 — Komponen modal, loading, error, toast dan status belum pasti** `P0`
+- [x] **TG-009 — Komponen modal, loading, error, toast dan status belum pasti** `P0`
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-007,TG-008. **Gate:** G-18.
   - **Selesai jika:** Tidak ada alert/confirm/prompt bawaan; tindakan kritis modal aksesibel; saat timeout ada tombol Cek Status; tidak ada progress palsu.
   - **Artefak teknis wajib:** `technical/ACTION_AUTH_MATRIX.md` modal/loading/timeout, upload progress dari event transfer asli.
 
-- [ ] **TG-010 — Audit log dan pengelolaan error yang aman** `P0`
+- [x] **TG-010 — Audit log dan pengelolaan error yang aman** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006,TG-007. **Gate:** G-21.
   - **Selesai jika:** Log mencatat aktor/status & request_id tanpa key, password atau data rekening; errors ramah pengguna.
   - **Artefak teknis wajib:** `technical/SECURITY_BASELINE.md` audit log redacted, retensi, error cases.
@@ -272,7 +272,10 @@ Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguha
 
 | ID task | Status | Commit/PR | Perintah & hasil tes | Reviewer | Tanggal |
 |---|---|---|---|---|---|
-| TG-005 | TODO | — | — | — | — |
+| TG-004 | DONE | `feat/laravel-foundation` (working tree) | Setup lokal, konfigurasi aman, helper repeatable; lihat `technical/validation/FOUNDATION.md` | Review agent + validasi lokal | 2026-11-04 |
+| TG-005 | DONE | `feat/laravel-foundation` (working tree) | Clone kandidat lokal, MySQL migrate/rollback, build, 18 tests / 48 assertions PASS | Review agent + validasi lokal | 2026-11-04 |
+| TG-006 | DONE | `feat/laravel-foundation` (working tree) | 171 tests / 1294 assertions, 30 domain tables, rollback, 38 FK, EXPLAIN, 2-connection lock; `technical/validation/TG006.md` | Review agent + validasi MySQL 8.4 lokal | 2026-11-04 |
+| TG-007 | DONE | `feat/laravel-foundation` (working tree) | 265 tests / 1946 assertions, register/login/TOTP/recovery/reset/policy/CSRF/idle PASS; `technical/validation/TG007.md` | Review keamanan agent + MySQL lokal | 2026-11-04 |
 | TG-016 | TODO | — | — | — | — |
 | TG-019 | TODO | — | — | — | — |
 | TG-027 | TODO | — | — | — | — |
@@ -288,6 +291,12 @@ Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguha
 
 ## Lampiran teknis v1.7 sebagai acceptance artifacts (bukan task baru)
 
-Jumlah tetap **44 task**, seluruhnya belum DONE. Dokumen berikut wajib dituntaskan **ketika task terkait dikerjakan** (bukan harus selesai sebelum developer mulai coding): `technical/DATABASE_SCHEMA.md`, `technical/API_CONTRACT.md`, `technical/ACTION_AUTH_MATRIX.md`, `technical/ROUTES_MATRIX.csv`, `technical/SECURITY_BASELINE.md`, `technical/ENVIRONMENT.md`, `technical/TEST_PLAN.md`, `.env.example`. Semua dipakai untuk menulis migration, implementation tests, CI/staging, sampai go-live gate.
+Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti checklist dan bukti di atas. Dokumen berikut wajib dituntaskan **ketika task terkait dikerjakan** (bukan harus selesai sebelum developer mulai coding): `technical/DATABASE_SCHEMA.md`, `technical/API_CONTRACT.md`, `technical/ACTION_AUTH_MATRIX.md`, `technical/ROUTES_MATRIX.csv`, `technical/SECURITY_BASELINE.md`, `technical/ENVIRONMENT.md`, `technical/TEST_PLAN.md`, `.env.example`. Semua dipakai untuk menulis migration, implementation tests, CI/staging, sampai go-live gate.
 
 **Pengingat status:** PRD dan HTML reference adalah target desain/kontrak, bukan aplikasi yang sudah terpasang. MVP tidak memakai Telegram Bot API/webhook, semua pembayaran oleh admin manual melalui panel. Lingkungan production jangan menggunakan data dummy atau hasil test palsu.
+
+| TG-008 | DONE | `feat/laravel-foundation` (working tree) | 278 tests / 2298 assertions; 139 browser checks, 32 screenshots, 360/768/1280; `technical/validation/TG008.md` | Review layout + Chromium/MySQL lokal | 2026-11-05 |
+
+| TG-009 | DONE | `feat/laravel-foundation` (working tree) | Komponen feedback, 278 suite PASS + 85 Auth/Layout setelah integrasi modal; 5 skenario browser PASS; `technical/validation/TG009.md` | Chromium + MySQL lokal | 2026-11-05 |
+
+| TG-010 | DONE | `feat/laravel-foundation` (working tree) | 284 tests / 2358 assertions; redaksi, korelasi request, error dan retensi; `technical/validation/TG010.md` | MySQL lokal | 2026-11-05 |

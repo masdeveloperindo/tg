@@ -1,22 +1,213 @@
 erDiagram
+  %% Thirty domain tables. Framework session/cache tables are separate.
+  %% Cardinalities describe physical FK/unique constraints, not workflow policies.
+  users {
+    bigint id PK
+    string email UK
+    string role
+    string status
+  }
+  admin_recovery_codes {
+    bigint id PK
+    bigint user_id FK
+    string code_hash
+  }
+  products {
+    bigint id PK
+    string slug UK
+    decimal base_price_idr
+    decimal minimum_price_idr
+  }
+  product_versions {
+    bigint id PK
+    bigint product_id FK
+    string version
+    bigint active_product_id UK "generated, nullable"
+  }
+  product_media {
+    bigint id PK
+    bigint product_id FK
+    string section
+  }
+  product_performances {
+    bigint id PK
+    bigint product_id FK
+    bigint version_id FK "nullable"
+    bigint updated_by FK
+  }
+  orders {
+    bigint id PK
+    string code UK
+    bigint user_id FK
+    bigint product_id FK
+    bigint renewal_license_id FK "nullable, deferred FK migration"
+    bigint confirmed_by FK "nullable"
+    decimal price_locked_idr
+    string idempotency_key "unique with user_id"
+  }
+  licenses {
+    bigint id PK
+    bigint user_id FK
+    bigint product_id FK
+    bigint issued_order_id FK
+    string key_hash UK
+    string mt5_account "unique with user_id and product_id"
+  }
+  license_account_change_requests {
+    bigint id PK
+    bigint license_id FK
+    bigint decided_by FK "nullable"
+  }
+  license_activations {
+    bigint id PK
+    bigint license_id FK
+    string account_number "unique with license_id"
+  }
+  license_logs {
+    bigint id PK
+    bigint license_id FK "nullable, SET NULL"
+    string request_id UK
+  }
+  license_flags {
+    bigint id PK
+    bigint license_id FK
+    bigint reviewed_by FK "nullable"
+    string cooldown_key UK
+  }
+  brokers {
+    bigint id PK
+    decimal rate_usd_per_lot
+  }
+  trading_accounts {
+    bigint id PK
+    bigint user_id FK
+    bigint broker_id FK
+    bigint verified_by FK "nullable"
+    string account_number "unique with broker_id"
+  }
+  wallets {
+    bigint id PK
+    bigint user_id FK,UK
+  }
+  rebate_entries {
+    bigint id PK
+    bigint trading_account_id FK
+    bigint correction_of_id FK "nullable, self-reference"
+    bigint entered_by FK
+    decimal lots
+    decimal amount_usd "signed corrections"
+    string source_reference "unique with trading_account_id"
+  }
+  withdrawals {
+    bigint id PK
+    bigint user_id FK
+    bigint processed_by FK "nullable"
+    decimal amount_usd
+    decimal fx_rate_idr
+    decimal amount_idr
+    string idempotency_key "unique with user_id"
+  }
+  refunds {
+    bigint id PK
+    bigint order_id FK
+    bigint actor_id FK
+    decimal amount_idr
+    string idempotency_key "unique with order_id"
+  }
+  announcements {
+    bigint id PK
+    bigint created_by FK
+  }
+  articles {
+    bigint id PK
+    string slug UK
+  }
+  article_images {
+    bigint id PK
+    bigint article_id FK
+  }
+  faqs {
+    bigint id PK
+    bigint product_id FK "nullable"
+  }
+  guides {
+    bigint id PK
+    bigint product_id FK "nullable"
+    string slug UK
+  }
+  guide_steps {
+    bigint id PK
+    bigint guide_id FK
+    int step_no "unique with guide_id"
+  }
+  testimonials {
+    bigint id PK
+    bigint product_id FK "nullable"
+    int rating "nullable, 1 to 5"
+  }
+  pages {
+    bigint id PK
+    string slug UK
+  }
+  settings {
+    bigint id PK
+    string key UK
+    bigint updated_by FK "nullable"
+  }
+  activity_logs {
+    bigint id PK
+    bigint actor_id FK "nullable, SET NULL"
+    string subject_type "polymorphic reference, no FK"
+    bigint subject_id "nullable"
+  }
+  outbound_clicks {
+    bigint id PK
+    string target_type "telegram or broker, no FK"
+    bigint target_id "nullable, polymorphic reference"
+  }
+  api_nonces {
+    bigint id PK
+    string nonce_sha256 UK
+  }
+
+  users ||--o{ admin_recovery_codes : has
   users ||--o{ orders : creates
+  users |o--o{ orders : confirms
   users ||--o{ licenses : owns
+  users ||--o{ product_performances : updates
+  users |o--o{ license_account_change_requests : decides
+  users |o--o{ license_flags : reviews
+  users ||--o{ trading_accounts : owns
+  users |o--o{ trading_accounts : verifies
+  users ||--o| wallets : locks
+  users ||--o{ rebate_entries : enters
+  users ||--o{ withdrawals : requests
+  users |o--o{ withdrawals : processes
+  users ||--o{ refunds : records
+  users ||--o{ announcements : creates
+  users |o--o{ settings : updates
+  users |o--o{ activity_logs : acts
+
   products ||--o{ orders : ordered_as
   products ||--o{ licenses : licensed_as
   products ||--o{ product_versions : has
   products ||--o{ product_media : shows
   products ||--o{ product_performances : reports
-  orders ||--o| licenses : issues_or_renews
-  licenses ||--o{ license_logs : verifies
-  licenses ||--o{ license_activations : activates
-  licenses ||--o{ license_flags : may_flag
+  products |o--o{ faqs : explains
+  products |o--o{ guides : documents
+  products |o--o{ testimonials : receives
+  product_versions |o--o{ product_performances : tested_as
+
+  orders ||--o{ licenses : issued_order
+  licenses |o--o{ orders : renewal_target
   licenses ||--o{ license_account_change_requests : changes
-  users ||--o{ trading_accounts : links
+  licenses ||--o{ license_activations : activates
+  licenses |o--o{ license_logs : verifies
+  licenses ||--o{ license_flags : may_flag
+
   brokers ||--o{ trading_accounts : hosts
   trading_accounts ||--o{ rebate_entries : earns
-  users ||--|| wallets : locks
-  users ||--o{ withdrawals : requests
+  rebate_entries |o--o{ rebate_entries : corrects
   orders ||--o{ refunds : may_refund
-  users ||--o{ activity_logs : acts
   guides ||--o{ guide_steps : has
   articles ||--o{ article_images : has

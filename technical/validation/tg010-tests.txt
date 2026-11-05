@@ -1,0 +1,316 @@
+
+   INFO  Configuration cache cleared successfully.
+
+
+   PASS  Tests\Feature\AdminTwoFactorTest
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #0      2.62s
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #1      0.01s
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #2      0.01s
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #3      0.01s
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #4      0.01s
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #5      0.01s
+  ✓ totp accepts only the current and adjacent thirty second counters    0.01s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.02s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.02s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s
+  ✓ generated secrets have 160 bits and are distinct                     0.01s
+  ✓ setup enables only after a valid code and stores only encrypted sec… 0.26s
+  ✓ setup requires recent past password confirmation with data set "ove… 0.01s
+  ✓ setup requires recent past password confirmation with data set "fir… 0.01s
+  ✓ expired setup cannot be confirmed even with a newly confirmed passw… 0.02s
+  ✓ setup and challenge cannot be performed for another admin or a clie… 0.02s
+  ✓ admin password login alone cannot open the admin area                0.21s
+  ✓ a totp counter is consumed once across sessions and the next counte… 0.04s
+  ✓ each recovery code is single use and belongs only to its admin       0.05s
+  ✓ challenge limits five failures and expired password confirmation do… 0.04s
+  ✓ an expired verified admin session cannot be revived with only a new… 0.02s
+  ✓ challenge requires a recent password login when not yet verified wi… 0.02s
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s
+  ✓ reauthentication requires both password and an unused factor and up… 0.87s
+  ✓ challenge livewire verifies the admin and recovery codes are shown…  0.06s
+  ✓ setup livewire keeps the secret and recovery codes out of component… 0.03s
+
+   PASS  Tests\Feature\AuthHttpSecurityTest
+  ✓ first admin is created only by private cli input and bootstrap cann… 0.43s
+  ✓ auth pages and real livewire update responses cannot be cached       0.04s
+  ✓ recovery and temporary password results are private single read res… 0.08s
+  ✓ web logout and livewire updates reject missing csrf outside testing… 0.02s
+
+   PASS  Tests\Feature\AuthenticationTest
+  ✓ registration ignores forged privileges encrypts contact creates wal… 0.49s
+  ✓ registration accepts whatsapp without email verification or client…  0.23s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s
+  ✓ case variants cannot register a second account                       0.02s
+  ✓ registration attempts are limited per ip without creating partial a… 0.22s
+  ✓ login regenerates session and does not reuse old admin verification  0.19s
+  ✓ missing wrong password and disabled account return the same generic… 0.56s
+  ✓ login is limited to five failures per normalized email and ip for f… 1.44s
+  ✓ ip limit prevents email rotation and isolated ips can still login    4.60s
+  ✓ logout invalidates the session and regenerates csrf token            0.02s
+  ✓ client can change password only with the current password and old s… 1.04s
+  ✓ manual reset requires two identity checks then revokes sessions and… 0.62s
+  ✓ register and login livewire forms use the real service               0.45s
+  ✓ admin livewire reset displays the temporary password once on a priv… 0.46s
+  ✓ reset cannot claim contact verification for an account without a re… 0.03s
+
+   PASS  Tests\Feature\AuthorizationTest
+  ✓ clients can read only their own resources and verified admins can r… 0.07s
+  ✓ disabled or forced password clients lose owner permissions with dat… 0.03s
+  ✓ disabled or forced password clients lose owner permissions with dat… 0.02s
+  ✓ client lists and audit logs require a verified admin                 0.02s
+  ✓ license download requires an active unexpired owner license with da… 0.02s
+  ✓ license download requires an active unexpired owner license with da… 0.02s
+  ✓ license download requires an active unexpired owner license with da… 0.02s
+  ✓ license download requires an active unexpired owner license with da… 0.02s
+  ✓ license download requires an active unexpired owner license with da… 0.02s
+  ✓ guests and wrong roles cannot enter member or admin pages            0.03s
+  ✓ disabled accounts are logged out and cannot reach member data        0.02s
+  ✓ forced password change allows only the change form and logout        0.02s
+  ✓ admin password alone cannot enter panel and copied verification ide… 0.03s
+  ✓ fake verified session cannot replace persisted admin totp enrollmen… 0.03s
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s
+  ✓ exact thirty minute idle boundary is accepted and refreshed          0.02s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.03s
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s
+  ✓ fresh password only admin can reach challenge at thirty minute boun… 0.03s
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s
+  ✓ client password reset requires session local recent reauthenticatio… 0.03s
+  ✓ client password reset requires session local recent reauthenticatio… 0.03s
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s
+  ✓ client cannot forge admin permissions by copying every verification… 0.02s
+  ✓ livewire reset action reauthorizes after the authenticated actor ch… 0.04s
+  ✓ livewire reset action rejects stale reauthentication after modal op… 0.05s
+  ✓ livewire reset rejects a tampered admin target                       0.02s
+
+   PASS  Tests\Feature\DatabaseFoundationTest
+  ✓ framework tables remain available on mysql 84                        0.03s
+  ✓ database cache persists across store instances                       0.01s
+  ✓ database lock rejects a second owner until released                  0.01s
+  ✓ home request persists a guest database session                       0.02s
+
+   PASS  Tests\Feature\DomainForeignKeyTest
+  ✓ the complete foreign key set matches the schema contract             0.02s
+  ✓ each foreign key rejects a missing parent with data set "recovery c… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "version pr… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "media prod… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order user… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order prod… 0.02s
+  ✓ each foreign key rejects a missing parent with data set "order rene… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "order conf… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license us… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license pr… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "license is… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "activation… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "log licens… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "flag licen… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "flag revie… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "wallet use… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate tra… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate cor… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "rebate aut… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "refund ord… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "refund act… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "announceme… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "article im… 0.01s
+  ✓ each foreign key rejects a missing parent with data set " f a q pro… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "guide prod… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "step guide… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "testimonia… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "setting up… 0.01s
+  ✓ each foreign key rejects a missing parent with data set "activity a… 0.03s
+
+   PASS  Tests\Feature\DomainIndexTest
+  ✓ mysql uses the required indexes on representative history            0.39s
+
+   PASS  Tests\Feature\DomainMigrationTest
+  ✓ wallet anchor excludes a second mysql connection until the lock is…  1.03s
+  ✓ empty database migrates rolls back and migrates again with circular… 5.35s
+
+   PASS  Tests\Feature\DomainModelTest
+  ✓ every domain model maps to its contract table and loads microsecond… 2.43s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s
+  ✓ decimal casts keep money lots and exchange rates as exact strings    0.01s
+  ✓ user creation normalizes email hashes password and does not mass as… 0.40s
+  ✓ core relationships follow owner product order license and rebate fo… 0.02s
+  ✓ timezone aware datetime assignments store utc microseconds without…  0.02s
+  ✓ history models reject instance and bulk mutation including update o… 0.01s
+  ✓ history models reject instance and bulk mutation including update o… 0.01s
+  ✓ append only models allow new rows with created at and no updated at  0.01s
+
+   PASS  Tests\Feature\DomainSchemaTest
+  ✓ all thirty domain tables exist on mysql 84 with transactional unico… 0.03s
+  ✓ default seeding does not create demo accounts business data or secr… 0.02s
+  ✓ money lots rates and performance numbers have the exact decimal pre… 0.01s
+  ✓ all domain timestamps are datetime with microseconds and created on… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero u… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero e… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "zero r… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s
+  ✓ numeric and date checks reject invalid values with data set "revers… 0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.02s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.08s
+  ✓ unique keys reject duplicate records at the database with data set…  0.02s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s
+  ✓ generated active version uniqueness allows many inactive versions a… 0.01s
+  ✓ license uniqueness survives revocation and renewal references the e… 0.02s
+  ✓ idempotency and rebate source keys are scoped to the declared owner  0.02s
+  ✓ signed rebate corrections preserve the original entry                0.01s
+  ✓ financial history blocks parent deletion but optional logs keep the… 0.02s
+
+   PASS  Tests\Feature\FoundationTest
+  ✓ home displays an honest empty state                                  0.04s
+  ✓ home is a renderable livewire component                              0.01s
+  ✓ foundation uses the required safe runtime configuration              0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "he… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "de… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set "pr… 0.01s
+  ✓ unimplemented sensitive endpoints are not exposed with data set " t… 0.01s
+
+   PASS  Tests\Feature\LayoutTest
+  ✓ public pages share an accessible light document with data set "home… 0.02s
+  ✓ public pages share an accessible light document with data set "logi… 0.02s
+  ✓ public pages share an accessible light document with data set "regi… 0.02s
+  ✓ client pages have member navigation and one content landmark with d… 0.02s
+  ✓ client pages have member navigation and one content landmark with d… 0.02s
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s
+  ✓ admin without second factor is kept out of the portal with data set… 0.02s
+  ✓ admin without second factor is kept out of the portal with data set… 0.02s
+  ✓ forced password change keeps the required form outside the portal    0.02s
+  ✓ disabled client cannot render the member portal                      0.01s
+
+   PASS  Tests\Feature\SafeAuditTest
+  ✓ request ids are server generated and correlate with safe logs        0.02s
+  ✓ configured logger discards messages nested objects and secret value… 0.01s
+  ✓ debug errors are generic in html and json and keep http status       0.02s
+  ✓ audit only persists typed approved metadata and stable correlation   0.01s
+  ✓ audit failure rolls back with the business transaction               0.01s
+  ✓ retention is dry run by default and preserves audit and boundary ro… 0.02s
+
+  Tests:    284 passed (2358 assertions)
+  Duration: 28.58s
