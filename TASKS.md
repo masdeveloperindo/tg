@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-011 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-012 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -97,7 +97,7 @@ Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Ad
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-006,TG-008. **Gate:** G-19.
   - **Selesai jika:** Admin mengelola deskripsi, tutorial, performa backtest/forward test, FAQ, versi, screenshot; data kosong tidak ditampilkan dan statistik tidak direkayasa.
 
-- [ ] **TG-012 — Halaman publik katalog, detail produk dan broker** `P1`
+- [x] **TG-012 — Halaman publik katalog, detail produk dan broker** `P1`
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-011. **Gate:** G-19,G-27.
   - **Selesai jika:** Route publik PRD aktif, metadata SEO & risk disclaimer tampil; satu halaman detail produk memuat preview + track record.
 
@@ -302,3 +302,5 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 | TG-010 | DONE | `feat/laravel-foundation` (working tree) | 284 tests / 2358 assertions; redaksi, korelasi request, error dan retensi; `technical/validation/TG010.md` | MySQL lokal | 2026-11-05 |
 
 | TG-011 | DONE | `feat/laravel-foundation` | 301 tests/2467 assertions;17 tes produk dan9 alur browser PASS; `technical/validation/TG011.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |
+
+| TG-012 | DONE | `feat/laravel-foundation` | 311 tests/2566 assertions;12 browser cases, published-only/SEO/privacy; `technical/validation/TG012.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |

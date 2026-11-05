@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductAssetController;
+use App\Http\Controllers\PublishedAssetController;
 use App\Livewire\Auth;
+use App\Livewire\Catalog\Brokers;
+use App\Livewire\Catalog\Detail;
+use App\Livewire\Catalog\Products;
 use App\Livewire\Home;
 use App\Livewire\Products\Editor;
 use App\Livewire\Products\Index;
@@ -11,6 +15,14 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
+Route::middleware('throttle:120,1')->group(function (): void {
+    Route::get('/produk', Products::class)->name('produk');
+    Route::get('/produk/media/{media}', [PublishedAssetController::class, 'media'])->whereNumber('media')->name('produk.media');
+    Route::get('/produk/performa/{performance}/gambar', [PublishedAssetController::class, 'performance'])->whereNumber('performance')->name('produk.performance.image');
+    Route::get('/produk/panduan/{step}/gambar', [PublishedAssetController::class, 'step'])->whereNumber('step')->name('produk.step.image');
+    Route::get('/produk/{slug}', Detail::class)->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')->name('produk.slug');
+    Route::get('/broker', Brokers::class)->name('broker');
+});
 
 Route::middleware(['guest', 'private.response'])->group(function (): void {
     Route::get('/login', Auth\Login::class)->name('login');

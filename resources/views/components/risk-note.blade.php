@@ -1,0 +1,1 @@
+<aside class="risk-note" aria-label="Risiko trading"><strong>Pahami risikonya.</strong> Trading dapat menyebabkan kerugian. EA, indikator, hasil historis maupun rebate tidak menjamin profit. Backtest dan forward test memiliki keterbatasan dan bukan jaminan hasil di masa depan.</aside>

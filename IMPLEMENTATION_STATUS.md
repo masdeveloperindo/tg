@@ -90,3 +90,9 @@ Retensi telemetry90hari/IP raw terenkripsi30hari tersedia melalui command dry-ru
 **TG-011: DONE.** Editor produk tujuh tab, policy admin/TOTP dan file privat, sanitasi HTML, gambar re-encode, versi/checksum/satu aktif, FAQ/tutorial serta metadata performa dengan audit editor/waktu/hash. Publikasi/arsip melalui modal; sale_enabled tetapfalse. Tidak ada angka performa buatan atau produk produksi dibuat.
 
 **301 tests/2467 assertions PASS**,172 file lint, Vite build dan9 alur browser PASS pada360/768/1280. Tes produk akhir17PASS/101assertions. Runtime GD dan upload20MiB/post24MiB disiapkan dalam Docker development. Bukti: [`TG011.md`](technical/validation/TG011.md). Push fondasi TG-004–TG-010 sebelumnya berhasil sebagai `8cfcd1d`; pekerjaan Fase2 mengikuti branch yang sama. Berikutnya TG-012. Input owner/legal/EA dan PoC terminal tetap eksternal; software belum siap handoff/go-live.
+
+## Progres 5 November 2026 — TG-012 / Fase2
+
+**TG-012: DONE.** Katalog/detail published-only, preview/cara pakai/track record/FAQ/changelog/ulasan dalam satu halaman, metadata SEO dan disclaimer. Broker aktif/efektif dengan allowlist link dan estimasi BCMath tanpa mutasi saldo. Data kosong disembunyikan; file EA/PDF/consent tetap privat; penjualan belum dibuka.
+
+**311 tests/2566 assertions PASS**,179 file lint, build dan12 kasus browser PASS pada360/768/1280 tanpa error JS. Bukti: [`TG012.md`](technical/validation/TG012.md). TG-011 sudah dipush sebagai `70d29c5`; status push TG-012 mengikuti Git. Berikutnya TG-013. Owner/legal/EA dan gate produksi tetap belum selesai.

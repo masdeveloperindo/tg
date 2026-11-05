@@ -30,6 +30,7 @@
             <p class="eyebrow">KATALOG / DIGITAL PRODUCTS</p>
             <h2 id="products-title">TOOLS, BUKAN JANJI.</h2>
             <p class="section-description">Detail produk akan menyatukan preview, panduan penggunaan, versi, dan catatan pengujian yang tersedia.</p>
+            @if($products->isNotEmpty())<div class="catalog-grid">@foreach($products as $product)<x-product-card :product="$product" />@endforeach</div><p><a class="auth-secondary" href="{{ route('produk') }}">Lihat seluruh produk</a></p>@else
             <div class="empty-state">
                 <span class="empty-symbol" aria-hidden="true"><x-ui.icon /></span>
                 <div>
@@ -37,6 +38,7 @@
                     <p>Daftar produk akan ditampilkan setelah siap ditawarkan. Periksa kembali halaman ini untuk informasi berikutnya.</p>
                 </div>
             </div>
+            @endif
         </section>
 
         <section id="alur" tabindex="-1" class="shell section steps-section" aria-labelledby="steps-title">

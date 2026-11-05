@@ -10,8 +10,8 @@
             <div class="site-nav-links">
                 <a href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page" @endif>Beranda</a>
                 @unless($compact)
-                    <a href="{{ route('home') }}#produk">Produk MT5</a>
-                    <a href="{{ route('home') }}#alur">Cara memulai</a>
+                    <a href="{{ route('produk') }}" @if(request()->routeIs('produk*')) aria-current="page" @endif>Produk MT5</a>
+                    <a href="{{ route('broker') }}" @if(request()->routeIs('broker')) aria-current="page" @endif>Broker</a><a href="{{ route('home') }}#alur">Cara memulai</a>
                 @endunless
             </div>
             <div class="site-nav-actions">

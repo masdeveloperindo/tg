@@ -1,0 +1,66 @@
+{
+  "passed": 12,
+  "results": [
+    {
+      "width": 360,
+      "uri": "/produk",
+      "status": "PASS"
+    },
+    {
+      "width": 360,
+      "uri": "/produk/synthetic-public-ea",
+      "status": "PASS"
+    },
+    {
+      "width": 360,
+      "uri": "/produk/synthetic-empty-indicator",
+      "status": "PASS"
+    },
+    {
+      "width": 360,
+      "uri": "/broker",
+      "status": "PASS"
+    },
+    {
+      "width": 768,
+      "uri": "/produk",
+      "status": "PASS"
+    },
+    {
+      "width": 768,
+      "uri": "/produk/synthetic-public-ea",
+      "status": "PASS"
+    },
+    {
+      "width": 768,
+      "uri": "/produk/synthetic-empty-indicator",
+      "status": "PASS"
+    },
+    {
+      "width": 768,
+      "uri": "/broker",
+      "status": "PASS"
+    },
+    {
+      "width": 1280,
+      "uri": "/produk",
+      "status": "PASS"
+    },
+    {
+      "width": 1280,
+      "uri": "/produk/synthetic-public-ea",
+      "status": "PASS"
+    },
+    {
+      "width": 1280,
+      "uri": "/produk/synthetic-empty-indicator",
+      "status": "PASS"
+    },
+    {
+      "width": 1280,
+      "uri": "/broker",
+      "status": "PASS"
+    }
+  ],
+  "javascriptErrors": []
+}

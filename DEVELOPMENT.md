@@ -1,6 +1,6 @@
 # Development lokal — Trader Garuda
 
-Panduan ini mencakup TG-004–TG-011: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
+Panduan ini mencakup TG-004–TG-012: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
 
 ## Prasyarat
 
@@ -169,3 +169,9 @@ Admin terverifikasi mengelola produk melalui `/admin/produk` dan satu editor ber
 Rebuild image app setelah perubahan Dockerfile: GD menyediakan re-encode JPG/PNG/WebP; PHP harus membaca upload20M/post24M. File INI disalin dengan mode0644 agar terbaca oleh user non-root. `.env` existing tetap dipertahankan. Temporary upload Livewire saat ini admin-only dengan batas20MiB; use case upload client berikutnya memerlukan kebijakan tersendiri.
 
 Gambar maksimal2MiB, PDF bukti maksimal5MiB dan EX5 maksimal20MiB. Format gate EX5 saat ini ketat dan hanya diuji memakai fixture biner; validasi file EA nyata/terminal tetap memerlukan TG-003/TG-020. File tidak dieksekusi server. Versi historis dan bukti asli dipertahankan saat presentasi dihapus. Lihat [`technical/validation/TG011.md`](technical/validation/TG011.md) untuk alur browser, hasil aktual dan batasnya.
+
+## Publikasi TG-012
+
+`/produk` dan `/produk/{slug}` hanya menampilkan published. Unpublish/arsip menutup halaman dan endpoint gambar berikutnya. File versi EA, laporan PDF asli dan consent ulasan tetap privat. `/broker` memakai mitra aktif/efektif; isi `TG_BROKER_REFERRAL_HOSTS` dengan hostname HTTPS persis yang disetujui owner/legal bila pendaftaran sudah siap. Nilai default kosong; `.env` existing tidak diubah. Estimasi rebate adalah informasi, bukan saldo.
+
+Fixture browser publik memakai `tests/Browser/seed-catalog.php` dan `tests/Browser/catalog.cjs`; database tg_test dan storage e2e terpisah. Prosedur dan hasil: [`technical/validation/TG012.md`](technical/validation/TG012.md). Harga kalender/kuotasi dan order belum aktif; berikutnya TG-013.
