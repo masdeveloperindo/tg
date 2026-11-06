@@ -1,21 +1,21 @@
 # Menjalankan Trader Garuda di komputer lokal
 
-Gunakan branch `feat/laravel-foundation`. Database MySQL 8.4 yang sudah disiapkan dapat langsung dipakai; tidak perlu membuat database Docker baru. Prasyarat: PHP 8.4, Composer 2, Node.js 24/npm, serta ekstensi bcmath, gd, sodium dan pdo_mysql (Composer memeriksa kebutuhan lainnya).
+Gunakan branch `main`. Database MySQL 8.4 yang sudah disiapkan dapat langsung dipakai; tidak perlu membuat database Docker baru. Prasyarat: PHP 8.4, Composer 2, Node.js 24/npm, serta ekstensi bcmath, gd, sodium dan pdo_mysql (Composer memeriksa kebutuhan lainnya).
 
 ## Ambil kode dan dependency
 
 Untuk clone pertama:
 
 ```bash
-git clone --branch feat/laravel-foundation https://github.com/masdeveloperindo/tg.git
+git clone --branch main https://github.com/masdeveloperindo/tg.git
 cd tg
 ```
 
 Untuk checkout yang sudah ada, simpan perubahan lokal Anda terlebih dahulu, kemudian:
 
 ```bash
-git switch feat/laravel-foundation
-git pull --ff-only origin feat/laravel-foundation
+git switch main
+git pull --ff-only origin main
 ```
 
 Pasang dependency terkunci dan buat `.env` hanya jika belum ada:
