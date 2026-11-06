@@ -48,9 +48,43 @@ class ProductEditorTest extends TestCase
     {
         $admin = User::findOrFail($this->records->user(['role' => 'admin', 'totp_secret_enc' => Crypt::encryptString('GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ'), 'totp_enabled_at' => now()]));
         $this->actingAs($admin);
-        session()->put(['auth.totp_user_id' => $admin->id, 'auth.totp_verified_at' => now()->timestamp, 'auth.admin_last_activity' => now()->timestamp, 'auth.password_confirmed_at' => now()->timestamp]);
+        session()->put(['auth.totp_user_id' => $admin->id, 'auth.totp_verified_at' => now()->timestamp, 'auth.admin_last_activity' => now()->timestamp, 'auth.password_confirmed_at' => now()->timestamp, 'auth.reauthenticated_at' => now()->timestamp]);
 
         return $admin;
+    }
+
+    public function test_price_mutation_rechecks_reauthentication_after_editor_mount(): void
+    {
+        $this->admin();
+        $product = $this->product();
+        $editor = Livewire::test(Editor::class, ['id' => $product->id]);
+        $before = DB::table('activity_logs')->count();
+        session()->put('auth.reauthenticated_at', now()->subSeconds(601)->timestamp);
+        $editor->set('form.base_price_idr', '120.00')->call('save')->assertForbidden();
+        $this->assertSame('100.10', $product->fresh()->base_price_idr);
+        $this->assertSame($before, DB::table('activity_logs')->count());
+        session()->put('auth.reauthenticated_at', now()->timestamp);
+        Livewire::test(Editor::class, ['id' => $product->id])->set('form.base_price_idr', '120.00')->call('save')->assertHasNoErrors();
+        $this->assertSame('120.00', $product->fresh()->base_price_idr);
+    }
+
+    public function test_new_product_price_requires_reauthentication_and_cannot_be_submitted_without_it(): void
+    {
+        $this->admin();
+        session()->forget('auth.reauthenticated_at');
+        Livewire::test(Editor::class)->set('form', $this->info())->call('save')->assertForbidden();
+        $this->assertDatabaseCount('products', 0);
+        $this->assertDatabaseCount('activity_logs', 0);
+    }
+
+    public function test_nonfinancial_content_save_does_not_need_an_unnecessary_price_reauthentication(): void
+    {
+        $this->admin();
+        $product = $this->product();
+        session()->forget('auth.reauthenticated_at');
+        $saved = app(ManageProducts::class)->save($product->id, $this->info(['name' => 'Updated synthetic information']));
+        $this->assertSame('Updated synthetic information', $saved->name);
+        $this->assertSame('100.10', $saved->base_price_idr);
     }
 
     private function info(array $changes = []): array

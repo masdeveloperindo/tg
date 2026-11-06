@@ -56,6 +56,10 @@ jobs:
           npx playwright install --with-deps chromium
           python3 -m pip install -r tools/qa/requirements.txt
           mkdir -p "$QA_ARTIFACT_DIR"
+      - name: Dependency security advisories
+        run: |
+          composer audit --locked --format=json > "$QA_ARTIFACT_DIR/composer-audit.json"
+          npm audit --audit-level=low --json > "$QA_ARTIFACT_DIR/npm-audit.json"
       - name: PHP, schema, concurrency and lint
         run: |
           composer validate --strict

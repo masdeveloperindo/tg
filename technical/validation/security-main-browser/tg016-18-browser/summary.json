@@ -1,0 +1,14 @@
+{
+  "passed": 8,
+  "checks": [
+    "Funds modal, Escape and lost confirmation response resolve paid order via GET",
+    "One encrypted license issued; plaintext key absent from admin page",
+    "Paid owner receives temporary signed URL and exact private EX5 fixture bytes",
+    "Suspension rejects a previously valid signed download",
+    "Reactivation then terminal revoke; owner download permission rechecked",
+    "Admin order/license fit viewport 360",
+    "Admin order/license fit viewport 768",
+    "Admin order/license fit viewport 1280"
+  ],
+  "javascriptErrors": []
+}

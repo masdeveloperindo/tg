@@ -10,6 +10,7 @@ use App\Models\ProductMedia;
 use App\Models\ProductPerformance;
 use App\Models\ProductVersion;
 use App\Models\User;
+use App\Security\Access;
 use App\Support\Audit;
 use App\Support\SafeHtml;
 use Illuminate\Http\UploadedFile;
@@ -41,6 +42,10 @@ final class ManageProducts
         return DB::transaction(function () use ($id, $data): Product {
             $product = $id ? Product::query()->lockForUpdate()->findOrFail($id) : new Product;
             Gate::authorize($id ? 'update' : 'create', $id ? $product : Product::class);
+            if (! $product->exists || bccomp($product->base_price_idr, $data['base_price_idr'], 2) !== 0 || bccomp($product->minimum_price_idr, $data['minimum_price_idr'], 2) !== 0) {
+                $actor = Auth::user()?->fresh();
+                abort_unless($actor && Access::hasRecentReauthentication($actor), 403);
+            }
             if ($id && $product->status->value === 'published' && $product->slug !== $data['slug']) {
                 throw ValidationException::withMessages(['slug' => 'Slug produk yang telah dipublikasikan tidak dapat diubah.']);
             }

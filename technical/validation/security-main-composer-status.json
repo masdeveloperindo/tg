@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_EXTERNAL",
+  "command": "composer audit --locked --format=json",
+  "tls_verification": true,
+  "managed_ca_mounted_read_only": true,
+  "blocked_endpoint": "https://packagist.org/api/security-advisories/",
+  "proxy_status": 403,
+  "clean_result_claimed": false,
+  "ci_audit_gate_added": true,
+  "remote_ci_result": "NOT VERIFIED"
+}

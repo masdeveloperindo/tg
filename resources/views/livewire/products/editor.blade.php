@@ -1,6 +1,7 @@
 <div x-data="{ tab: 'info', move(direction) { const tabs = [...$refs.tabs.querySelectorAll('[role=tab]')]; const next = (tabs.indexOf(document.activeElement) + direction + tabs.length) % tabs.length; tabs[next].click(); tabs[next].focus(); } }">
     <div class="auth-admin-heading"><div><p class="eyebrow">KATALOG / EDITOR PRODUK</p><h1>{{ $product ? 'Edit produk.' : 'Tambah produk.' }}</h1><p class="auth-muted">Satu editor untuk informasi, cara pakai, performa, file dan FAQ.</p></div><x-ui.button :href="route('admin.produk')">Daftar produk</x-ui.button></div>
     @include('livewire.auth.partials.feedback')
+    <p class="auth-hint">Membuat produk atau mengubah harga memerlukan verifikasi admin dalam 10 menit terakhir. <a href="{{ route('admin.reauth') }}">Verifikasi ulang password dan TOTP</a>.</p>
     <p class="auth-warning">Publikasi konten tidak membuka penjualan. Aktivasi lisensi tetap menunggu PoC EA dan kelengkapan konfigurasi bisnis.</p>
     @if($product)
         <div class="editor-status"><x-ui.badge>{{ ['draft'=>'Draft', 'published'=>'Dipublikasikan', 'archived'=>'Diarsipkan'][$product->status->value] }}</x-ui.badge><x-ui.button wire:click="confirm('published')">Publikasikan</x-ui.button><x-ui.button wire:click="confirm('draft')">Jadikan draft</x-ui.button><x-ui.button wire:click="confirm('archived')">Arsipkan</x-ui.button></div>
@@ -90,6 +91,7 @@
         <x-ui.modal id="product-confirm" title="Konfirmasi perubahan produk" description="Perubahan akan disimpan dan dicatat dalam audit. Publikasi dan versi aktif tidak mengaktifkan penjualan." wire:loading.class="auth-is-busy" wire:target="execute,cancelConfirmation" x-on:modal-cancel="$wire.cancelConfirmation()">
             <p>{{ ['published'=>'Publikasikan konten produk?', 'draft'=>'Sembunyikan produk dari publik?', 'archived'=>'Arsipkan produk? Data historis tetap disimpan.', 'activate'=>'Jadikan versi ini satu-satunya versi aktif?', 'media'=>'Hapus media dari tampilan produk?', 'faqs'=>'Hapus FAQ produk?', 'performances'=>'Hapus hasil uji dari tampilan? Bukti asli tetap disimpan.'][$confirmation] ?? 'Periksa perubahan sebelum melanjutkan.' }}</p>
             @include('livewire.auth.partials.feedback')
+    <p class="auth-hint">Membuat produk atau mengubah harga memerlukan verifikasi admin dalam 10 menit terakhir. <a href="{{ route('admin.reauth') }}">Verifikasi ulang password dan TOTP</a>.</p>
             <div class="auth-modal-actions"><button class="auth-secondary" type="button" wire:click="cancelConfirmation" wire:loading.attr="disabled" wire:target="execute,cancelConfirmation">Batal</button><button class="button button-lime" type="button" wire:click="execute" wire:loading.attr="disabled" wire:target="execute,cancelConfirmation">Konfirmasi</button><x-ui.loading target="execute" label="Menyimpan perubahan…" /></div>
         </x-ui.modal>
     @endif

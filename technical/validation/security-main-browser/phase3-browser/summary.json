@@ -1,0 +1,21 @@
+{
+  "passed": 15,
+  "checks": [
+    "Broker validation and real logo upload preserve the native modal; referral allowlist enforced",
+    "Public broker logo and estimate work without creating wallet funds",
+    "Missing owner payout settings keep withdrawals closed",
+    "Client without EA license submits two broker accounts as pending, with evidence and Escape support",
+    "Admin verification checks proof and commits both account statuses visible to the owner",
+    "Admin credits two accounts and corrects one with reversal plus replacement, retaining four ledger rows",
+    "Filtered report shows one broker while global wallet correctly retains USD 120.00",
+    "Reauthenticated admin configures actual minimum, exchange rate and enabled flag",
+    "Frozen USD/IDR/destination preview survives lost request response; GET finds exactly one reservation",
+    "Manual processing keeps reserve; checked transfer/reference/time commits paid once and updates owner totals",
+    "Owner cancellation releases reserve after committed server status",
+    "Admin rejection releases reserve, exposes reason only to owner, and preserves paid/cancelled history",
+    "Broker, IB, reports, client/admin payouts and ledger fit viewport 360",
+    "Broker, IB, reports, client/admin payouts and ledger fit viewport 768",
+    "Broker, IB, reports, client/admin payouts and ledger fit viewport 1280"
+  ],
+  "javascriptErrors": []
+}

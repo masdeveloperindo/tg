@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GuideStep;
 use App\Models\ProductMedia;
 use App\Models\ProductPerformance;
-use Illuminate\Support\Facades\Storage;
+use App\Support\PrivateStorage;
 
 class PublishedAssetController
 {
@@ -32,8 +32,8 @@ class PublishedAssetController
 
     private function image(?string $path)
     {
-        abort_unless($path && preg_match('/\Aproducts\/images\/[a-f0-9-]{36}\.webp\z/', $path) && Storage::disk('local')->exists($path), 404);
+        $file = PrivateStorage::file($path, '/\Aproducts\/images\/[a-f0-9-]{36}\.webp\z/');
 
-        return Storage::disk('local')->response($path, null, ['Content-Type' => 'image/webp', 'X-Content-Type-Options' => 'nosniff', 'Cache-Control' => 'no-cache, private']);
+        return response()->file($file, ['Content-Type' => 'image/webp', 'X-Content-Type-Options' => 'nosniff', 'Cache-Control' => 'no-cache, private']);
     }
 }

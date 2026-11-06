@@ -11,6 +11,7 @@ use App\Http\Middleware\EnsureClient;
 use App\Http\Middleware\EnsurePasswordChanged;
 use App\Http\Middleware\PrivateResponseHeaders;
 use App\Http\Middleware\ProtectLivewireResponse;
+use App\Http\Middleware\SecurityHeaders;
 use App\Support\RequestId;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(CorrelateRequest::class);
+        $middleware->prepend(SecurityHeaders::class);
         $middleware->web(append: [ProtectLivewireResponse::class]);
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(fn (Request $request) => route(
@@ -78,7 +80,7 @@ return Application::configure(basePath: dirname(__DIR__))
             $response->headers->set('Cache-Control', 'no-store, private');
             $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
 
-            return $response;
+            return SecurityHeaders::apply($response);
         });
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),

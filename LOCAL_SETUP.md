@@ -72,3 +72,17 @@ Perintah meminta nama/email/password secara interaktif. Tidak ada akun atau pass
 Penjualan EA tetap tertutup sampai integrasi EA dan gate penerimaan selesai. Konfigurasi produk, Telegram pribadi, rekening dan broker diisi owner melalui alur aplikasi yang tersedia.
 
 Panduan Docker dan pengembangan lengkap: [DEVELOPMENT.md](DEVELOPMENT.md). Runner QA hanya untuk database terpisah `tg_test`, karena fixture pengujian mengosongkan schema test; jangan arahkan pengujian ke database aplikasi Anda.
+
+## Memperbarui kode setelah audit keamanan
+
+```bash
+git pull --ff-only origin main
+composer install --no-interaction --prefer-dist
+npm ci
+npm run build
+php artisan optimize:clear
+```
+
+Patch audit ini tidak menambah migration. Pertahankan `.env`, APP_KEY dan file privat existing; jangan menjalankan key:generate ulang atau migrate:fresh pada data penting. Pastikan APP_DEBUG=false dan SESSION_ENCRYPT=true. HTTP lokal memakai SESSION_SECURE_COOKIE=false; pada HTTPS staging/production wajib true. Web server harus menggunakan public/ sebagai document root, dan storage privat tidak boleh ditautkan ke folder publik.
+
+Membuat produk/mengubah harga memerlukan verifikasi password+TOTP admin dalam10menit terakhir. Hasil audit dan keterbatasannya: [SECURITY_MAIN_REVIEW.md](technical/validation/SECURITY_MAIN_REVIEW.md).

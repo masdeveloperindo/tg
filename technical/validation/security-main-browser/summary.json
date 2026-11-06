@@ -1,0 +1,38 @@
+{
+  "environment": "local isolated e2e/MySQL8.4 tg_test; not staging",
+  "passed": 56,
+  "suites": [
+    {
+      "suite": "feedback",
+      "passed": 5,
+      "summary": "tg009-browser/summary.json"
+    },
+    {
+      "suite": "products",
+      "passed": 9,
+      "summary": "tg011-browser/summary.json"
+    },
+    {
+      "suite": "checkout",
+      "passed": 8,
+      "summary": "tg013-15-browser/summary.json"
+    },
+    {
+      "suite": "fulfillment",
+      "passed": 8,
+      "summary": "tg016-18-browser/summary.json"
+    },
+    {
+      "suite": "rebates",
+      "passed": 15,
+      "summary": "phase3-browser/summary.json"
+    },
+    {
+      "suite": "content",
+      "passed": 11,
+      "summary": "phase4-browser/summary.json"
+    }
+  ],
+  "javascript_errors": 0,
+  "product_suite_repeated_after_final_price_patch": true
+}

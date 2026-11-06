@@ -149,3 +149,9 @@ TG-038 dan TG-039 DONE lokal: 402 tes PHP/MySQL8.4 PASS /3870 assertions, termas
 TG-041/TG-042 tetap PARTIAL karena staging dan penerimaan infra belum tersedia. TG-040 DEFERRED sesuai penundaan EA oleh owner; TG-043/TG-044 BLOCKED oleh terminal EA/UAT owner/config legal asli dan penerimaan handoff. GitHub Actions dikonfigurasi; PASS lokal bukan klaim remote CI. SOFTWARE READY FOR HANDOFF: **NO**. Penjualan tetap tertutup; tidak ada deploy/backup/transfer nyata.
 
 Hasil akhir lokal Fase5: **216 browser checks /9 suite /107 screenshot /0 error JS PASS**; kandidat commit `fe4b4c4` bersih, 303 file, migration/cache/HTTP/private-health rehearsal17 langkah PASS dan malformed archive ditolak exit1. Manifest/checksum dan laporan dicatat pada bukti TG038–TG044.
+
+## Audit keamanan main — 7 November 2026
+
+Baseline e8efbf5 direview ulang: price mutation sekarang memerlukan fresh actor+reauth; header anti-framing/no-referrer/nosniff dan policy browser diterapkan pada respons aplikasi/error/Livewire; storage privat menolak public exposure/symlink dan canonical-path escape; default sesi diperketat; guard DB aktual/session/cache tes dipisahkan. Tidak ada migration bisnis atau perubahan .env/APP_KEY.
+
+411 PHP tests /3997 assertions,279 file lint, Composer validate, Vite build,4 vector PHP→Python dan4 artifact tests PASS;6 browser suite mencakup56 pemeriksaan. npm audit0 vulnerability. **Composer audit BLOCKED EXTERNAL** oleh proxy403 endpoint Packagist advisory; audit Composer/npm ditambahkan ke CI sebagai gate, hasil remote belum diverifikasi. Bukti dan batas: [SECURITY_MAIN_REVIEW.md](technical/validation/SECURITY_MAIN_REVIEW.md). Tidak mengubah status penerimaan EA/staging/UAT/go-live.

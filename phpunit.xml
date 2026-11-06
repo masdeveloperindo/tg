@@ -26,6 +26,9 @@
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="database" force="true"/>
+        <env name="SESSION_CONNECTION" value="mysql" force="true"/>
+        <env name="DB_CACHE_CONNECTION" value="mysql" force="true"/>
+        <env name="DB_CACHE_LOCK_CONNECTION" value="mysql" force="true"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
