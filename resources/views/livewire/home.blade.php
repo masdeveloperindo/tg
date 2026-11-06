@@ -66,12 +66,8 @@
                 <strong>Pahami risikonya.</strong> Trading memiliki risiko kerugian. Penggunaan perangkat trading tidak menjamin keuntungan atau hasil tertentu.
             </aside>
         </section>
+        @if($testimonials->isNotEmpty())<section class="shell section"><h2>Pengalaman pengguna</h2><div class="catalog-grid">@foreach($testimonials as $testimonial)<article class="catalog-card">@if($testimonial->photo_path)<img src="{{ route('content.image',['type'=>'testimonial','id'=>$testimonial->id]) }}" alt="{{ $testimonial->display_name }}" width="80" height="80">@endif<h3>{{ $testimonial->display_name }}</h3><p>{{ $testimonial->content }}</p>@if($testimonial->rating)<p>Rating {{ $testimonial->rating }}/5</p>@endif</article>@endforeach</div></section>@endif
     </main>
 
-    <footer class="site-footer">
-        <div class="shell footer-inner">
-            <strong>TRADER GARUDA.</strong>
-            <p>Perangkat MT5. Informasi terbuka. Keputusan di tangan Anda.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </div>

@@ -9,12 +9,16 @@ use App\Actions\Rebates\WalletTotals;
 use App\Models\Withdrawal;
 use App\Security\Access;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class AdminWithdrawals extends Component
 {
     use WithPagination;
+
+    #[Url]
+    public string $status = '';
 
     #[Locked]
     public ?int $withdrawalId = null;
@@ -74,9 +78,10 @@ class AdminWithdrawals extends Component
     public function render()
     {
         $admin = Finance::admin(false);
+        abort_unless(in_array($this->status, ['', 'requested', 'processing', 'paid', 'rejected', 'cancelled'], true), 422);
         $row = $this->withdrawalId ? Withdrawal::with('user')->findOrFail($this->withdrawalId) : null;
         $reauth = Access::hasRecentReauthentication($admin);
 
-        return view('livewire.rebates.admin-withdrawals', ['withdrawal' => $row, 'withdrawals' => $row ? null : Withdrawal::with('user')->latest('id')->paginate(20), 'destination' => $row && $reauth ? json_decode($row->destination_enc, true) : null, 'balance' => $row ? WalletTotals::read($row->user_id) : null, 'reauth' => $reauth, 'rules' => app(PayoutRules::class)->get()])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Kelola pencairan']);
+        return view('livewire.rebates.admin-withdrawals', ['withdrawal' => $row, 'withdrawals' => $row ? null : Withdrawal::when($this->status, fn ($q) => $q->where('status', $this->status))->with('user')->latest('id')->paginate(20), 'destination' => $row && $reauth ? json_decode($row->destination_enc, true) : null, 'balance' => $row ? WalletTotals::read($row->user_id) : null, 'reauth' => $reauth, 'rules' => app(PayoutRules::class)->get()])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Kelola pencairan']);
     }
 }

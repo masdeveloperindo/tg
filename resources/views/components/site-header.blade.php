@@ -11,7 +11,7 @@
                 <a href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page" @endif>Beranda</a>
                 @unless($compact)
                     <a href="{{ route('produk') }}" @if(request()->routeIs('produk*')) aria-current="page" @endif>Produk MT5</a>
-                    <a href="{{ route('broker') }}" @if(request()->routeIs('broker')) aria-current="page" @endif>Broker</a><a href="{{ route('home') }}#alur">Cara memulai</a>
+                    <a href="{{ route('broker') }}" @if(request()->routeIs('broker')) aria-current="page" @endif>Broker</a><a href="{{ route('edukasi') }}" @if(request()->routeIs('edukasi*')) aria-current="page" @endif>Edukasi</a><a href="{{ route('panduan') }}" @if(request()->routeIs('panduan*')) aria-current="page" @endif>Panduan</a>
                 @endunless
             </div>
             <div class="site-nav-actions">

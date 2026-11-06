@@ -45,3 +45,19 @@ Dependensi eksternal tetap: data owner dan keputusan harga/rekening/Telegram (TG
 Layout bersama TG-008 dan pemeriksaan Chromium 360/768/1280 tersedia; lihat `DESIGN_SYSTEM.md` dan `validation/TG008.md`. Server e2e wajib memakai `--no-reload` agar override environment database dipertahankan; prosedur terisolasi ada di `../DEVELOPMENT.md`.
 
 TG-011 memerlukan ekstensi GD (dideklarasikan Composer) untuk re-encode gambar; Docker development menyediakannya. PHP upload_max_filesize20M/post_max_size24M dan temporary upload admin-only sudah diselaraskan; lihat `validation/TG011.md`. File INI di image harus terbaca oleh user non-root.
+
+## Kontrak scheduler dan health — TG-035 (7 November 2026)
+
+Aplikasi menyediakan lima jadwal Laravel dengan withoutOverlapping/onOneServer. Operator infra perlu memanggil `php artisan schedule:run` sekali per menit dari root release aktif, memakai PHP/runtime/env yang sama dengan aplikasi. Gunakan satu shared cache database untuk mutex. Tidak perlu queue worker MVP. Task software ini hanya mendaftarkan/menguji schedule, tidak memasang atau menjalankan cron host.
+
+| Job | Jadwal aplikasi | Efek |
+| --- | --- | --- |
+| tg:expire-orders | Tiap menit | Hanya waiting lewat deadline, audit system, tidak mengubah paid |
+| tg:detect-license-anomalies | Tiap10menit | Flag dedup untuk review manusia; tidak auto-suspend |
+| tg:prune-api-nonces --apply | Tiap10menit | Hanya nonce expired |
+| tg:prune-license-logs --apply | 02:00 WIB | Telemetry>90hari dan rawIP>30hari; audit finansial tidak dihapus |
+| tg:reconcile-rebates | 02:30 WIB | Read-only, nonzero bila mismatch; perlu review manusia |
+
+schedule:list dapat menampilkan ekspresi/next_due yang dikonversi UTC; sumber daily jobs memakai Asia/Jakarta. Periksa cache lock dan output command saat insiden, jangan melakukan auto-fix saldo. Kebutuhan log/storage: private directory di luar public, writable untuk upload/tmp/log/cache; pertahankan APP_KEY dan file versi immutable. Rotasi log/kapasitas, backup DB+private files serta secret recovery diserahkan kepada infra, bukan dijalankan task software.
+
+GET /health berada di luar session middleware. Operator menyediakan TG_HEALTH_TOKEN melalui secret configuration, minimal32karakter acak, tanpa nilai bawaan atau commit .env. Probe mengirim Authorization: Bearer melalui koneksi internal/HTTPS; jangan taruh token di query/URL/log. Missing/wrong token404; authorized DB+cache sehat200 {status:ok}; dependency gagal503 {status:unavailable}, tanpa detail versi/credential dan tanpa cookie. Proxy perlu meneruskan Authorization. Host monitor/token/cron belum diaktifkan oleh software task.

@@ -7,12 +7,16 @@ use App\Actions\Rebates\IbAccounts;
 use App\Models\Broker;
 use App\Models\TradingAccount;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Accounts extends Component
 {
     use WithPagination;
+
+    #[Url]
+    public string $status = '';
 
     public string $brokerId = '';
 
@@ -85,7 +89,8 @@ class Accounts extends Component
     public function render()
     {
         $this->authorizePage();
-        $query = TradingAccount::with(['broker', 'user'])->withSum('rebateEntries as total_rebate', 'amount_usd');
+        abort_unless(in_array($this->status, ['', 'pending', 'approved', 'rejected'], true), 422);
+        $query = TradingAccount::when($this->status, fn ($q) => $q->where('status', $this->status))->with(['broker', 'user'])->withSum('rebateEntries as total_rebate', 'amount_usd');
         if (! $this->adminArea()) {
             $query->where('user_id', auth()->id());
         }

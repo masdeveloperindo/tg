@@ -12,6 +12,7 @@
         @include('livewire.rebates.balance',['balance'=>\App\Actions\Rebates\WalletTotals::read(auth()->id())])
         <x-ui.button :href="route('member.rebate')">Lihat hasil rebate</x-ui.button>
     @endif
+    @foreach(\App\Actions\Content\Visibility::announcements(auth()->id())->latest('id')->limit(10)->get() as $announcement)<x-ui.panel :title="$announcement->title"><div class="editor-prose">{!! \App\Support\SafeHtml::clean($announcement->body) !!}</div></x-ui.panel>@endforeach
     <div class="portal-grid">
         <x-ui.panel title="Layanan Anda" eyebrow="INFORMASI LAYANAN">
             <x-ui.empty-state title="Kelola produk dan akun Anda">

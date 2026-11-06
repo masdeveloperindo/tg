@@ -26,7 +26,7 @@ class Detail extends Component
             'performances' => fn ($query) => $query->with('version')->orderByDesc('ends_on'),
             'faqs' => fn ($query) => $query->where('is_active', true)->orderBy('sort_order'),
             'guides' => fn ($query) => $query->where('is_active', true)->with(['steps' => fn ($steps) => $steps->orderBy('step_no')]),
-            'testimonials' => fn ($query) => $query->where('is_visible', true)->whereNotNull('published_at')->where('published_at', '<=', now())->whereRaw('CHAR_LENGTH(TRIM(consent_record)) > 0')->orderBy('sort_order'),
+            'testimonials' => fn ($query) => $query->where('is_visible', true)->whereNotNull('published_at')->where('published_at', '<=', now()->format('Y-m-d H:i:s.u'))->whereRaw('CHAR_LENGTH(TRIM(consent_record)) > 0')->orderBy('sort_order'),
         ])->firstOrFail();
         $product->setRelation('media', $product->media->filter(fn ($media) => $media->media_type->value === 'image'
             ? PublicContent::image($media->disk_path, route('produk.media', $media->id, false)) !== null

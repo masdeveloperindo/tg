@@ -9,12 +9,14 @@
             ['label' => 'Penjualan', 'items' => [['route'=>'admin.pesanan','label'=>'Pesanan','active'=>'admin.pesanan*'],['route'=>'admin.lisensi','label'=>'Lisensi','active'=>'admin.lisensi*']]],
             ['label' => 'IB & rebate', 'items' => [['route'=>'admin.broker','label'=>'Broker','active'=>'admin.broker'],['route'=>'admin.rebate.akun','label'=>'Verifikasi IB','active'=>'admin.rebate.akun'],['route'=>'admin.rebate','label'=>'Rebate','active'=>'admin.rebate'],['route'=>'admin.penarikan','label'=>'Pencairan','active'=>'admin.penarikan*']]],
             ['label' => 'Katalog', 'items' => [['route' => 'admin.produk', 'label' => 'Produk', 'active' => 'admin.produk*']]],
+            ['label' => 'Konten & operasional', 'items' => array_merge(array_map(fn ($kind)=>['route'=>'admin.'.$kind,'label'=>ucfirst($kind),'active'=>'admin.'.$kind.'*'],array_keys(\App\Actions\Content\Types::MODELS)),[['route'=>'admin.anomali','label'=>'Anomali','active'=>'admin.anomali*'],['route'=>'admin.pengaturan','label'=>'Pengaturan','active'=>'admin.pengaturan'],['route'=>'admin.log','label'=>'Audit','active'=>'admin.log']])],
             ['label' => 'Kelola akses', 'items' => [['route' => 'admin.clients', 'label' => 'Client', 'active' => 'admin.clients*']]],
             ['label' => 'Akun & keamanan', 'items' => [['route' => 'admin.reauth', 'label' => 'Verifikasi ulang akses', 'active' => 'admin.reauth'], ['route' => 'password.change', 'label' => 'Ganti kata sandi', 'active' => 'password.change']]],
         ]
         : [
             ['label' => 'Area saya', 'items' => [['route' => 'member', 'label' => 'Ringkasan', 'active' => 'member']]],
             ['label' => 'Produk', 'items' => [['route' => 'member.produk', 'label' => 'Produk Saya', 'active' => 'member.produk*']]],
+            ['label'=>'Berkas','items'=>[['route'=>'member.unduhan','label'=>'Unduhan','active'=>'member.unduhan']]],
             ['label' => 'Pesanan', 'items' => [['route' => 'member.pesanan', 'label' => 'Pesanan saya', 'active' => ['member.pesanan', 'pesanan.kode']]]],
             ['label' => 'Rebate opsional', 'items' => [['route'=>'member.rebate.akun','label'=>'Broker IB Saya','active'=>'member.rebate.akun'],['route'=>'member.rebate','label'=>'Hasil Rebate','active'=>'member.rebate'],['route'=>'member.penarikan','label'=>'Pencairan','active'=>'member.penarikan']]],
             ['label' => 'Akun', 'items' => [['route' => 'member.profile', 'label' => 'Profil & kata sandi', 'active' => ['member.profile', 'password.change']]]],

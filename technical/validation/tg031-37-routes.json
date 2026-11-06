@@ -1,0 +1,1023 @@
+{
+  "matched": 71,
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "name": "home",
+      "action": "App\\Livewire\\Home",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/produk",
+      "name": "produk",
+      "action": "App\\Livewire\\Catalog\\Products",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/produk/{slug}",
+      "name": "produk.slug",
+      "action": "App\\Livewire\\Catalog\\Detail",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/broker",
+      "name": "broker",
+      "action": "App\\Livewire\\Catalog\\Brokers",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edukasi",
+      "name": "edukasi",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edukasi/kategori/{kategori}",
+      "name": "edukasi.kategori.kategori",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/edukasi/{slug}",
+      "name": "edukasi.slug",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/faq",
+      "name": "faq",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/panduan",
+      "name": "panduan",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/panduan/{slug}",
+      "name": "panduan.slug",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/tentang",
+      "name": "tentang",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/kontak",
+      "name": "kontak",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/kebijakan-privasi",
+      "name": "kebijakan_privasi",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/syarat-layanan",
+      "name": "syarat_layanan",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/disclaimer-risiko",
+      "name": "disclaimer_risiko",
+      "action": "App\\Http\\Controllers\\ContentController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/login",
+      "name": "login",
+      "action": "App\\Livewire\\Auth\\Login",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated",
+        "App\\Http\\Middleware\\PrivateResponseHeaders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/register",
+      "name": "register",
+      "action": "App\\Livewire\\Auth\\Register",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated",
+        "App\\Http\\Middleware\\PrivateResponseHeaders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/checkout/{slug}",
+      "name": "checkout.slug",
+      "action": "App\\Livewire\\Orders\\CheckoutPage",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pesanan/{kode}",
+      "name": "pesanan.kode",
+      "action": "App\\Livewire\\Orders\\Detail",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/go/telegram",
+      "name": "go.telegram",
+      "action": "App\\Http\\Controllers\\OutboundController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/go/broker/{id}",
+      "name": "go.broker.id",
+      "action": "App\\Http\\Controllers\\OutboundController",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member",
+      "name": "member",
+      "action": "Closure",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/produk",
+      "name": "member.produk",
+      "action": "App\\Livewire\\Licenses\\MyProducts",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/produk/{licenseId}",
+      "name": "member.produk.licenseId",
+      "action": "App\\Livewire\\Licenses\\MyProducts",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/unduhan",
+      "name": "member.unduhan",
+      "action": "App\\Livewire\\Content\\Downloads",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/pesanan",
+      "name": "member.pesanan",
+      "action": "App\\Livewire\\Orders\\Index",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/rebate",
+      "name": "member.rebate",
+      "action": "App\\Livewire\\Rebates\\Results",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/rebate/akun",
+      "name": "member.rebate.akun",
+      "action": "App\\Livewire\\Rebates\\Accounts",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/penarikan",
+      "name": "member.penarikan",
+      "action": "App\\Livewire\\Rebates\\Withdrawals",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/profil",
+      "name": "member.profile",
+      "action": "App\\Livewire\\Auth\\ChangePassword",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin",
+      "name": "admin",
+      "action": "Closure",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/produk",
+      "name": "admin.produk",
+      "action": "App\\Livewire\\Products\\Index",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/produk/create",
+      "name": "admin.produk.create",
+      "action": "App\\Livewire\\Products\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/produk/{id}/edit",
+      "name": "admin.produk.id.edit",
+      "action": "App\\Livewire\\Products\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pesanan",
+      "name": "admin.pesanan",
+      "action": "App\\Livewire\\Fulfillment\\AdminOrders",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pesanan/{id}",
+      "name": "admin.pesanan.id",
+      "action": "App\\Livewire\\Fulfillment\\AdminOrders",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/lisensi",
+      "name": "admin.lisensi",
+      "action": "App\\Livewire\\Fulfillment\\AdminLicenses",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/lisensi/{id}",
+      "name": "admin.lisensi.id",
+      "action": "App\\Livewire\\Fulfillment\\AdminLicenses",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/anomali",
+      "name": "admin.anomali",
+      "action": "App\\Livewire\\Operations\\Anomalies",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/anomali/{id}",
+      "name": "admin.anomali.id",
+      "action": "App\\Livewire\\Operations\\Anomalies",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/client",
+      "name": "admin.clients",
+      "action": "App\\Livewire\\Auth\\AdminClients",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/broker",
+      "name": "admin.broker",
+      "action": "App\\Livewire\\Rebates\\Brokers",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/akun-trading",
+      "name": "admin.akun_trading",
+      "action": "App\\Livewire\\Rebates\\AdminAccounts",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/rebate",
+      "name": "admin.rebate",
+      "action": "App\\Livewire\\Rebates\\Ledger",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/penarikan",
+      "name": "admin.penarikan",
+      "action": "App\\Livewire\\Rebates\\AdminWithdrawals",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/penarikan/{id}",
+      "name": "admin.penarikan.id",
+      "action": "App\\Livewire\\Rebates\\AdminWithdrawals",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/edukasi",
+      "name": "admin.edukasi",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/edukasi/create",
+      "name": "admin.edukasi.create",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/edukasi/{id}/edit",
+      "name": "admin.edukasi.id.edit",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/faq",
+      "name": "admin.faq",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/faq/create",
+      "name": "admin.faq.create",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/faq/{id}/edit",
+      "name": "admin.faq.id.edit",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/panduan",
+      "name": "admin.panduan",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/panduan/create",
+      "name": "admin.panduan.create",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/panduan/{id}/edit",
+      "name": "admin.panduan.id.edit",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/testimoni",
+      "name": "admin.testimoni",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/testimoni/create",
+      "name": "admin.testimoni.create",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/testimoni/{id}/edit",
+      "name": "admin.testimoni.id.edit",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/halaman",
+      "name": "admin.halaman",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pengumuman",
+      "name": "admin.pengumuman",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pengumuman/create",
+      "name": "admin.pengumuman.create",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pengumuman/{id}/edit",
+      "name": "admin.pengumuman.id.edit",
+      "action": "App\\Livewire\\Content\\Editor",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/pengaturan",
+      "name": "admin.pengaturan",
+      "action": "App\\Livewire\\Operations\\Settings",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/log",
+      "name": "admin.log",
+      "action": "App\\Livewire\\Operations\\AuditLog",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureAdminRole",
+        "App\\Http\\Middleware\\EnsureAdminTwoFactor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/sitemap.xml",
+      "name": "sitemap.xml",
+      "action": "App\\Http\\Controllers\\SeoController@sitemap",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/robots.txt",
+      "name": "robots.txt",
+      "action": "App\\Http\\Controllers\\SeoController@robots",
+      "middleware": [
+        "web",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests:120,1"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/member/unduh/{versionId}",
+      "name": "member.unduh.versionId",
+      "action": "App\\Http\\Controllers\\VersionDownloadController",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\EnsureActiveUser",
+        "App\\Http\\Middleware\\EnsureAdminSessionFresh",
+        "Illuminate\\Session\\Middleware\\AuthenticateSession",
+        "App\\Http\\Middleware\\EnsurePasswordChanged",
+        "App\\Http\\Middleware\\PrivateResponseHeaders",
+        "App\\Http\\Middleware\\EnsureClient"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "name": "health",
+      "action": "App\\Http\\Controllers\\HealthController",
+      "middleware": []
+    },
+    {
+      "method": "POST",
+      "path": "/logout",
+      "name": "logout",
+      "action": "App\\Http\\Controllers\\LogoutController",
+      "middleware": [
+        "web",
+        "Illuminate\\Auth\\Middleware\\Authenticate",
+        "App\\Http\\Middleware\\PrivateResponseHeaders"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/licenses/verify",
+      "name": "api.v1.licenses.verify",
+      "action": "App\\Http\\Controllers\\Api\\V1\\LicenseVerifyController",
+      "middleware": [
+        "api",
+        "App\\Http\\Middleware\\LicenseApiBoundary"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/licenses/deactivate",
+      "name": "api.v1.licenses.deactivate",
+      "action": "Closure",
+      "middleware": [
+        "api"
+      ]
+    }
+  ]
+}

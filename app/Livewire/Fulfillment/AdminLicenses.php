@@ -3,18 +3,23 @@
 namespace App\Livewire\Fulfillment;
 
 use App\Actions\Licenses\ChangeLicenseStatus;
+use App\Actions\Operations\Tasks;
 use App\Models\License;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class AdminLicenses extends Component
 {
     use WithPagination;
+
+    #[Url]
+    public string $task = '';
 
     #[Locked]
     public ?int $licenseId = null;
@@ -70,6 +75,6 @@ class AdminLicenses extends Component
     {
         Gate::authorize('viewAny', User::class);
 
-        return view('livewire.fulfillment.licenses', ['license' => $this->licenseId ? License::with('product')->findOrFail($this->licenseId) : null, 'licenses' => $this->licenseId ? null : License::with('product')->latest('id')->paginate(20)])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Kelola lisensi']);
+        return view('livewire.fulfillment.licenses', ['license' => $this->licenseId ? License::with('product')->findOrFail($this->licenseId) : null, 'licenses' => $this->licenseId ? null : Tasks::licenses($this->task)->with('product')->latest('id')->paginate(20)])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Kelola lisensi']);
     }
 }

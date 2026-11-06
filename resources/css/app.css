@@ -355,3 +355,6 @@ button:disabled { cursor: wait; }
 .product-detail summary { min-height: 44px; padding-block: 10px; cursor: pointer; font-weight: 700; }
 @media(max-width: 1023px) { .catalog-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .catalog-filters { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media(max-width: 600px) { .catalog-grid, .catalog-filters { grid-template-columns: minmax(0,1fr); } .catalog-card { padding: 20px; } }
+
+/* Nested CMS/settings forms must shrink within narrow viewports. */
+.auth-form fieldset { min-inline-size: 0; max-width: 100%; }

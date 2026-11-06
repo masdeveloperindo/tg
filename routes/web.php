@@ -1,19 +1,29 @@
 <?php
 
+use App\Actions\Content\Types;
 use App\Actions\Orders\SaleInfo;
 use App\Http\Controllers\BrokerLogoController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ContentImageController;
 use App\Http\Controllers\LicenseDownloadController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\OutboundController;
 use App\Http\Controllers\ProductAssetController;
 use App\Http\Controllers\PublishedAssetController;
+use App\Http\Controllers\SeoController;
+use App\Http\Controllers\VersionDownloadController;
 use App\Livewire\Auth;
 use App\Livewire\Catalog\Brokers;
 use App\Livewire\Catalog\Detail;
 use App\Livewire\Catalog\Products;
+use App\Livewire\Content\Downloads;
 use App\Livewire\Fulfillment\AdminLicenses;
 use App\Livewire\Fulfillment\AdminOrders;
 use App\Livewire\Home;
 use App\Livewire\Licenses\MyProducts;
+use App\Livewire\Operations\Anomalies;
+use App\Livewire\Operations\AuditLog;
+use App\Livewire\Operations\Settings;
 use App\Livewire\Orders\CheckoutPage;
 use App\Livewire\Products\Editor;
 use App\Livewire\Products\Index;
@@ -29,6 +39,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::middleware('throttle:120,1')->group(function (): void {
+    Route::get('/edukasi', ContentController::class)->defaults('kind', 'edukasi')->name('edukasi');
+    Route::get('/edukasi/kategori/{kategori}', ContentController::class)->defaults('kind', 'edukasi')->name('edukasi.kategori.kategori');
+    Route::get('/edukasi/{slug}', ContentController::class)->defaults('kind', 'edukasi')->name('edukasi.slug');
+    Route::get('/faq', ContentController::class)->defaults('kind', 'faq')->name('faq');
+    Route::get('/panduan', ContentController::class)->defaults('kind', 'panduan')->name('panduan');
+    Route::get('/panduan/{slug}', ContentController::class)->defaults('kind', 'panduan')->name('panduan.slug');
+    foreach (Types::PAGES as $slug => $title) {
+        Route::get('/'.$slug, ContentController::class)->defaults('kind', 'halaman')->defaults('slug', $slug)->name(str_replace('-', '_', $slug));
+    }
+    Route::get('/konten/gambar/{type}/{id}', ContentImageController::class)->where('type', 'cover|article|step|testimonial')->whereNumber('id')->name('content.image');
+    Route::get('/go/telegram', OutboundController::class)->defaults('target', 'telegram')->name('go.telegram');
+    Route::get('/go/broker/{id}', OutboundController::class)->defaults('target', 'broker')->whereNumber('id')->name('go.broker.id');
+    Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap.xml');
+    Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots.txt');
     Route::get('/produk', Products::class)->name('produk');
     Route::get('/produk/media/{media}', [PublishedAssetController::class, 'media'])->whereNumber('media')->name('produk.media');
     Route::get('/produk/performa/{performance}/gambar', [PublishedAssetController::class, 'performance'])->whereNumber('performance')->name('produk.performance.image');
@@ -53,6 +77,8 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
         Route::get('/pesanan/{kode}', App\Livewire\Orders\Detail::class)->name('pesanan.kode');
         Route::get('/member/produk/{license}/download', [LicenseDownloadController::class, 'request'])->whereNumber('license')->name('licenses.download.request');
         Route::get('/download/{license}/{version}', [LicenseDownloadController::class, 'download'])->whereNumber(['license', 'version'])->name('licenses.download');
+        Route::get('/member/unduhan', Downloads::class)->name('member.unduhan');
+        Route::get('/member/unduh/{versionId}', VersionDownloadController::class)->whereNumber('versionId')->name('member.unduh.versionId');
         Route::get('/member/rebate', Results::class)->name('member.rebate');
         Route::get('/member/rebate/akun', Accounts::class)->name('member.rebate.akun');
         Route::get('/member/penarikan', Withdrawals::class)->name('member.penarikan');
@@ -73,6 +99,18 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
 
                 return view('auth.admin');
             })->name('admin');
+            foreach (array_keys(Types::MODELS) as $kind) {
+                Route::get('/admin/'.$kind, App\Livewire\Content\Editor::class)->defaults('kind', $kind)->name('admin.'.$kind);
+                if ($kind !== 'halaman') {
+                    Route::get('/admin/'.$kind.'/create', App\Livewire\Content\Editor::class)->defaults('kind', $kind)->defaults('mode', 'create')->name('admin.'.$kind.'.create');
+                    Route::get('/admin/'.$kind.'/{id}/edit', App\Livewire\Content\Editor::class)->whereNumber('id')->defaults('kind', $kind)->defaults('mode', 'edit')->name('admin.'.$kind.'.id.edit');
+                }
+            }
+            Route::get('/admin/anomali', Anomalies::class)->name('admin.anomali');
+            Route::get('/admin/anomali/{id}', Anomalies::class)->whereNumber('id')->name('admin.anomali.id');
+            Route::get('/admin/pengaturan', Settings::class)->name('admin.pengaturan');
+            Route::get('/admin/log', AuditLog::class)->name('admin.log');
+            Route::get('/admin/akun-trading', AdminAccounts::class)->name('admin.akun_trading');
             Route::get('/admin/broker', App\Livewire\Rebates\Brokers::class)->name('admin.broker');
             Route::get('/admin/rebate', Ledger::class)->name('admin.rebate');
             Route::get('/admin/rebate/akun', AdminAccounts::class)->name('admin.rebate.akun');

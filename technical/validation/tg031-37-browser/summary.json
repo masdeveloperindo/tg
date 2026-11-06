@@ -1,0 +1,17 @@
+{
+  "passed": 11,
+  "checks": [
+    "Guest education exposes published public content only; client article redirects to login",
+    "Active client access protects article images and shows bulletin on existing member dashboard",
+    "Guide images, keyboard-native FAQ disclosure and legal publication/empty states are real",
+    "Task dashboard links resolve to filtered waiting-payment and paid-without-license jobs",
+    "CMS draft, Escape, real cover upload and sanitized publication recover from a lost committed response",
+    "Testimonial consent validation keeps modal open; explicit unpublish removes public review without exposing consent",
+    "Anomaly review and suspension are explicit reauthenticated decisions with notes; no raw IP or key exposed",
+    "Dynamic sitemap excludes private/draft paths, robots is served by app and health remains private",
+    "Content, guide, bulletin, CMS, task dashboard, anomaly and settings fit viewport 360",
+    "Content, guide, bulletin, CMS, task dashboard, anomaly and settings fit viewport 768",
+    "Content, guide, bulletin, CMS, task dashboard, anomaly and settings fit viewport 1280"
+  ],
+  "javascriptErrors": []
+}

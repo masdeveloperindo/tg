@@ -31,3 +31,13 @@ Dokumen ini **bukan instruksi penugasan infrastruktur kepada developer**. Pekerj
 | Kebutuhan eksternal | daftar domain/TLS/DB/backup/monitoring | Infra | Pending |
 
 **Keputusan:** Setelah semua item software lulus, status `SOFTWARE READY FOR HANDOFF`; transaksi asli dibuka hanya oleh owner sesudah infra/legal dan kriteria go-live umum juga lulus.
+
+## Paket operasional aplikasi dari Fase 4
+
+Source scheduler ada pada routes/console.php. Lima command dan cadence tercantum di technical/ENVIRONMENT.md; bukti schedule:list dan health tests di technical/validation/TG031-TG037.md. Infra perlu shared database cache, pemanggilan schedule:run setiap menit dari release aktif, token health yang disuplai melalui secret config, penerusan Authorization dan writable private storage/log. Tidak ada kebutuhan queue worker MVP. Seluruh perintah tetap melalui runtime/env aplikasi dan hak file minimum.
+
+Migration Fase4 hanya menambah review_note nullable pada license_flags. Terapkan migrate biasa; jangan migrate:fresh/reset pada data bisnis. Pertahankan APP_KEY, encryption/signing keys dan version files saat rilis; recovery/backup host dilakukan infra sesuai prosedur yang disahkan, tidak disediakan sebagai aksi otomatis aplikasi.
+
+Health minimal hanya memeriksa DB/cache; bukan klaim kesiapan EA, bank, konten legal atau sales gate. Tanpa token sah endpoint404 memang diharapkan. Probe internal/HTTPS menggunakan bearer header, bukan query. Reconcile hanya mendeteksi mismatch dan tidak memindah uang/memperbaiki saldo. Flag anomali tidak mensuspend otomatis. Ops harus meninjau kegagalan job/mutex/cache, bukan mengulang transfer manual.
+
+Owner masih perlu legal/about/contact dan sumber/consent testimoni nyata, konfigurasi bisnis yang sah serta UAT. Source EA/verifier dan terminal ditunda sesuai owner; software tidak mengaktifkan sales flags. Paket Fase4 ini belum menyatakan seluruh handoff/produksi siap dan tidak memasang cron, monitor, backup atau deploy host.

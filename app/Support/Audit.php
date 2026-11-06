@@ -11,7 +11,25 @@ final class Audit
 {
     public static function record(User $actor, string $action, Model $subject, array $summary): void
     {
+        self::write($actor, $action, $subject, $summary);
+    }
+
+    public static function system(string $action, Model $subject): void
+    {
+        if ($action !== 'order.expired') {
+            throw new InvalidArgumentException('Unsupported system action.');
+        }
+        self::write(null, $action, $subject, []);
+    }
+
+    private static function write(?User $actor, string $action, Model $subject, array $summary): void
+    {
         $schemas = [
+            'order.expired' => [],
+            'configuration.saved' => ['content_changed'],
+            'anomaly.reviewed' => ['flag_status', 'reason_provided'],
+            'content.saved' => ['content_changed', 'before_sha256', 'after_sha256'],
+            'content.image_added' => ['resource_id'],
             'broker.saved' => ['rate_before', 'rate_after', 'effective_before', 'effective_after', 'content_changed'],
             'ib.account_attached' => ['proof_provided'],
             'ib.account_decided' => ['approved', 'proof_checked', 'reason_provided'],
@@ -56,6 +74,7 @@ final class Audit
         foreach ($schemas[$action] as $key) {
             $value = $summary[$key] ?? null;
             $valid = match ($key) {
+                'flag_status' => in_array($value, ['reviewed', 'ignored', 'suspended'], true),
                 'rate_before', 'rate_after' => is_string($value) && preg_match('/\A[0-9]{1,14}\.[0-9]{4}\z/', $value) === 1,
                 'effective_before', 'effective_after' => is_string($value) && preg_match('/\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z/', $value) === 1,
                 'intent_sha256', 'before_sha256', 'after_sha256' => is_string($value) && preg_match('/^[a-f0-9]{64}$/', $value) === 1,
@@ -71,7 +90,7 @@ final class Audit
             }
         }
         (new ActivityLog)->forceFill([
-            'actor_id' => $actor->getKey(), 'action' => $action,
+            'actor_id' => $actor?->getKey(), 'action' => $action,
             'subject_type' => $subject::class, 'subject_id' => $subject->getKey(),
             'request_id' => RequestId::current(), 'summary_json' => $safe,
         ])->save();

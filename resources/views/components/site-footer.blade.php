@@ -1,1 +1,1 @@
-<footer class="site-footer"><div class="shell footer-inner"><strong>TRADER GARUDA.</strong><p>Perangkat MT5. Informasi terbuka. Keputusan di tangan Anda.</p></div></footer>
+<footer class="site-footer"><div class="shell footer-inner"><strong>TRADER GARUDA.</strong><p>Perangkat MT5. Informasi terbuka. Keputusan di tangan Anda.</p><nav aria-label="Informasi layanan">@foreach(\App\Actions\Content\Types::PAGES as $slug=>$label)<a href="{{ url('/'.$slug) }}">{{ $label }}</a> @endforeach<a href="{{ route('faq') }}">FAQ</a></nav></div></footer>

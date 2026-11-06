@@ -1,4 +1,7 @@
-@props(['title' => null, 'noindex' => false, 'description' => 'Trader Garuda — perangkat MetaTrader 5, panduan penggunaan, dan informasi produk.', 'canonical' => null, 'structuredData' => null, 'socialImage' => null])
+@props(['title' => null, 'noindex' => false, 'description' => null, 'canonical' => null, 'structuredData' => null, 'socialImage' => null])
+@php($site=\App\Actions\Operations\Configuration::json('public.site'))
+@php($description=$description??$site['description']??'Trader Garuda — perangkat MetaTrader 5, panduan penggunaan, dan informasi produk.')
+@php($title=$title??$site['title']??config('app.name','Trader Garuda'))
 <!DOCTYPE html>
 <html lang="id" class="no-js">
     <head>

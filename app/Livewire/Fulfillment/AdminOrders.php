@@ -3,16 +3,21 @@
 namespace App\Livewire\Fulfillment;
 
 use App\Actions\Licenses\FulfillOrder;
+use App\Actions\Operations\Tasks;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class AdminOrders extends Component
 {
     use WithPagination;
+
+    #[Url]
+    public string $task = '';
 
     #[Locked]
     public ?int $orderId = null;
@@ -68,6 +73,6 @@ class AdminOrders extends Component
     {
         Gate::authorize('viewAny', User::class);
 
-        return view('livewire.fulfillment.orders', ['order' => $this->orderId ? Order::with(['product', 'user', 'checkoutQuote'])->findOrFail($this->orderId) : null, 'orders' => $this->orderId ? null : Order::with('product')->latest('id')->paginate(20)])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Pesanan & pembayaran']);
+        return view('livewire.fulfillment.orders', ['order' => $this->orderId ? Order::with(['product', 'user', 'checkoutQuote'])->findOrFail($this->orderId) : null, 'orders' => $this->orderId ? null : Tasks::orders($this->task)->with('product')->latest('id')->paginate(20)])->layout('components.layouts.portal', ['area' => 'admin', 'title' => 'Pesanan & pembayaran']);
     }
 }

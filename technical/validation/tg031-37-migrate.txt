@@ -1,0 +1,3 @@
+INFO  Running migrations.
+
+  2026_11_07_000001_add_license_flag_review_note ................ 21.90ms DONE

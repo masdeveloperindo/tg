@@ -89,7 +89,7 @@ class RebateAccountsTest extends TestCase
 
     public function test_future_or_inactive_broker_rejects_new_claim_and_pending_account_cannot_receive_credit(): void
     {
-        $future = $this->broker(['valid_from' => now()->addDay()->format('Y-m-d')]);
+        $future = $this->broker(['valid_from' => now('Asia/Jakarta')->addDay()->format('Y-m-d')]);
         $inactive = $this->broker(['is_active' => false]);
         $active = $this->broker();
         $this->actingAs($this->buyer);
@@ -149,7 +149,7 @@ class RebateAccountsTest extends TestCase
         DB::table('settings')->where('key', 'rebate.payout')->delete();
         $this->actingAs($this->buyer);
         $this->assertNull(app(PayoutRules::class)->get());
-        $this->invalid(fn () => app(Payouts::class)->quote('10',$this->destination(),(string) Str::uuid()),'amount');
+        $this->invalid(fn () => app(Payouts::class)->quote('10', $this->destination(), (string) Str::uuid()), 'amount');
         $this->get(route('member.penarikan'))->assertOk()->assertSee('Pengajuan pencairan belum dibuka')->assertDontSee('Periksa pencairan');
     }
 }

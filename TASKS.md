@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-021–TG-030 juga selesai secara software; backend TG-019 selesai, tetapi penerimaan TG-019/TG-020 terblokir source EA dan PoC terminal. Bukti terbaru: `technical/validation/TG023-TG030.md`. TG-001–TG-003 masih menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-021–TG-037 juga selesai secara software; backend TG-019 selesai, tetapi penerimaan TG-019/TG-020 terblokir source EA dan PoC terminal. Bukti terbaru: `technical/validation/TG031-TG037.md`. TG-001–TG-003 masih menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -190,34 +190,34 @@ IB opsional, tetapi bila client ikut, daftar broker, hasil rebate dan pencairan 
 
 Pengalaman client tetap ringan; semua kompleksitas operasional diletakkan di panel admin.
 
-- [ ] **TG-031 — FAQ, panduan instalasi bergambar, edukasi** `P1`
+- [x] **TG-031 — FAQ, panduan instalasi bergambar, edukasi** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-011,TG-008. **Gate:** G-28.
   - **Selesai jika:** Admin CRUD media bertipe aman, langkah instalasi MT5, SEO dan publikasi; tampilan mobile dan empty state benar.
 
-- [ ] **TG-032 — Testimoni manual dan pengumuman** `P1`
+- [x] **TG-032 — Testimoni manual dan pengumuman** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-011,TG-008. **Gate:** G-28.
   - **Selesai jika:** Hanya admin dapat input/aktifkan testimoni nyata berizin; pengumuman tampil sesuai masa aktif/audiens.
 
-- [ ] **TG-033 — Dashboard Tugas Hari Ini dan shortcut** `P1`
+- [x] **TG-033 — Dashboard Tugas Hari Ini dan shortcut** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-016,TG-024,TG-029. **Gate:** G-28.
   - **Selesai jika:** Menunggu bayar/IB/pencairan, lisensi hampir habis, anomali dan order lunas tanpa key; setiap kartu menuju pekerjaan konkret.
 
-- [ ] **TG-034 — Deteksi anomali lisensi dan review admin** `P0`
+- [x] **TG-034 — Deteksi anomali lisensi dan review admin** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-019,TG-010. **Gate:** G-21.
   - **Selesai jika:** Aturan threshold dedup, review/suspend manual, audit; tidak ada suspend otomatis agresif dan tidak menampilkan data pribadi berlebihan.
   - **Artefak teknis wajib:** `technical/SECURITY_BASELINE.md` anomaly flag dedup, no automatic suspend default.
 
-- [ ] **TG-035 — Scheduler Laravel, health check aplikasi dan log aman** `P0`
+- [x] **TG-035 — Scheduler Laravel, health check aplikasi dan log aman** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006,TG-010. **Gate:** G-21.
   - **Selesai jika:** Laravel Scheduler jobs terdaftar/idempoten dan lulus tes; `/health` serta log/error aplikasi bisa diuji; frekuensi cron dan kebutuhan backup/storage **didokumentasikan untuk infra**, tanpa mengoperasikan backup atau monitoring host.
   - **Artefak teknis wajib:** automated scheduler/health/log tests, kontrak kebutuhan di `technical/ENVIRONMENT.md` dan `RELEASE_HANDOFF.md`.
 
-- [ ] **TG-036 — Selesaikan semua route PRD, SEO, legal & akses** `P1`
+- [x] **TG-036 — Selesaikan semua route PRD, SEO, legal & akses** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-012,TG-031,TG-032. **Gate:** G-19,G-27.
   - **Selesai jika:** Route list diverifikasi; sitemap/robots/canonical/noindex tepat; hak akses admin/member di server.
   - **Artefak teknis wajib:** `technical/ROUTES_MATRIX.csv` 71 routes + `php artisan route:list` reconciliation.
 
-- [ ] **TG-037 — Polish mobile, status loading, progres & modal** `P1`
+- [x] **TG-037 — Polish mobile, status loading, progres & modal** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-008,TG-009,TG-036. **Gate:** G-18,G-26.
   - **Selesai jika:** Tes responsif 360/768/1280, keyboard/focus trap, upload progress byte asli, idle/empty/error/timeout/retry tidak menipu.
 
@@ -313,3 +313,5 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 | TG-021–TG-022 | DONE (software) | `feat/laravel-foundation` | 363 tests/3191 assertions,9 browser checks; `technical/validation/TG019-TG022.md` | MySQL8.4 + Chromium | 2026-11-06 |
 
 | TG-023–TG-030 | DONE (software) | `feat/laravel-foundation` | 381 tests/3421 assertions; 248 lint; 15 browser checks; 2-worker money races; `technical/validation/TG023-TG030.md` | MySQL8.4 + Chromium, rekonsiliasi read-only | 2026-11-06 |
+
+| TG-031–TG-037 | DONE (software) | `feat/laravel-foundation` | 402 tests/3822 assertions; 273 lint; 11 browser checks; 71/71 routes; `technical/validation/TG031-TG037.md` | MySQL8.4 + Chromium + scheduler/health | 2026-11-07 |

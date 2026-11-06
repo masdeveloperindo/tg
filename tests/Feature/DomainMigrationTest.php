@@ -66,6 +66,11 @@ class DomainMigrationTest extends TestCase
             $this->assertCount(35, $this->tables());
             $this->assertSame(1, $this->renewalForeignKeyCount());
 
+            // Phase 4 adds only an anomaly review note.
+            $this->assertTrue(Schema::hasColumn('license_flags', 'review_note'));
+            $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
+            $this->assertFalse(Schema::hasColumn('license_flags', 'review_note'));
+
             // Phase 3 adds only a nullable review note; rollback preserves financial history.
             $this->assertTrue(Schema::hasColumn('trading_accounts', 'verification_note'));
             $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
