@@ -25,14 +25,14 @@ if (config('database.default') !== 'mysql' || ! in_array($db['host'], ['db', 'lo
 $folder = storage_path('framework/testing/release-check-'.bin2hex(random_bytes(8)));
 $files = new Filesystem;
 $files->makeDirectory($folder, 0755, true);
-$env = ['APP_ENV' => 'release-check', 'APP_DEBUG' => 'false', 'APP_KEY' => 'base64:'.base64_encode(random_bytes(32)), 'APP_URL' => 'https://release-check.example.invalid', 'DB_CONNECTION' => 'mysql', 'DB_HOST' => $db['host'], 'DB_PORT' => (string) $db['port'], 'DB_DATABASE' => 'tg_test', 'DB_USERNAME' => $db['username'], 'DB_PASSWORD' => $db['password'], 'DB_URL' => '', 'DB_SOCKET' => '', 'CACHE_STORE' => 'database', 'SESSION_DRIVER' => 'database', 'SESSION_ENCRYPT' => 'true', 'SESSION_SECURE_COOKIE' => 'true', 'QUEUE_CONNECTION' => 'sync', 'MAIL_MAILER' => 'array', 'LOG_CHANNEL' => 'stack', 'LOG_STACK' => 'single', 'LOG_LEVEL' => 'warning', 'TG_PRIVATE_STORAGE_PATH' => $folder.'/storage/app/private', 'TG_HEALTH_TOKEN' => bin2hex(random_bytes(24)), 'TG_LICENSE_ED25519_PRIVATE_KEY_PATH' => '', 'TG_LICENSE_ED25519_KID' => '', 'TG_TELEGRAM_USERNAME' => '', 'TG_BROKER_REFERRAL_HOSTS' => '', 'COMPOSER_DISABLE_NETWORK' => '1'];
+$env = ['APP_ENV' => 'release-check', 'APP_DEBUG' => 'false', 'APP_KEY' => 'base64:'.base64_encode(random_bytes(32)), 'APP_URL' => 'https://release-check.example.invalid', 'DB_CONNECTION' => 'mysql', 'DB_HOST' => $db['host'], 'DB_PORT' => (string) $db['port'], 'DB_DATABASE' => 'tg_test', 'DB_USERNAME' => $db['username'], 'DB_PASSWORD' => $db['password'], 'DB_URL' => '', 'DB_SOCKET' => '', 'CACHE_STORE' => 'database', 'SESSION_DRIVER' => 'database', 'SESSION_ENCRYPT' => 'true', 'SESSION_SECURE_COOKIE' => 'true', 'QUEUE_CONNECTION' => 'sync', 'MAIL_MAILER' => 'array', 'LOG_CHANNEL' => 'stack', 'LOG_STACK' => 'single', 'LOG_LEVEL' => 'warning', 'TG_PRIVATE_STORAGE_PATH' => $folder.'/storage/app/private', 'TG_HEALTH_TOKEN' => bin2hex(random_bytes(24)), 'TG_LICENSE_ED25519_PRIVATE_KEY_PATH' => '', 'TG_LICENSE_ED25519_KID' => '', 'TG_TELEGRAM_USERNAME' => '', 'TG_BROKER_REFERRAL_HOSTS' => '', 'COMPOSER_DISABLE_NETWORK' => '1', 'COMPOSER_DISCARD_CHANGES' => 'true'];
 $steps = [];
 $execute = function (array $command, string $name, ?string $cwd = null) use ($env, $folder, &$steps): string {
     $process = new Process($command, $cwd ?? $folder, $env);
     $process->setTimeout(120);
     $process->run();
     if (! $process->isSuccessful()) {
-        throw new RuntimeException('Candidate step failed: '.$name.'. Inspect only isolated runtime; no secret configuration is printed.');
+        throw new RuntimeException('Candidate step failed (exit '.$process->getExitCode().'): '.$name.'. Inspect only isolated runtime; no secret configuration is printed.');
     }
     $steps[] = $name;
 
@@ -88,6 +88,12 @@ try {
     $files->ensureDirectoryExists(dirname($report));
     file_put_contents($report, json_encode($result, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR).PHP_EOL);
     echo "PASS: isolated candidate migrations, caches, routes and private health. No deployment performed.\n";
+} catch (Throwable $error) {
+    fwrite(STDERR, $error->getMessage().PHP_EOL);
+    $failed = true;
 } finally {
     $files->deleteDirectory($folder);
+}
+if ($failed ?? false) {
+    exit(1);
 }

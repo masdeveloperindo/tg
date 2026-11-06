@@ -1,0 +1,15 @@
+{
+  "passed": 9,
+  "checks": [
+    "Owner has key, private download, last verification and 50 optional history entries",
+    "Clipboard success and denied permission provide accurate feedback",
+    "Client submits one pending account request through accessible modal; account unchanged before approval",
+    "Admin approves one yearly account move, retains key and invalidates old signed download",
+    "Refund initiates separately from paid order and active license",
+    "Lost refund completion response resolves once through GET; order stays paid and license active",
+    "Product detail, refund and account approval fit viewport 360",
+    "Product detail, refund and account approval fit viewport 768",
+    "Product detail, refund and account approval fit viewport 1280"
+  ],
+  "javascriptErrors": []
+}

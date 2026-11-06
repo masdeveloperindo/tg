@@ -1,0 +1,833 @@
+{
+  "workflow": "TG-008 responsive layouts using real UI authentication and isolated synthetic fixtures",
+  "passed": 139,
+  "failed": 0,
+  "browserErrors": [],
+  "screenshots": [
+    {
+      "view": "guest:/:360:menu-open",
+      "file": "guest-home-360-menu.png"
+    },
+    {
+      "view": "guest:/:360",
+      "file": "guest-home-360.png"
+    },
+    {
+      "view": "guest:/login:360:menu-open",
+      "file": "guest-login-360-menu.png"
+    },
+    {
+      "view": "guest:/login:360",
+      "file": "guest-login-360.png"
+    },
+    {
+      "view": "guest:/register:360:menu-open",
+      "file": "guest-register-360-menu.png"
+    },
+    {
+      "view": "guest:/register:360",
+      "file": "guest-register-360.png"
+    },
+    {
+      "view": "guest:/:768",
+      "file": "guest-home-768.png"
+    },
+    {
+      "view": "guest:/login:768",
+      "file": "guest-login-768.png"
+    },
+    {
+      "view": "guest:/register:768",
+      "file": "guest-register-768.png"
+    },
+    {
+      "view": "guest:/:1280",
+      "file": "guest-home-1280.png"
+    },
+    {
+      "view": "guest:/login:1280",
+      "file": "guest-login-1280.png"
+    },
+    {
+      "view": "guest:/register:1280",
+      "file": "guest-register-1280.png"
+    },
+    {
+      "view": "client:/member:360:menu-open",
+      "file": "client-member-360-menu.png"
+    },
+    {
+      "view": "client:/member:360",
+      "file": "client-member-360.png"
+    },
+    {
+      "view": "client:/member/profil:360:menu-open",
+      "file": "client-member-profil-360-menu.png"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "file": "client-member-profil-360.png"
+    },
+    {
+      "view": "client:/member:768",
+      "file": "client-member-768.png"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "file": "client-member-profil-768.png"
+    },
+    {
+      "view": "client:/member:1280",
+      "file": "client-member-1280.png"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "file": "client-member-profil-1280.png"
+    },
+    {
+      "view": "admin:/admin:360:menu-open",
+      "file": "admin-admin-360-menu.png"
+    },
+    {
+      "view": "admin:/admin:360",
+      "file": "admin-admin-360.png"
+    },
+    {
+      "view": "admin:/admin/client:360:menu-open",
+      "file": "admin-admin-client-360-menu.png"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "file": "admin-admin-client-360.png"
+    },
+    {
+      "view": "admin:/admin:768",
+      "file": "admin-admin-768.png"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "file": "admin-admin-client-768.png"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "file": "admin-admin-1280.png"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "file": "admin-admin-client-1280.png"
+    },
+    {
+      "view": "long-client:/member:360:menu-open",
+      "file": "long-client-member-360-menu.png"
+    },
+    {
+      "view": "long-client:/member:360",
+      "file": "long-client-member-360.png"
+    },
+    {
+      "view": "long-client:/member:768",
+      "file": "long-client-member-768.png"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "file": "long-client-member-1280.png"
+    }
+  ],
+  "results": [
+    {
+      "view": "guest:/:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/login:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "guest:/register:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "client:/member/profil:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "long fixture text wraps and Livewire search preserves navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "long fixture text wraps and Livewire search preserves navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "long fixture text wraps and Livewire search preserves navigation",
+      "status": "passed"
+    },
+    {
+      "view": "admin:/admin/client:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:360",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "mobile action targets are at least 44px",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:768",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "check": "one keyboard-accessible main and skip link",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "check": "light theme remains active with dark system preference",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "check": "no horizontal overflow in document or visible containers",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "check": "current page is identified in primary navigation",
+      "status": "passed"
+    },
+    {
+      "view": "long-client:/member:1280",
+      "check": "responsive navigation, Escape and link-close behavior",
+      "status": "passed"
+    }
+  ]
+}

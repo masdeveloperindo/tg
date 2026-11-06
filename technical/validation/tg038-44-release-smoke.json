@@ -1,0 +1,83 @@
+{
+    "environment": "isolated release-check tg_test, not deployment",
+    "debug_off": true,
+    "sales_closed": true,
+    "business_rows": 0,
+    "review_note_present": true,
+    "routes": [
+        {
+            "method": "GET",
+            "path": "\/",
+            "status": 200
+        },
+        {
+            "method": "GET",
+            "path": "\/produk",
+            "status": 200
+        },
+        {
+            "method": "GET",
+            "path": "\/edukasi",
+            "status": 200
+        },
+        {
+            "method": "GET",
+            "path": "\/sitemap.xml",
+            "status": 200
+        },
+        {
+            "method": "GET",
+            "path": "\/robots.txt",
+            "status": 200
+        },
+        {
+            "method": "GET",
+            "path": "\/member",
+            "status": 302
+        },
+        {
+            "method": "GET",
+            "path": "\/admin",
+            "status": 302
+        },
+        {
+            "method": "GET",
+            "path": "\/storage\/private\/example.ex5",
+            "status": 404
+        },
+        {
+            "method": "POST",
+            "path": "\/api\/v1\/licenses\/deactivate",
+            "status": 404
+        },
+        {
+            "method": "GET",
+            "path": "\/health",
+            "status": 404
+        }
+    ],
+    "authenticated_health": 200,
+    "framework_tables": 35,
+    "steps": [
+        "archive manifest\/checksums verified",
+        "candidate extracted",
+        "production dependency set installed without network",
+        "package discovery",
+        "actual MySQL8.4 tg_test guard",
+        "fresh migrations on dedicated tg_test",
+        "latest additive migration rollback on tg_test",
+        "migration reapplied",
+        "config:cache",
+        "route:cache",
+        "view:cache",
+        "event:cache",
+        "tg:expire-orders on empty candidate",
+        "tg:detect-license-anomalies on empty candidate",
+        "tg:reconcile-rebates on empty candidate",
+        "cached production-style HTTP\/health smoke",
+        "cache clear rehearsal"
+    ],
+    "archive_sha256": "b9996c5dfd5362967c68fe57179b8981ae4781dbe03f923d058f0a26249b0fd4",
+    "dependencies": "composer --no-dev, copied cache only, no network",
+    "cleanup": "candidate including generated keys\/config cache removed"
+}

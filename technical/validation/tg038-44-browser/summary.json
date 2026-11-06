@@ -1,0 +1,63 @@
+{
+  "environment": "local e2e / MySQL8.4 tg_test / Chromium; not staging",
+  "source_commit": "fe4b4c4881d7099b79c0b82e21071f3f63f79709",
+  "passed": 216,
+  "screenshots": 107,
+  "javascript_errors": 0,
+  "suites": [
+    {
+      "suite": "feedback",
+      "passed": 5,
+      "screenshots": 0,
+      "summary": "tg009-browser/summary.json"
+    },
+    {
+      "suite": "layout",
+      "passed": 139,
+      "screenshots": 32,
+      "summary": "tg008-browser/summary.json"
+    },
+    {
+      "suite": "products",
+      "passed": 9,
+      "screenshots": 3,
+      "summary": "tg011-browser/summary.json"
+    },
+    {
+      "suite": "catalog",
+      "passed": 12,
+      "screenshots": 12,
+      "summary": "tg012-browser/summary.json"
+    },
+    {
+      "suite": "checkout",
+      "passed": 8,
+      "screenshots": 6,
+      "summary": "tg013-15-browser/summary.json"
+    },
+    {
+      "suite": "fulfillment",
+      "passed": 8,
+      "screenshots": 6,
+      "summary": "tg016-18-browser/summary.json"
+    },
+    {
+      "suite": "licenses",
+      "passed": 9,
+      "screenshots": 9,
+      "summary": "tg019-22-browser/summary.json"
+    },
+    {
+      "suite": "rebates",
+      "passed": 15,
+      "screenshots": 18,
+      "summary": "phase3-browser/summary.json"
+    },
+    {
+      "suite": "content",
+      "passed": 11,
+      "screenshots": 21,
+      "summary": "phase4-browser/summary.json"
+    }
+  ]
+}

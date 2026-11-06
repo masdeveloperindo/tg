@@ -1,0 +1,6 @@
+{
+  "case": "malformed synthetic tar.gz rejected before migration",
+  "exit_code": 1,
+  "success_report_created": false,
+  "remaining_candidate_directories": 0
+}

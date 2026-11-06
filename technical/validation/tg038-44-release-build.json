@@ -1,0 +1,9 @@
+{
+  "archive": "trader-garuda-candidate.tar.gz",
+  "sha256": "b9996c5dfd5362967c68fe57179b8981ae4781dbe03f923d058f0a26249b0fd4",
+  "source_commit": "fe4b4c4881d7099b79c0b82e21071f3f63f79709",
+  "source_tree_sha256": "80e89ca94a157e90545d21788728a99c178885f950adfb8080f9dbf52d1a107f",
+  "files": 303,
+  "bytes": 198161,
+  "worktree_dirty": false
+}
