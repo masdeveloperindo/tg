@@ -1,0 +1,8 @@
+
+   PASS  Tests\Feature\FulfillmentTest
+  ✓ signed download is owned short lived and contains exact verified by… 3.81s
+  ✓ signed url cannot select another product version or bypass state fi… 0.05s
+  ✓ suspend revoke expiry version mismatch and corruption reject downlo… 0.07s
+
+  Tests:    3 passed (14 assertions)
+  Duration: 4.05s

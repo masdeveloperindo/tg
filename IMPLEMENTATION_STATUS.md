@@ -104,3 +104,11 @@ Retensi telemetry90hari/IP raw terenkripsi30hari tersedia melalui command dry-ru
 **331 tes / 2.692 assertion PASS**,195 file lint, build, Composer metadata dan8 pemeriksaan browser PASS. Migration additive diterapkan ke development; tidak ada reset/data bisnis nyata. Bukti: [`TG013-TG015.md`](technical/validation/TG013-TG015.md).
 
 Keputusan UX: server MT5 dan real/demo diminta satu kali karena schema/API wajib, sedangkan renewal memakai akun lama. PoC/sales gate tetapfalse; harga/aturan/rekening/Telegram owner belum diisi. Konfirmasi pembayaran dan penerbitan key belum termasuk group ini. Berikutnya TG-016. **SOFTWARE READY FOR HANDOFF:NO;GO-LIVE:NO.**
+
+## Progres 6 November 2026 — TG-016–TG-018
+
+**DONE untuk software:** panel pembayaran admin dengan TOTP/reauth, modal cek dana dan catatan; paid+lisensi+audit atomik dan idempoten; key CSPRNG128bit terenkripsi/hash lookup; renewal mempertahankan key; suspend/reactivate/revoke dengan intent replay aman. Unduhan EX5 pemilik menggunakan URL sementara, pemeriksaan hak/status saat akses dan checksum file privat.
+
+**343 tes / 2.771 assertion PASS**,206 file lint, build dan8 pemeriksaan browser PASS tanpa error JS. Dua worker MySQL membuktikan satu lisensi dan audit pembayaran untuk konfirmasi bersamaan; respons browser yang hilang setelah commit pulih melalui Cek Status GET. Setelah fingerprint diperkuat dengan timestamp perubahan,3 tes unduhan/14assertion serta browser lulus. Bukti: [`TG016-TG018.md`](technical/validation/TG016-TG018.md).
+
+Tidak ada migration baru atau transaksi/transfer/chat nyata. Flag penjualan tetapfalse. TG-001–TG-003 dan PoC EA/indikator tetap eksternal; suspend/revoke aplikasi bukan bukti penghentian EA offline. Berikutnya TG-019, lalu integrasi terminal TG-020. **SOFTWARE READY FOR HANDOFF: NO; GO-LIVE: NO.**

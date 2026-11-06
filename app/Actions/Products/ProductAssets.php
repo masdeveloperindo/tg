@@ -2,6 +2,7 @@
 
 namespace App\Actions\Products;
 
+use App\Support\PrivateStorage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -65,6 +66,7 @@ final class ProductAssets
 
     private function put(string $path, string $bytes): string
     {
+        PrivateStorage::root();
         if (! Storage::disk('local')->put($path, $bytes, ['visibility' => 'private'])) {
             throw new \RuntimeException('Private product asset write failed.');
         }

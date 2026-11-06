@@ -29,6 +29,8 @@
 }
 ```
 
+**Format penerbitan TG-017:** key baru berupa 8 grup masing-masing 4 karakter hex uppercase (128 bit CSPRNG), dipisahkan tanda hubung. Contoh 4 grup di atas bersifat ilustrasi, bukan batas panjang validator. Verifier TG-019 wajib menerima format penerbitan ini tanpa memotong key; renewal tidak mengganti key.
+
 **Validasi:** key case-insensitive, uppercase normalize, jangan log raw key. Nomor akun MT5 dikirim sebagai string (bukan JSON number). `account_type` hanya `real`/`demo`; simbol/pair tidak masuk identitas lisensi. Timestamp UTC ISO 8601, skew maksimal ±300 detik, nonce minimal 128 bit CSPRNG, base64url (no padding) maksimal 128 karakter; hash SHA-256 nonce dicatat di `api_nonces` dengan unique index dan TTL 10 menit. Satu nonce hanya boleh diterima sekali secara atomik. Ukuran string, nomor produk, dan versi dibatasi; request abnormal -> 422.
 
 Pencocokan selalu menggunakan **nomor akun dari terminal MT5 aktual** (`ACCOUNT_LOGIN`), bukan input bebas di UI EA; server dan tipe akun dibaca dari terminal, tidak boleh diedit client untuk menyamar. Server cocok dengan order/lisensi; akun tidak cocok -> `account_mismatch`; versi terlalu tua -> `update_required`. Jangan menyimpan raw payload.

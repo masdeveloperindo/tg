@@ -6,6 +6,7 @@
     $navigation = $isAdmin
         ? [
             ['label' => 'Urusan hari ini', 'items' => [['route' => 'admin', 'label' => 'Ringkasan', 'active' => 'admin']]],
+            ['label' => 'Penjualan', 'items' => [['route'=>'admin.pesanan','label'=>'Pesanan','active'=>'admin.pesanan*'],['route'=>'admin.lisensi','label'=>'Lisensi','active'=>'admin.lisensi*']]],
             ['label' => 'Katalog', 'items' => [['route' => 'admin.produk', 'label' => 'Produk', 'active' => 'admin.produk*']]],
             ['label' => 'Kelola akses', 'items' => [['route' => 'admin.clients', 'label' => 'Client', 'active' => 'admin.clients*']]],
             ['label' => 'Akun & keamanan', 'items' => [['route' => 'admin.reauth', 'label' => 'Verifikasi ulang akses', 'active' => 'admin.reauth'], ['route' => 'password.change', 'label' => 'Ganti kata sandi', 'active' => 'password.change']]],

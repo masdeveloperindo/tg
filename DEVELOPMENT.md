@@ -1,6 +1,6 @@
 # Development lokal — Trader Garuda
 
-Panduan ini mencakup TG-004–TG-015: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
+Panduan ini mencakup TG-004–TG-018: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
 
 ## Prasyarat
 
@@ -189,3 +189,13 @@ Sales flag aplikasi tetapfalse. Checkout memerlukan product published/sale_enabl
 Migration additive menambah checkout_quotes dan kolom order. Harga/coverage/payment disimpan sebagai snapshot server. Quote expired atau data renewal berubah memerlukan kuotasi baru; respons hilang memakai URL intent yang sama untuk Cek Status. Jangan mengirim ulang mutasi dengan UUID baru otomatis. Tidak ada bank transfer/API Telegram yang dijalankan aplikasi.
 
 Rincian hasil dan browser test-only router: [`technical/validation/TG013-TG015.md`](technical/validation/TG013-TG015.md). PHP memerlukan BCMath; Docker development sudah menyediakannya dan Composer mendeklarasikannya.
+
+## Pembayaran, lisensi dan unduhan TG-016–TG-018
+
+`/admin/pesanan` menyediakan pemeriksaan dan konfirmasi/penolakan pembayaran. Admin wajib TOTP terverifikasi dan reauthentication masih berlaku; konfirmasi memerlukan cek dana, referensi dan catatan verifikasi. Dana tetap diperiksa manusia; Telegram tidak mengubah status. Konfirmasi ulang order lunas mengembalikan receipt lama. Pembayaran lewat deadline ditangani manual, bukan dipaksakan menjadi lunas.
+
+`/admin/lisensi` menyediakan suspend, aktivasi kembali sebelum expiry, dan revoke permanen dengan kategori alasan. Retry UUID sama tidak mengulang perubahan atau membatalkan perubahan lebih baru. Renewal menjaga key lama. Key terenkripsi tidak ditampilkan di panel admin; portal key/riwayat lengkap mengikuti TG-021.
+
+Invoice lunas pemilik menyediakan unduhan EX5 versi aktif melalui URL signed maksimal5 menit, dibatasi expiry. Setiap unduhan memeriksa owner, status, fingerprint lisensi, versi produk, ukuran dan SHA-256. Storage harus di luar public; file tidak dieksekusi server. Suspend/revoke menutup permintaan unduhan berikutnya; byte yang sudah ditransmisikan tidak dapat ditarik. Revocation EA offline masih memerlukan API dan PoC terminal TG-019/TG-020.
+
+Bukti dan fixture sintetis: [`technical/validation/TG016-TG018.md`](technical/validation/TG016-TG018.md). Tidak ada migration baru dalam kelompok ini. Flag penjualan produksi tetapfalse; menjalankan tes tidak mengaktifkan bisnis.

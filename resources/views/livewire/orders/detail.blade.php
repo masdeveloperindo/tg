@@ -7,6 +7,10 @@
     @elseif(\App\Support\OrderDisplay::status($order) === 'expired')<p class="auth-warning">Batas pembayaran sudah lewat. Jangan mentransfer untuk pesanan ini. Jika dana terlanjur dikirim, hubungi admin untuk pemeriksaan manual.</p>
     @elseif(\App\Support\OrderDisplay::status($order) === 'rejected')<p class="auth-warning">Pesanan ditolak. Hubungi admin sebelum melakukan pembayaran lain.</p>
     @else<p class="auth-notice">Pembayaran tercatat lunas. Akses produk mengikuti lisensi yang diterbitkan setelah konfirmasi server.</p>@endif
+    @if($order->status->value==='paid')
+        @php($issued=$order->renewal_license_id?$order->renewalLicense:$order->issuedLicense)
+        @if($issued && $issued->user_id===auth()->id())@can('download',$issued)<x-ui.panel title="Unduh produk"><p>File hanya tersedia selama lisensi Anda berhak mengakses.</p><a class="button button-lime" href="{{ route('licenses.download.request',$issued->id) }}">Unduh EX5 privat</a></x-ui.panel>@endcan @endif
+    @endif
     <x-ui.panel title="Hubungi admin">
         <label for="order-text">Detail pesanan untuk dikirim sendiri</label><textarea id="order-text" class="auth-input" rows="7" readonly x-ref="orderText">{{ $clipboard }}</textarea>
         <div class="editor-status"><button class="button button-lime" type="button" @click="copyDetails()">Salin Detail Pesanan</button>@if($telegram)<a class="auth-secondary" href="{{ $telegram }}" target="_blank" rel="noopener noreferrer nofollow">Chat Admin di Telegram <x-ui.icon /></a>@else<p class="auth-hint">Kontak Telegram admin belum tersedia.</p>@endif</div>

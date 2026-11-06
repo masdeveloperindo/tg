@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Orders\SaleInfo;
+use App\Http\Controllers\LicenseDownloadController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductAssetController;
 use App\Http\Controllers\PublishedAssetController;
@@ -8,6 +9,8 @@ use App\Livewire\Auth;
 use App\Livewire\Catalog\Brokers;
 use App\Livewire\Catalog\Detail;
 use App\Livewire\Catalog\Products;
+use App\Livewire\Fulfillment\AdminLicenses;
+use App\Livewire\Fulfillment\AdminOrders;
 use App\Livewire\Home;
 use App\Livewire\Orders\CheckoutPage;
 use App\Livewire\Products\Editor;
@@ -39,6 +42,8 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
     Route::middleware('client')->group(function (): void {
         Route::get('/checkout/{slug}', CheckoutPage::class)->name('checkout.slug');
         Route::get('/pesanan/{kode}', App\Livewire\Orders\Detail::class)->name('pesanan.kode');
+        Route::get('/member/produk/{license}/download', [LicenseDownloadController::class, 'request'])->whereNumber('license')->name('licenses.download.request');
+        Route::get('/download/{license}/{version}', [LicenseDownloadController::class, 'download'])->whereNumber(['license', 'version'])->name('licenses.download');
         Route::get('/member/pesanan', App\Livewire\Orders\Index::class)->name('member.pesanan');
         Route::get('/member', fn () => view('auth.member', ['renewals' => app(SaleInfo::class)->renewals()]))->name('member');
         Route::get('/member/profil', Auth\ChangePassword::class)->name('member.profile');
@@ -54,6 +59,10 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
 
                 return view('auth.admin');
             })->name('admin');
+            Route::get('/admin/pesanan', AdminOrders::class)->name('admin.pesanan');
+            Route::get('/admin/pesanan/{id}', AdminOrders::class)->whereNumber('id')->name('admin.pesanan.id');
+            Route::get('/admin/lisensi', AdminLicenses::class)->name('admin.lisensi');
+            Route::get('/admin/lisensi/{id}', AdminLicenses::class)->whereNumber('id')->name('admin.lisensi.id');
             Route::get('/admin/reauth', Auth\Reauthenticate::class)->name('admin.reauth');
             Route::get('/admin/produk', Index::class)->name('admin.produk');
             Route::get('/admin/produk/create', Editor::class)->name('admin.produk.create');

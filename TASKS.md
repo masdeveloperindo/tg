@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-015 selesai; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -113,17 +113,17 @@ Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Ad
   - **Pemilik peran:** Frontend Dev. **Dependensi:** TG-014,TG-001. **Gate:** G-05.
   - **Selesai jika:** Tautan membuka chat ke @username admin, client mengirim bukti manual; tidak ada bot/webhook, pesan otomatis ataupun perubahan status pesanan.
 
-- [ ] **TG-016 — Konfirmasi pembayaran hanya dari panel admin** `P0`
+- [x] **TG-016 — Konfirmasi pembayaran hanya dari panel admin** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006,TG-007,TG-009,TG-014. **Gate:** G-06,G-07.
   - **Selesai jika:** Modal wajib cek dana; admin simpan catatan verifikasi mutasi, klik ganda/race/timeout tidak menghasilkan dua lisensi; audit ada.
   - **Artefak teknis wajib:** `technical/ACTION_AUTH_MATRIX.md` A02, test T-ORD-02 konkurensi/idempotency.
 
-- [ ] **TG-017 — Penerbitan key, perpanjangan, suspend, revoke** `P0`
+- [x] **TG-017 — Penerbitan key, perpanjangan, suspend, revoke** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-016,TG-003. **Gate:** G-07,G-08,G-10.
   - **Selesai jika:** 1 lisensi per kombinasi pemilik-produk-akun, key kriptografis terenkripsi + hash lookup, renewal tetap key sama; operasi idempoten.
   - **Artefak teknis wajib:** `technical/DATABASE_SCHEMA.md` unique license triple + renewal key sama, tests.
 
-- [ ] **TG-018 — Storage privat .ex5 dan unduh aman** `P0`
+- [x] **TG-018 — Storage privat .ex5 dan unduh aman** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-011,TG-017. **Gate:** G-09.
   - **Selesai jika:** File hanya bisa diunduh pemilik lisensi berhak melalui URL sementara dan cek authorization; checksum dan tes akses silang lulus.
 
@@ -276,7 +276,7 @@ Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguha
 | TG-005 | DONE | `feat/laravel-foundation` (working tree) | Clone kandidat lokal, MySQL migrate/rollback, build, 18 tests / 48 assertions PASS | Review agent + validasi lokal | 2026-11-04 |
 | TG-006 | DONE | `feat/laravel-foundation` (working tree) | 171 tests / 1294 assertions, 30 domain tables, rollback, 38 FK, EXPLAIN, 2-connection lock; `technical/validation/TG006.md` | Review agent + validasi MySQL 8.4 lokal | 2026-11-04 |
 | TG-007 | DONE | `feat/laravel-foundation` (working tree) | 265 tests / 1946 assertions, register/login/TOTP/recovery/reset/policy/CSRF/idle PASS; `technical/validation/TG007.md` | Review keamanan agent + MySQL lokal | 2026-11-04 |
-| TG-016 | TODO | — | — | — | — |
+| TG-016–TG-018 | DONE (software) | `feat/laravel-foundation` | 343 tests/2771 assertions; race MySQL,8 browser checks; `technical/validation/TG016-TG018.md` | MySQL8.4 + Chromium lokal | 2026-11-06 |
 | TG-019 | TODO | — | — | — | — |
 | TG-027 | TODO | — | — | — | — |
 | TG-044 | BLOCKED | — | Seluruh gate P0 belum diuji | — | — |

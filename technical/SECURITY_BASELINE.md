@@ -87,3 +87,11 @@ S-10 CSP, cookies, rate limits, error pages, DEBUG off diperiksa pada staging.
 - Command retensi belum dijadwalkan otomatis: integrasi Laravel Scheduler adalah TG-035; cron host milik infra. Command `--apply` hanya dijalankan pada database test selama validasi TG-010.
 
 Bukti: [`validation/TG010.md`](validation/TG010.md). Tidak merupakan kelulusan seluruh G-21 atau audit produksi.
+
+## Implementasi TG-016–TG-018 (6 November 2026)
+
+Konfirmasi pembayaran mengunci order lalu lisensi dalam transaksi yang sama dengan paid dan audit; replay order paid mengembalikan receipt. Role admin, TOTP dan reauthentication diperiksa pada mutasi. Key baru memakai random_bytes(16), terenkripsi dengan cast Laravel, SHA-256 untuk lookup dan unique triple pemilik/produk/akun. Renewal mempertahankan ciphertext/hash. Catatan mutasi bank disimpan hanya pada order dan tidak disalin ke audit/log. Perubahan status menyimpan kategori alasan dan hash intent; replay tidak mengembalikan state lama. Revoked terminal.
+
+File privat diperiksa canonical path di luar public, pola UUID, ukuran dan SHA-256 pada handle terkunci yang sama dengan stream. URL signed maksimal5 menit tidak membawa key/path; GET tetap memeriksa sesi pemilik, hak download, expiry, status, fingerprint state dan versi aktif produk yang sesuai. Respons no-store/private/nosniff. Perubahan status menutup request baru; stream yang sudah terkirim dan akses EA offline memerlukan batas tersendiri. Tidak mengklaim PoC offline/revocation selesai.
+
+Bukti: [`validation/TG016-TG018.md`](validation/TG016-TG018.md).

@@ -9,6 +9,11 @@ use App\Security\Access;
 
 class LicensePolicy
 {
+    public function manage(User $user, License $license): bool
+    {
+        return Access::hasRecentReauthentication($user);
+    }
+
     public function view(User $user, License $license): bool
     {
         return Access::isOwner($user, (int) $license->user_id) || Access::isVerifiedAdmin($user);

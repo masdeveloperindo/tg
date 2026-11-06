@@ -8,6 +8,16 @@ use App\Security\Access;
 
 class OrderPolicy
 {
+    public function confirmPayment(User $user, Order $order): bool
+    {
+        return Access::hasRecentReauthentication($user);
+    }
+
+    public function reject(User $user, Order $order): bool
+    {
+        return Access::hasRecentReauthentication($user);
+    }
+
     public function viewAny(User $user): bool
     {
         return Access::isOwner($user, $user->id);
