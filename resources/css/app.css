@@ -69,6 +69,8 @@ h3 { margin: 0 0 12px; font-size: 19px; font-weight: 800; letter-spacing: -.025e
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 36px; font-size: 12px; line-height: 1.8; }
 .footer-inner strong { color: var(--color-lime); }
 .footer-inner p { margin: 0; }
+.footer-inner nav { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+.footer-inner nav a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 8px; overflow-wrap: anywhere; }
 
 @media (max-width: 767px) {
     .shell { width: calc(100% - 32px); }

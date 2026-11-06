@@ -49,6 +49,6 @@ for ($i = 0; $i < 6; $i++) {
     (new LicenseLog)->forceFill(['license_id' => $license->id, 'event' => 'verify', 'result' => 'account_mismatch', 'product_version' => '1.0.0', 'ip_hash' => hash('sha256', 'synthetic-ip'), 'request_id' => (string) Str::uuid()])->save();
 }
 app(DetectAnomalies::class)->run();
-$r->create('orders',['user_id' => $client, 'status' => 'waiting', 'expires_at' => now()->addHour()]);
-$r->create('orders',['user_id' => $client, 'status' => 'paid']);
+$r->create('orders', ['user_id' => $client, 'status' => 'waiting', 'expires_at' => now()->addHour()]);
+$r->create('orders', ['user_id' => $client, 'status' => 'paid']);
 echo "Synthetic CMS, member bulletin, task and anomaly fixtures created only in e2e tg_test. No EA gate or production content enabled.\n";

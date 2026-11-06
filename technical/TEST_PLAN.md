@@ -1,6 +1,6 @@
 # TEST_PLAN.md — Kriteria Uji Wajib Trader Garuda v1.7
 
-Status seluruh kasus **NOT RUN** sampai aplikasi Laravel, database, dan EA nyata tersedia. HTML demo yang bisa diklik tidak membuktikan kelayakan produksi.
+Status aktual per kasus dicatat pada bagian bukti Fase 5 di bawah. Pengujian Laravel/MySQL dan browser lokal tidak membuktikan kelulusan terminal EA, staging atau UAT. HTML demo bukan bukti aplikasi.
 
 | ID | Skenario | Hasil yang wajib | Prioritas |
 |---|---|---|---|
@@ -48,3 +48,29 @@ Status seluruh kasus **NOT RUN** sampai aplikasi Laravel, database, dan EA nyata
 ## Batas pelaksanaan QA
 
 Tim software menjalankan tes unit, feature, integrasi Laravel, browser E2E, keamanan level aplikasi, concurreny DB dan PoC EA. Pengujian pada staging nyata dilakukan setelah lingkungan **disediakan pihak infra**. Uji TLS/DNS, backup/restore fisik, kapasitas server, cron host dan deployment dilakukan pihak infra; software menyediakan test query, health endpoint dan laporan hasil agar dapat diverifikasi bersama.
+
+## Hasil Fase 5 — 7 November 2026
+
+Bukti dan versi: [TG038–TG044](validation/TG038-TG044.md). Data sintetis MySQL8.4 tg_test, PHP8.4/Livewire4 dan Chromium; tidak ada transaksi nyata. Semua hasil PASS berikut hanya untuk lingkungan lokal.
+
+| Kasus | Hasil aktual / suite |
+| --- | --- |
+| T-ORD-01/02/03 | PASS — CheckoutTest, CheckoutConcurrencyTest, FulfillmentTest, FulfillmentConcurrencyTest; checkout/fulfillment browser |
+| T-REF-01, T-LIC-02/03 | PASS — LicenseOperationsTest dan LicenseOperationsConcurrencyTest; browser lisensi |
+| T-LIC-01 | API server PASS — LicenseApiTest; perilaku grace terminal belum diuji |
+| T-IB-01/02/03 | PASS — RebateAccountsTest dan browser IB/rebate |
+| T-REB-01/02 | PASS — RebateFinanceTest dan RebateConcurrencyTest; ledger immutable/reversal/replacement |
+| T-PAY-01/02/03/04/05 | PASS — RebateFinanceTest/RebateConcurrencyTest; transaksi dua koneksi, saldo tidak negatif, retry/reconcile |
+| T-CMS-01, T-ANM-01 | PASS — ContentManagementTest, OperationsTest dan browser konten |
+| T-SET-01 | PASS — ProductEditorTest/CheckoutTest/RebateFinanceTest; reauth, harga/kurs dan pengaturan |
+| T-AUTH-01/02 | PASS — AuthenticationTest, AdminTwoFactorTest, AuthHttpSecurityTest, AuthorizationTest dan kasus cross-owner pada suite domain |
+| T-FILE-01, T-UP-01 | PASS — FulfillmentTest/ProductEditorTest/ContentManagementTest dan browser upload/unduh |
+| T-API-01 | PHP Ed25519 dan Python 4 vector PASS; pure MQL5/terminal DEFERRED |
+| T-API-02 | PASS — LicenseApiTest/LicenseOperationsConcurrencyTest; nonce race dan window timestamp |
+| T-API-03/04 | Server negative cases PASS; terminal MT5/grace/offline DEFERRED |
+| T-DEP-01 | Build/migration/cache/HTTP kandidat lokal diuji; staging PENDING |
+| T-DEP-02 | BLOCKED — snapshot/restore yang disediakan infra belum tersedia; bukan bukti dari fresh test schema |
+| T-UI-01 | Browser Livewire lokal 360/768/1280, focus/menu/modal/upload/timeout; staging PENDING |
+| T-LEG-01 | BLOCKED — owner/legal belum mengesahkan materi/config nyata |
+
+UAT owner belum dijalankan: gunakan [checklist](UAT_CHECKLIST.md), isi bukti dan keputusan oleh penerima yang sebenarnya. Workflow CI sudah dikonfigurasi; PASS remote hanya boleh dicatat dari run yang selesai.

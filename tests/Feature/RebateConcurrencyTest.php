@@ -42,7 +42,10 @@ class RebateConcurrencyTest extends TestCase
                 $p->wait();
                 $this->assertSame(0, $p->getExitCode(), 'Independent rebate worker failed.');
                 $lines = explode("\n", trim($p->getOutput()));
-                $results[] = json_decode(end($lines), true, 512, JSON_THROW_ON_ERROR);
+                $result = json_decode(end($lines), true, 512, JSON_THROW_ON_ERROR);
+                $this->assertGreaterThanOrEqual(1, $result['attempts']);
+                $this->assertLessThanOrEqual(3, $result['attempts']);
+                $results[] = $result;
             }
             $this->assertNotSame($results[0]['connection'], $results[1]['connection']);
 

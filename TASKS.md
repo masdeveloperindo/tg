@@ -225,37 +225,44 @@ Pengalaman client tetap ringan; semua kompleksitas operasional diletakkan di pan
 
 Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguhan diterima.
 
-- [ ] **TG-038 — Tes otomatis autentikasi, order, lisensi dan refund** `P0`
+- [x] **TG-038 — Tes otomatis autentikasi, order, lisensi dan refund** `P0`
+  - **Status Fase 5:** DONE lokal — suite auth/order/license/refund dan race PASS; bukti technical/validation/TG038-TG044.md.
   - **Pemilik peran:** QA. **Dependensi:** TG-007,TG-016,TG-022. **Gate:** G-03,G-04,G-06,G-07,G-17.
   - **Selesai jika:** Test authz silang, transaksi ganda, replay, negative cases dan refund tercatat PASS dalam log test.
   - **Artefak teknis wajib:** `technical/TEST_PLAN.md` P0 order/license/refund/RBAC suite pass.
 
-- [ ] **TG-039 — Tes transaksi rebate & pencairan paralel** `P0`
+- [x] **TG-039 — Tes transaksi rebate & pencairan paralel** `P0`
+  - **Status Fase 5:** DONE lokal — transaksi MySQL dua proses/koneksi, saldo dan rekonsiliasi PASS; bukti technical/validation/TG038-TG044.md.
   - **Pemilik peran:** QA. **Dependensi:** TG-030. **Gate:** G-13,G-14,G-15,G-16.
   - **Selesai jika:** Concurrency test dan ledger reconciliation PASS; tidak ada saldo negatif atau pembayaran ganda.
   - **Artefak teknis wajib:** `technical/TEST_PLAN.md` concurrent payout / ledger reconciliation pass.
 
 - [ ] **TG-040 — Bukti integrasi EA ↔ API pada terminal nyata** `P0`
+  - **Status Fase 5:** DEFERRED sesuai owner: EA dibuat setelah website; source/verifier dan terminal MT5 belum tersedia. PHP/Python bukan bukti EA.
   - **Pemilik peran:** QA + MQL5 Dev. **Dependensi:** TG-020. **Gate:** G-10,G-11,G-12.
   - **Selesai jika:** Log testing MT5 menunjukkan verifikasi valid/invalid/offline dan signature; indikator disembunyikan sampai PoC selesai.
   - **Artefak teknis wajib:** `technical/API_CONTRACT.md` signature PoC fixture + terminal evidence.
 
 - [ ] **TG-041 — E2E Livewire di staging & audit responsive** `P0`
+  - **Status Fase 5:** PARTIAL: matrix Livewire responsif lokal tersedia; staging belum disediakan, sehingga acceptance staging belum DONE.
   - **Pemilik peran:** QA + Frontend Dev. **Dependensi:** TG-037. **Gate:** G-18,G-19,G-26.
   - **Selesai jika:** Bukan HTML demo: order, admin konfirmasi, IB, saldo, pencairan, modal, loading nyata, 360/768/1280 diuji.
   - **Artefak teknis wajib:** `technical/ROUTES_MATRIX.csv` + mobile Livewire e2e evidence.
 
 - [ ] **TG-042 — Paket rilis aplikasi, validasi migration dan serah-terima ke infra** `P0`
+  - **Status Fase 5:** PARTIAL: builder/manifest/checksum, rehearsal instalasi kandidat dan panduan rollback software tersedia; hasil di technical/validation/TG038-TG044.md. Penerimaan infra dan staging pending.
   - **Pemilik peran:** Lead Dev + QA. **Dependensi:** TG-035,TG-041. **Gate:** G-01,G-19,G-21.
   - **Selesai jika:** build artefak, migration dan kompatibilitas skema, perintah rollback aplikasi yang aman, smoke-test, konfigurasi contoh, checklist instalasi dan handoff sudah diuji pada lingkungan development/staging **yang disediakan**; tim developer tidak melakukan provisioning/deploy/backup host.
   - **Artefak teknis wajib:** `RELEASE_HANDOFF.md`, hasil CI/QA, migration plan dan manifest artefak rilis.
 
 - [ ] **TG-043 — UAT owner dan verifikasi konfigurasi asli** `P0`
+  - **Status Fase 5:** BLOCKED eksternal: UAT owner, akun MT5 test serta konfigurasi/legal asli belum disahkan; technical/UAT_CHECKLIST.md disiapkan.
   - **Pemilik peran:** Owner + QA. **Dependensi:** TG-002,TG-038,TG-039,TG-040,TG-042. **Gate:** G-22,G-23,G-24,G-25.
   - **Selesai jika:** Pemilik cek alur transaksi simulasi + akun MT5 test; username Telegram, rekening, produk, broker/legal dikonfirmasi; seed demo tidak di produksi.
   - **Artefak teknis wajib:** `technical/TEST_PLAN.md` UAT owner and actual config approval.
 
 - [ ] **TG-044 — Persetujuan kesiapan software dan handoff go-live** `P0`
+  - **Status Fase 5:** BLOCKED: EA/staging/UAT dan penerimaan handoff belum lulus; penjualan tetap terkunci.
   - **Pemilik peran:** Lead Dev + QA + Owner (penerimaan software). **Dependensi:** TG-043. **Gate:** aplikasi P0 di `SOFTWARE_ACCEPTANCE.md`.
   - **Selesai jika:** semua gate aplikasi P0 PASS dan paket kode+tes diserahkan; keputusan membuka transaksi nyata menunggu verifikasi terpisah pemilik/infra/legal, bukan task developer.
   - **Artefak teknis wajib:** `SOFTWARE_ACCEPTANCE.md` berisi bukti, dan `RELEASE_HANDOFF.md` yang diterima pihak infra/owner.
@@ -280,8 +287,10 @@ Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguha
 | TG-007 | DONE | `feat/laravel-foundation` (working tree) | 265 tests / 1946 assertions, register/login/TOTP/recovery/reset/policy/CSRF/idle PASS; `technical/validation/TG007.md` | Review keamanan agent + MySQL lokal | 2026-11-04 |
 | TG-016–TG-018 | DONE (software) | `feat/laravel-foundation` | 343 tests/2771 assertions; race MySQL,8 browser checks; `technical/validation/TG016-TG018.md` | MySQL8.4 + Chromium lokal | 2026-11-06 |
 | TG-019 | BLOCKED (PoC EA) | `feat/laravel-foundation` | Backend/signature/nonce/rate limit PASS; vector EA nyata belum tersedia; `technical/validation/TG019-TG022.md` | PHP/MySQL + Python | 2026-11-06 |
-| TG-027 | TODO | — | — | — | — |
-| TG-044 | BLOCKED | — | Seluruh gate P0 belum diuji | — | — |
+| TG-027 | DONE software | `feat/laravel-foundation` | Fase3, technical/validation/TG023-TG030.md | QA lokal | 2026-11-06 |
+| TG-038–TG-039 | DONE lokal | `feat/laravel-foundation` | QA auth/order/license/refund/rebate/concurrency; technical/validation/TG038-TG044.md | QA lokal | 2026-11-07 |
+| TG-041–TG-042 | PARTIAL | `feat/laravel-foundation` | Browser/kandidat lokal; staging dan penerimaan handoff pending | QA lokal | 2026-11-07 |
+| TG-040/TG-043/TG-044 | DEFERRED/BLOCKED | `feat/laravel-foundation` | Source EA/MT5, staging, UAT owner dan penerimaan infra belum tersedia | Pending eksternal | 2026-11-07 |
 
 ## Urutan pengerjaan untuk AI coding agent
 

@@ -1,8 +1,8 @@
 'use strict';
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
-const base='http://127.0.0.1:8081',out='/workspace/.tg-cache/tg019-22-browser';fs.mkdirSync(out,{recursive:true});
+const base=require('./environment.cjs').base,out=require('./environment.cjs').artifactPath('tg019-22-browser');fs.mkdirSync(out,{recursive:true});
 function otp(){const n=Buffer.alloc(8);n.writeBigUInt64BE(BigInt(Math.floor(Date.now()/30000)));const d=crypto.createHmac('sha1',Buffer.from('12345678901234567890')).update(n).digest();return((d.readUInt32BE(d[d.length-1]&15)&0x7fffffff)%1000000).toString().padStart(6,'0');}
-(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const checks=[],errors=[];try{
+(async()=>{const b=await chromium.launch({executablePath:require('./environment.cjs').chromiumPath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const checks=[],errors=[];try{
 const admin=await b.newContext(),client=await b.newContext(),a=await admin.newPage(),c=await client.newPage();
 for(const p of [a,c]){p.setDefaultTimeout(12000);p.on('pageerror',e=>errors.push(e.message));}
 async function login(page,email,isAdmin=false){await page.goto(base+'/login');await page.locator('#email').fill(email);await page.locator('#password').fill('test-only-password');await page.locator('.auth-submit').click();await page.waitForURL(isAdmin?'**/admin/2fa/challenge':'**/member');if(isAdmin){await page.locator('#otp').fill(otp());await page.locator('.auth-submit').click();await page.waitForURL('**/admin');}}

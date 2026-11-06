@@ -1,7 +1,7 @@
 'use strict';
 const { chromium }=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8081',out='/workspace/.tg-cache/tg012-browser';fs.mkdirSync(out,{recursive:true});
-(async()=>{const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];const errors=[];try{
+const base=require('./environment.cjs').base,out=require('./environment.cjs').artifactPath('tg012-browser');fs.mkdirSync(out,{recursive:true});
+(async()=>{const browser=await chromium.launch({executablePath:require('./environment.cjs').chromiumPath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];const errors=[];try{
  const page=await browser.newPage({colorScheme:'dark'});page.setDefaultTimeout(10000);page.on('pageerror',error=>errors.push(error.message));
  for(const width of [360,768,1280]){await page.setViewportSize({width,height:900});for(const uri of ['/produk','/produk/synthetic-public-ea','/produk/synthetic-empty-indicator','/broker']){
   const response=await page.goto(base+uri,{waitUntil:'networkidle'});assert.equal(response.status(),200);assert.equal(await page.locator('main').count(),1);assert.equal(await page.locator('h1').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'Overflow '+uri+' '+width);

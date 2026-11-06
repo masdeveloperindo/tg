@@ -178,10 +178,10 @@ class OperationsTest extends TestCase
         $pricing = CheckoutRecords::rules();
         $methods = CheckoutRecords::methods();
         app(Configuration::class)->save($pricing, $methods, 'fixture_admin', Configuration::ANOMALY, ['title' => 'Synthetic Site', 'description' => 'Synthetic SEO description']);
-        $raw = DB::table('settings')->where('key','checkout.payment_methods')->value('value_encrypted');
-        $this->assertStringNotContainsString('SYNTHETIC-NOT-A-BANK',$raw);
+        $raw = DB::table('settings')->where('key', 'checkout.payment_methods')->value('value_encrypted');
+        $this->assertStringNotContainsString('SYNTHETIC-NOT-A-BANK', $raw);
         $this->assertFalse(config('tradergaruda.license_sales_enabled'));
-        $this->assertSame($pricing,Configuration::json('checkout.pricing'));
-        $this->assertStringNotContainsString('SYNTHETIC-NOT-A-BANK',DB::table('activity_logs')->get()->toJson());
+        $this->assertSame($pricing, Configuration::json('checkout.pricing'));
+        $this->assertStringNotContainsString('SYNTHETIC-NOT-A-BANK', DB::table('activity_logs')->get()->toJson());
     }
 }

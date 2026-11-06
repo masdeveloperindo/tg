@@ -1,7 +1,7 @@
 'use strict';
 const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8081',out='/workspace/.tg-cache/tg013-15-browser';fs.mkdirSync(out,{recursive:true});
-(async()=>{const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const checks=[];try{
+const base=require('./environment.cjs').base,out=require('./environment.cjs').artifactPath('tg013-15-browser');fs.mkdirSync(out,{recursive:true});
+(async()=>{const browser=await chromium.launch({executablePath:require('./environment.cjs').chromiumPath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const checks=[];try{
  const context=await browser.newContext({viewport:{width:1280,height:900},permissions:['clipboard-read','clipboard-write']});const page=await context.newPage();page.setDefaultTimeout(12000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'/produk/synthetic-checkout-ea',{waitUntil:'networkidle'});await page.getByRole('link',{name:'Sewa',exact:true}).click();await page.waitForURL('**/login');
  await page.locator('#email').fill('layout-client@example.invalid');await page.locator('#password').fill('test-only-password');await page.locator('.auth-submit').click();await page.waitForURL(url=>url.pathname==='/checkout/synthetic-checkout-ea'&&url.searchParams.has('intent'));

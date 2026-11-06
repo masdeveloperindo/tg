@@ -8,12 +8,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
 
-const base = new URL(process.env.LAYOUT_BASE_URL || 'http://127.0.0.1:8081');
+const base = new URL(process.env.LAYOUT_BASE_URL || require('./environment.cjs').base);
 if (base.protocol !== 'http:' || !['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname)
     || base.username || base.password || base.pathname !== '/' || base.search || base.hash) {
     throw new Error('LAYOUT_BASE_URL must be the origin of the isolated HTTP loopback e2e server.');
 }
-const artifacts = process.env.LAYOUT_ARTIFACT_DIR || '/workspace/.tg-cache/tg008-browser';
+const artifacts = process.env.LAYOUT_ARTIFACT_DIR || require('./environment.cjs').artifactPath('tg008-browser');
 fs.mkdirSync(artifacts, { recursive: true });
 
 const fixtures = {
@@ -259,7 +259,7 @@ async function inspectAdminSearch(page, view) {
 
 async function run() {
     const browser = await chromium.launch({
-        executablePath: '/usr/bin/chromium',
+        executablePath: require('./environment.cjs').chromiumPath,
         headless: true,
         args: ['--no-sandbox', '--disable-dev-shm-usage'],
     });

@@ -38,7 +38,7 @@ final class DetectAnomalies
                         $created++;
                     }
 
-return $created;
+                    return $created;
                 }, 3);
             }
         });

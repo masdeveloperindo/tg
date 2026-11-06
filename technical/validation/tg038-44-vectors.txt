@@ -1,0 +1,1 @@
+PASS: 4 PHP Ed25519 vectors verified independently by Python; MT5 PoC remains pending.

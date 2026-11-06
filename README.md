@@ -9,7 +9,7 @@
 
 **Mulai dari `CODEX_START_HERE.md` dan `AGENTS.md`.** Prompt pertama bisa disalin dari `CODEX_TASK_PROMPTS.md`. Jangan upload file ZIP tanpa ekstrak: seluruh isinya harus berada di root repository.
 
-**Ini bukan Laravel aplikasi siap-run.** Source Laravel dibuat oleh Codex secara bertahap mengikuti `TASKS.md`.
+**Source Laravel sudah tersedia.** Setup lokal ada di [DEVELOPMENT.md](DEVELOPMENT.md); status QA dan dependensi eksternal ada di [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## Cara mulai
 
@@ -34,7 +34,7 @@
 ## Status
 
 - Dokumentasi: tersedia untuk implementasi.
-- Source Laravel production: belum dibuat dalam paket ini.
+- Source aplikasi: Fase 1–4 sudah diimplementasikan; QA Fase 5 berjalan dengan bukti lokal.
 - Integrasi MQL5 verified: belum dijalankan.
 - Go-live: baru setelah bukti gate P0 lolos.
 
@@ -44,8 +44,10 @@
 
 Keterangan starter dan status di atas menggambarkan **paket spesifikasi awal**. Implementasi kini dimulai dengan fondasi Laravel 13, Livewire 4 dan Tailwind CSS 4 di root repository, tanpa mengganti dokumen atau HTML referensi. Panduan menjalankan aplikasi, konfigurasi lokal, build dan pengujian ada di [DEVELOPMENT.md](DEVELOPMENT.md); bukti hasil aktual dan batasannya dicatat di [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
-Workflow lokal memakai PHP 8.4, Composer 2, Node.js 24 dan MySQL 8.4. Container development disediakan untuk dependency lokal; ini tidak mencakup deployment atau operasi infrastruktur produksi. Schema/model lisensi dan ledger tersedia lewat TG-006, beserta autentikasi/TOTP TG-007; workflow transaksi, API lisensi dan integrasi EA MT5 belum diimplementasikan. Jangan gunakan untuk transaksi nyata.
+Workflow lokal memakai PHP 8.4, Composer 2, Node.js 24 dan MySQL 8.4. Container development disediakan untuk dependency lokal. Auth, produk/order/lisensi/API server, IB/rebate/pencairan, konten dan operasional sudah tersedia. Integrasi EA MT5, staging, UAT owner dan penerimaan handoff belum selesai; transaksi nyata tetap tertutup.
 
 Bukti database TG-006: [migrasi, constraint, model dan hasil pengujian](technical/validation/TG006.md). Autentikasi dan otorisasi TG-007 juga selesai; TG-008 (layout/design system) juga selesai; TG-009 (modal/loading/error/toast) selesai; TG-010 (audit/error aman) selesai; TG-011 (editor produk) selesai; TG-012 (katalog/detail publik) selesai; TG-013–TG-015 (harga kalender/checkout/Telegram manual) selesai; TG-016–TG-018 (konfirmasi admin, lifecycle lisensi dan unduhan privat) selesai; backend TG-019 (API lisensi) selesai, TG-021–TG-037 selesai; TG-019/TG-020 menunggu PoC EA nyata, handoff di `mt5/INTEGRATION.md`. TG-001–TG-003 masih menunggu owner/legal/source EA.
 
 Bukti TG-007: [autentikasi, TOTP, recovery dan reset manual](technical/validation/TG007.md). Admin pertama dibuat manual melalui `docker compose run --rm app php artisan tg:create-admin`; tidak ada akun/password bawaan.
+
+Fase 5: [runner QA/CI dan kandidat rilis](tools/qa/README.md), [bukti pengujian dan batas kelulusan](technical/validation/TG038-TG044.md), [UAT owner](technical/UAT_CHECKLIST.md). Kandidat tidak di-deploy dan tidak merupakan persetujuan go-live.

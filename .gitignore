@@ -35,3 +35,7 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Local QA / release rehearsal outputs, never runtime source.
+__pycache__/
+/qa-artifacts/

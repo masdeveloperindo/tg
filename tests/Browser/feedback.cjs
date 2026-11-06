@@ -2,7 +2,7 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 (async () => {
- const browser = await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
+ const browser = await chromium.launch({executablePath:require('./environment.cjs').chromiumPath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  const results=[];
  try {
   for (const scenario of ['expired','server-error','disconnected','timeout']) {
@@ -10,7 +10,7 @@ const assert = require('node:assert/strict');
    const page=await context.newPage();let posts=0;const errors=[];
    page.on('pageerror',e=>errors.push(e.message));
    page.on('dialog',()=>{throw new Error('Native browser alert/confirm is forbidden');});
-   await page.goto('http://127.0.0.1:8080/login',{waitUntil:'networkidle'});
+   await page.goto(require('./environment.cjs').base+'/login',{waitUntil:'networkidle'});
    if(scenario==='timeout') await page.clock.install();
    let received;const sent=new Promise(resolve=>received=resolve);
    await page.route('**/livewire-*/update',async route=>{
@@ -40,9 +40,9 @@ const assert = require('node:assert/strict');
    assert.deepEqual(errors,[]);results.push({scenario,status:'PASS'});await context.close();
   }
   const page=await browser.newPage();
-  await page.goto('http://127.0.0.1:8080/login',{waitUntil:'networkidle'});
+  await page.goto(require('./environment.cjs').base+'/login',{waitUntil:'networkidle'});
   await page.locator('#email').focus();
-  const html=require('node:fs').readFileSync('/workspace/.tg-cache/tg009-fixture.html','utf8');
+  const html=require('node:fs').readFileSync(require('./environment.cjs').fixturePath('qa-feedback.html'),'utf8');
   await page.evaluate(html=>document.body.insertAdjacentHTML('beforeend',html),html);
   const modal=page.locator('dialog[aria-labelledby="fixture-title"]');
   await modal.waitFor({state:'visible'});
@@ -67,5 +67,6 @@ const assert = require('node:assert/strict');
   results.push({scenario:'shared modal keyboard, busy Escape, upload events and dismissible toast',status:'PASS'});
   await page.close();
  } finally {await browser.close();}
+ const fs=require('node:fs'),out=require('./environment.cjs').artifactPath('tg009-browser');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(out+'/summary.json',JSON.stringify({passed:results.length,results,javascriptErrors:[]},null,2)+'\n');
  process.stdout.write(JSON.stringify(results,null,2)+'\n');
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});

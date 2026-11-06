@@ -1,0 +1,2 @@
+# QA-only independent consumer for PHP Ed25519 fixtures.
+cryptography==50.0.0

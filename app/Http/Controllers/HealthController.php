@@ -28,6 +28,6 @@ final class HealthController
             }
         }
 
-return response()->json(['status' => $ok ? 'ok' : 'unavailable'], $ok ? 200 : 503)->header('Cache-Control', 'no-store, private')->header('X-Robots-Tag', 'noindex, nofollow');
+        return response()->json(['status' => $ok ? 'ok' : 'unavailable'], $ok ? 200 : 503)->header('Cache-Control', 'no-store, private')->header('X-Robots-Tag', 'noindex, nofollow');
     }
 }

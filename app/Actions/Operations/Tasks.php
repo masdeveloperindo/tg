@@ -23,7 +23,7 @@ final class Tasks
             abort(422);
         }
 
-return $q;
+        return $q;
     }
 
     public static function licenses(string $task = '')
@@ -35,7 +35,7 @@ return $q;
             abort(422);
         }
 
-return $q;
+        return $q;
     }
 
     public static function cards(): array
@@ -47,7 +47,7 @@ return $q;
             ['label' => 'Pencairan diproses', 'count' => Withdrawal::where('status', 'processing')->count(), 'url' => route('admin.penarikan', ['status' => 'processing'])],
             ['label' => 'Lisensi berakhir dalam 30 hari', 'count' => self::licenses('expiring')->count(), 'url' => route('admin.lisensi', ['task' => 'expiring'])],
             ['label' => 'Anomali baru', 'count' => LicenseFlag::where('status', 'new')->count(), 'url' => route('admin.anomali', ['status' => 'new'])],
-            ['label' => 'Lunas tanpa lisensi', 'count' => self::orders('missing_license')->count(), 'url' => route('admin.pesanan',['task' => 'missing_license'])],
+            ['label' => 'Lunas tanpa lisensi', 'count' => self::orders('missing_license')->count(), 'url' => route('admin.pesanan', ['task' => 'missing_license'])],
         ];
     }
 }

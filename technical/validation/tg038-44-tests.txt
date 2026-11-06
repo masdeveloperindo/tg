@@ -1,0 +1,474 @@
+
+  ..................................................✓.........................
+  ............................................................................
+  ............................................................................
+  .................................................
+
+  ──────────────────────────────────────────────────────────────────── Laravel  
+    FIXED   ................................... 277 files, 1 style issue fixed  
+  ✓ tests/Support/rebate-worker.php unary_operator_spaces, braces_position, s…  
+
+
+   PASS  Tests\Feature\AdminTwoFactorTest
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #0      2.81s  
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #1      0.01s  
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #2      0.01s  
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #3      0.01s  
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #4      0.01s  
+  ✓ totp matches the official rfc6238 sha1 vectors with data set #5      0.01s  
+  ✓ totp accepts only the current and adjacent thirty second counters    0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.02s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ totp rejects invalid secret timestamp and digit parameters with dat… 0.01s  
+  ✓ generated secrets have 160 bits and are distinct                     0.01s  
+  ✓ setup enables only after a valid code and stores only encrypted sec… 0.24s  
+  ✓ setup requires recent past password confirmation with data set "ove… 0.01s  
+  ✓ setup requires recent past password confirmation with data set "fir… 0.01s  
+  ✓ expired setup cannot be confirmed even with a newly confirmed passw… 0.02s  
+  ✓ setup and challenge cannot be performed for another admin or a clie… 0.02s  
+  ✓ admin password login alone cannot open the admin area                0.21s  
+  ✓ a totp counter is consumed once across sessions and the next counte… 0.04s  
+  ✓ each recovery code is single use and belongs only to its admin       0.04s  
+  ✓ challenge limits five failures and expired password confirmation do… 0.04s  
+  ✓ an expired verified admin session cannot be revived with only a new… 0.02s  
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s  
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s  
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s  
+  ✓ challenge requires a recent password login when not yet verified wi… 0.01s  
+  ✓ reauthentication requires both password and an unused factor and up… 0.82s  
+  ✓ challenge livewire verifies the admin and recovery codes are shown…  0.09s  
+  ✓ setup livewire keeps the secret and recovery codes out of component… 0.04s  
+
+   PASS  Tests\Feature\AuthHttpSecurityTest
+  ✓ first admin is created only by private cli input and bootstrap cann… 0.42s  
+  ✓ auth pages and real livewire update responses cannot be cached       0.03s  
+  ✓ recovery and temporary password results are private single read res… 0.03s  
+  ✓ web logout and livewire updates reject missing csrf outside testing… 0.03s  
+
+   PASS  Tests\Feature\AuthenticationTest
+  ✓ registration ignores forged privileges encrypts contact creates wal… 0.41s  
+  ✓ registration accepts whatsapp without email verification or client…  0.21s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.02s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ invalid registration does not leave a user wallet or audit record w… 0.01s  
+  ✓ case variants cannot register a second account                       0.01s  
+  ✓ registration attempts are limited per ip without creating partial a… 0.22s  
+  ✓ login regenerates session and does not reuse old admin verification  0.19s  
+  ✓ missing wrong password and disabled account return the same generic… 0.58s  
+  ✓ login is limited to five failures per normalized email and ip for f… 1.15s  
+  ✓ ip limit prevents email rotation and isolated ips can still login    3.91s  
+  ✓ logout invalidates the session and regenerates csrf token            0.02s  
+  ✓ client can change password only with the current password and old s… 0.93s  
+  ✓ manual reset requires two identity checks then revokes sessions and… 0.56s  
+  ✓ register and login livewire forms use the real service               0.42s  
+  ✓ admin livewire reset displays the temporary password once on a priv… 0.43s  
+  ✓ reset cannot claim contact verification for an account without a re… 0.02s  
+
+   PASS  Tests\Feature\AuthorizationTest
+  ✓ clients can read only their own resources and verified admins can r… 0.03s  
+  ✓ disabled or forced password clients lose owner permissions with dat… 0.02s  
+  ✓ disabled or forced password clients lose owner permissions with dat… 0.02s  
+  ✓ client lists and audit logs require a verified admin                 0.02s  
+  ✓ license download requires an active unexpired owner license with da… 0.02s  
+  ✓ license download requires an active unexpired owner license with da… 0.02s  
+  ✓ license download requires an active unexpired owner license with da… 0.02s  
+  ✓ license download requires an active unexpired owner license with da… 0.02s  
+  ✓ license download requires an active unexpired owner license with da… 0.02s  
+  ✓ guests and wrong roles cannot enter member or admin pages            0.04s  
+  ✓ disabled accounts are logged out and cannot reach member data        0.02s  
+  ✓ forced password change allows only the change form and logout        0.03s  
+  ✓ admin password alone cannot enter panel and copied verification ide… 0.03s  
+  ✓ fake verified session cannot replace persisted admin totp enrollmen… 0.02s  
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s  
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s  
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s  
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s  
+  ✓ invalid admin idle timestamp revokes the entire session with data s… 0.02s  
+  ✓ exact thirty minute idle boundary is accepted and refreshed          0.03s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.03s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s  
+  ✓ expired admin sessions cannot bypass timeout through setup challeng… 0.02s  
+  ✓ fresh password only admin can reach challenge at thirty minute boun… 0.02s  
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s  
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s  
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.03s  
+  ✓ missing malformed or future totp verified marker does not grant adm… 0.02s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.01s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s  
+  ✓ client password reset requires session local recent reauthenticatio… 0.02s  
+  ✓ client cannot forge admin permissions by copying every verification… 0.02s  
+  ✓ livewire reset action reauthorizes after the authenticated actor ch… 0.04s  
+  ✓ livewire reset action rejects stale reauthentication after modal op… 0.04s  
+  ✓ livewire reset rejects a tampered admin target                       0.03s  
+
+   PASS  Tests\Feature\CheckoutConcurrencyTest
+  ✓ two independent workers create only one order and audit for the sam… 3.49s  
+
+   PASS  Tests\Feature\CheckoutTest
+  ✓ calendar price is linear and ends exclusively at new year wib with…  2.67s  
+  ✓ calendar price is linear and ends exclusively at new year wib with…  0.02s  
+  ✓ calendar price is linear and ends exclusively at new year wib with…  0.02s  
+  ✓ calendar price is linear and ends exclusively at new year wib with…  0.02s  
+  ✓ rounding half up modes floor and large decimal values use no float   0.02s  
+  ✓ h30 active renewal targets next year at base price and expired rene… 0.02s  
+  ✓ month and year boundaries use jakarta and cap quote lifetime         0.03s  
+  ✓ quote snapshot is immutable encrypted and order ignores client pric… 0.04s  
+  ✓ same intent retries return same order even after expiry and product… 0.03s  
+  ✓ quote owner and order owner cannot be forged                         0.06s  
+  ✓ waiting order contains no key and clipboard and chat cannot mark pa… 0.05s  
+  ✓ status check resumes original intent without minting a new quote af… 0.06s  
+  ✓ member renewal links only show eligible owned licenses               0.04s  
+  ✓ telegram accepts only username or exact personal url without query…  0.04s  
+  ✓ renewal uses stored account keeps key and rejects forged account     0.04s  
+  ✓ default poc gate missing owner settings and missing file fail close… 0.05s  
+  ✓ checkout livewire submission and private headers                     0.07s  
+  ✓ new registration returns to the original checkout without reenterin… 0.23s  
+  ✓ expired quote rejects order and invalid method never mutates databa… 0.03s  
+
+   PASS  Tests\Feature\ContentManagementTest
+  ✓ article drafts schedules categories and seo only expose eligible co… 0.07s  
+  ✓ private article and images require active client including ib only…  0.08s  
+  ✓ cover reencode sanitization and unpublish close all image endpoints  0.04s  
+  ✓ guide steps images reorder and inactive visibility are real          0.05s  
+  ✓ testimonials require real source consent confirmation schedule and…  0.04s  
+  ✓ announcement audience and exact schedule expiry use same member pag… 0.06s  
+  ✓ faq and static legal pages have honest unpublished state and only p… 0.05s  
+  ✓ admin content routes create edit and server ownership cannot be byp… 0.08s  
+
+   PASS  Tests\Feature\DatabaseFoundationTest
+  ✓ framework tables remain available on mysql 84                        0.01s  
+  ✓ database cache persists across store instances                       0.01s  
+  ✓ database lock rejects a second owner until released                  0.01s  
+  ✓ home request persists a guest database session                       0.02s  
+
+   PASS  Tests\Feature\DomainForeignKeyTest
+  ✓ the complete foreign key set matches the schema contract             0.01s  
+  ✓ each foreign key rejects a missing parent with data set "recovery c… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "version pr… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "media prod… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "performanc… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "order user… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "order prod… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "order rene… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "order conf… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "license us… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "license pr… 0.02s  
+  ✓ each foreign key rejects a missing parent with data set "license is… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "account ch… 0.02s  
+  ✓ each foreign key rejects a missing parent with data set "activation… 0.02s  
+  ✓ each foreign key rejects a missing parent with data set "log licens… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "flag licen… 0.02s  
+  ✓ each foreign key rejects a missing parent with data set "flag revie… 0.02s  
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "trading ac… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "wallet use… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "rebate tra… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "rebate cor… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "rebate aut… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "withdrawal… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "refund ord… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "refund act… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "announceme… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "article im… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set " f a q pro… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "guide prod… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "step guide… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "testimonia… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "setting up… 0.01s  
+  ✓ each foreign key rejects a missing parent with data set "activity a… 0.01s  
+
+   PASS  Tests\Feature\DomainIndexTest
+  ✓ mysql uses the required indexes on representative history            0.32s  
+
+   PASS  Tests\Feature\DomainMigrationTest
+  ✓ wallet anchor excludes a second mysql connection until the lock is…  1.03s  
+  ✓ empty database migrates rolls back and migrates again with circular… 5.75s  
+
+   PASS  Tests\Feature\DomainModelTest
+  ✓ every domain model maps to its contract table and loads microsecond… 2.23s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.02s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ every domain model maps to its contract table and loads microsecond… 0.01s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.02s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s  
+  ✓ sensitive model values are encrypted at rest and hidden from serial… 0.01s  
+  ✓ decimal casts keep money lots and exchange rates as exact strings    0.02s  
+  ✓ user creation normalizes email hashes password and does not mass as… 0.37s  
+  ✓ core relationships follow owner product order license and rebate fo… 0.02s  
+  ✓ timezone aware datetime assignments store utc microseconds without…  0.02s  
+  ✓ history models reject instance and bulk mutation including update o… 0.02s  
+  ✓ history models reject instance and bulk mutation including update o… 0.02s  
+  ✓ append only models allow new rows with created at and no updated at  0.02s  
+
+   PASS  Tests\Feature\DomainSchemaTest
+  ✓ all thirty domain tables exist on mysql 84 with transactional unico… 0.03s  
+  ✓ default seeding does not create demo accounts business data or secr… 0.02s  
+  ✓ money lots rates and performance numbers have the exact decimal pre… 0.01s  
+  ✓ all domain timestamps are datetime with microseconds and created on… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.02s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ varchar checks accept each declared value but reject invalid case a… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "zero u… 0.02s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.02s  
+  ✓ numeric and date checks reject invalid values with data set "zero e… 0.02s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "zero r… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "negati… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "rating… 0.01s  
+  ✓ numeric and date checks reject invalid values with data set "revers… 0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.02s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.02s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.02s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ unique keys reject duplicate records at the database with data set…  0.01s  
+  ✓ generated active version uniqueness allows many inactive versions a… 0.01s  
+  ✓ license uniqueness survives revocation and renewal references the e… 0.01s  
+  ✓ idempotency and rebate source keys are scoped to the declared owner  0.02s  
+  ✓ signed rebate corrections preserve the original entry                0.01s  
+  ✓ financial history blocks parent deletion but optional logs keep the… 0.01s  
+
+   PASS  Tests\Feature\FoundationTest
+  ✓ home displays an honest empty state                                  0.04s  
+  ✓ home is a renderable livewire component                              0.01s  
+  ✓ foundation uses the required safe runtime configuration              0.01s  
+  ✓ unimplemented sensitive endpoints are not exposed with data set "li… 0.01s  
+  ✓ unimplemented sensitive endpoints are not exposed with data set "he… 0.02s  
+  ✓ unimplemented sensitive endpoints are not exposed with data set "de… 0.01s  
+  ✓ unimplemented sensitive endpoints are not exposed with data set "pr… 0.01s  
+  ✓ unimplemented sensitive endpoints are not exposed with data set " t… 0.02s  
+
+   PASS  Tests\Feature\FulfillmentConcurrencyTest
+  ✓ two independent admin workers confirm once and issue only one licen… 2.71s  
+
+   PASS  Tests\Feature\FulfillmentTest
+  ✓ payment and encrypted license commit once and never log key or veri… 2.40s  
+  ✓ client unverified admin and expired reauth cannot confirm            0.05s  
+  ✓ missing funds proof expiry or poc gate do not issue a license        0.04s  
+  ✓ reject is terminal and never issues a key                            0.03s  
+  ✓ renewal keeps key and original issue order and does not extend twic… 0.07s  
+  ✓ audit failure rolls back paid and license creation                   0.04s  
+  ✓ status intents are idempotent and old suspend does not undo reactiv… 0.07s  
+  ✓ signed download is owned short lived and contains exact verified by… 0.06s  
+  ✓ signed url cannot select another product version or bypass state fi… 0.05s  
+  ✓ private storage configuration rejects a root inside the webroot      0.02s  
+  ✓ suspend revoke expiry version mismatch and corruption reject downlo… 0.06s  
+
+   PASS  Tests\Feature\LayoutTest
+  ✓ public pages share an accessible light document with data set "home… 0.02s  
+  ✓ public pages share an accessible light document with data set "logi… 0.02s  
+  ✓ public pages share an accessible light document with data set "regi… 0.02s  
+  ✓ client pages have member navigation and one content landmark with d… 0.02s  
+  ✓ client pages have member navigation and one content landmark with d… 0.03s  
+  ✓ verified admin pages share the admin navigation without nested layo… 0.03s  
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s  
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s  
+  ✓ verified admin pages share the admin navigation without nested layo… 0.02s  
+  ✓ admin without second factor is kept out of the portal with data set… 0.03s  
+  ✓ admin without second factor is kept out of the portal with data set… 0.03s  
+  ✓ forced password change keeps the required form outside the portal    0.02s  
+  ✓ disabled client cannot render the member portal                      0.02s  
+
+   PASS  Tests\Feature\LicenseApiTest
+  ✓ real ed25519 signature identity expiry and redacted logs             0.06s  
+  ✓ nonce replay is atomic durable and expires after ten minutes         0.06s  
+  ✓ all business denials are signed and do not create an activation      0.12s  
+  ✓ disabled owner and indicator without poc fail closed                 0.05s  
+  ✓ request validation limits and time skew do not echo secrets          0.07s  
+  ✓ rate limits key and ip independently without revealing identity      0.47s  
+  ✓ missing or insecure signing key is unavailable never unsigned valid  0.06s  
+  ✓ nonce cleanup preserves live replay window and defaults to dry run   0.04s  
+  ✓ approved account move denies old terminal and allows new terminal w… 0.06s  
+
+   PASS  Tests\Feature\LicenseOperationsConcurrencyTest
+  ✓ parallel nonce refund and account requests obey database invariants  2.88s  
+
+   PASS  Tests\Feature\LicenseOperationsTest
+  ✓ products and plaintext key only belong to owner and logs are limite… 2.38s  
+  ✓ expired license has zero days and no download but keeps owner histo… 0.05s  
+  ✓ request is pending replay safe and approval keeps key without rewri… 0.05s  
+  ✓ old approval retry does not restore account after a later change     0.06s  
+  ✓ change conflict stale identity and revoked license reject approval   0.05s  
+  ✓ other client and expired admin reauth cannot decide or refund        0.05s  
+  ✓ refund reserved totals replay and manual completion do not revoke l… 0.05s  
+  ✓ rejected refund releases reserved amount and never sets transfer da… 0.05s  
+  ✓ audit failure rolls back refund and account approval                 0.05s  
+  ✓ one approved account move per calendar service year even after earl… 0.07s  
+
+   PASS  Tests\Feature\LicenseSignatureVectorTest
+  ✓ public interoperability fixtures reject tampering nonce and unknown… 0.01s  
+
+   PASS  Tests\Feature\OperationsTest
+  ✓ anomaly threshold dedup cooldown and unknown key never automaticall… 0.05s  
+  ✓ unknown version and many ips flag counts without exposing raw ip     0.04s  
+  ✓ manual review and suspend require reauthentication and reason        0.06s  
+  ✓ expiry scheduler is idempotent audited and preserves paid or future… 0.03s  
+  ✓ health requires bearer returns minimal dependencies and never start… 0.03s  
+  ✓ scheduler jobs registered with overlap protection without host oper… 0.03s  
+  ✓ task dashboard counts link to server filtered jobs including paid w… 0.05s  
+  ✓ configuration is encrypted validated and does not enable ea sales    0.02s  
+
+   PASS  Tests\Feature\ProductEditorTest
+  ✓ product creation sanitizes description keeps decimals and ignores s… 0.02s  
+  ✓ product prices slug and published slug are validated                 0.02s  
+  ✓ empty description cannot be published and unknown status is rejecte… 0.02s  
+  ✓ guest client unverified and disabled admin cannot open editor or mu… 0.02s  
+  ✓ livewire editor creates product and locked id cannot be forged       0.07s  
+  ✓ livewire actions reauthorize after admin session expires             0.04s  
+  ✓ image upload is reencoded private and client filename cannot select… 0.03s  
+  ✓ disguised image svg and malicious video hosts are rejected           0.03s  
+  ✓ ex5 upload checksum and only one active version are enforced         0.03s  
+  ✓ script disguised as ex5 is rejected and database failure removes ne… 0.03s  
+  ✓ faq and tutorial are sanitized and can be updated without duplicate… 0.04s  
+  ✓ performance preserves optional null values and records editor and c… 0.03s  
+  ✓ cross product resource ids cannot be changed activated or removed    0.03s  
+  ✓ media and version metadata can be edited without replacing the sour… 0.10s  
+  ✓ performance pdf and equity are private and media removal is scoped…  0.05s  
+  ✓ temporary upload and preview endpoints require admin authentication  0.02s  
+  ✓ sanitizer removes xss namespaces comments styles and event handlers  0.01s  
+
+   PASS  Tests\Feature\PublishedCatalogTest
+  ✓ catalog and home only show published products and filter by type     0.07s  
+  ✓ empty catalog and broker pages are honest and accessible server ren… 0.05s  
+  ✓ detail hides absent sections and never exposes a checkout or fake m… 0.03s  
+  ✓ draft archived unknown and unpublished after mount return not found  0.05s  
+  ✓ published detail unifies real metadata and redacts private paths an… 0.03s  
+  ✓ published images are visible but unpublished images and raw reports… 0.06s  
+  ✓ missing or unsafe media do not produce an empty preview section or…  0.04s  
+  ✓ seo uses configured canonical origin and json ld cannot close scrip… 0.03s  
+  ✓ broker page only shows active effective partners and allowlisted li… 0.03s  
+  ✓ rebate estimate uses decimal strings and rejects inactive partner w… 0.07s  
+
+   PASS  Tests\Feature\RebateAccountsTest
+  ✓ broker logo url rate history sanitization and disabling preserve hi… 0.10s  
+  ✓ clients can link two brokers without license but cannot claim someo… 0.05s  
+  ✓ future or inactive broker rejects new claim and pending account can… 0.04s  
+  ✓ approval requires checked evidence and rejected reason is visible o… 0.05s  
+  ✓ member and admin routes authorize each mutation and do not expose f… 0.16s  
+  ✓ missing or paused rules do not invent a minimum or open withdrawals  0.04s  
+
+   PASS  Tests\Feature\RebateConcurrencyTest
+  ✓ parallel credits quotes pay reject cancel and correction obey one w… 4.20s  
+
+   PASS  Tests\Feature\RebateFinanceTest
+  ✓ credits are verified idempotent immutable and scoped to owner        2.36s  
+  ✓ correction appends reversal and replacement and replay preserves or… 0.05s  
+  ✓ negative correction cannot spend funds reserved or paid elsewhere    0.05s  
+  ✓ quote freezes fx minimum destination and retries after config chang… 0.04s  
+  ✓ validation expired or foreign quote and changed intent cannot reser… 0.06s  
+  ✓ two fresh quotes cannot reserve more than available and duplicate i… 0.04s  
+  ✓ processing paid once and terminal transitions keep accounting uncha… 0.07s  
+  ✓ reject and client cancel release reservation exactly once            0.05s  
+  ✓ other client disabled user and stale admin cannot mutate finances o… 0.05s  
+  ✓ two brokers accounts filters and end to end reconciliation match cl… 0.14s  
+  ✓ audit failure rolls back credit reservation and paid status          0.05s  
+
+   PASS  Tests\Feature\RouteCoverageTest
+  ✓ every prd path has a concrete handler and server access rules        0.02s  
+  ✓ cms create and list routes are operational not placeholder pages     0.16s  
+  ✓ sitemap xml is valid canonical and robots is dynamic not a static b… 0.03s  
+  ✓ outbound routes never accept a caller destination or send messages   0.04s  
+  ✓ unreadable optional seo configuration falls back without breaking s… 0.02s  
+
+   PASS  Tests\Feature\SafeAuditTest
+  ✓ request ids are server generated and correlate with safe logs        0.02s  
+  ✓ configured logger discards messages nested objects and secret value… 0.01s  
+  ✓ debug errors are generic in html and json and keep http status       0.02s  
+  ✓ audit only persists typed approved metadata and stable correlation   0.01s  
+  ✓ audit failure rolls back with the business transaction               0.01s  
+  ✓ retention is dry run by default and preserves audit and boundary ro… 0.02s  
+
+  Tests:    402 passed (3870 assertions)
+  Duration: 56.62s
+

@@ -76,7 +76,7 @@ class ContentController
         $response = response()->view('content.public', compact('kind', 'record', 'rows', 'title', 'description', 'noindex', 'canonical', 'socialImage', 'images', 'steps', 'telegram'));
         if ($noindex) {
             $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
-            $response->headers->set('Cache-Control','no-store, private');
+            $response->headers->set('Cache-Control', 'no-store, private');
         }
 
         return $response;

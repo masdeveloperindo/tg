@@ -1,0 +1,77 @@
+name: Application QA and release candidate
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+concurrency:
+  group: qa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  software:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: tg_test
+          MYSQL_ROOT_PASSWORD: synthetic-ci-only-password
+        ports: [3306:3306]
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    env:
+      APP_ENV: testing
+      APP_DEBUG: 'false'
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_DATABASE: tg_test
+      DB_USERNAME: root
+      DB_PASSWORD: synthetic-ci-only-password
+      DB_URL: ''
+      CACHE_STORE: database
+      SESSION_DRIVER: database
+      QA_ARTIFACT_DIR: ${{ runner.temp }}/tg-qa
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@d52fc211a0436f8839a587b3b5b8efddab4744ea # v2
+        with:
+          php-version: '8.4'
+          extensions: bcmath, gd, sodium, pdo_mysql, dom, mbstring
+          tools: composer:v2
+          coverage: none
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked application dependencies
+        run: |
+          cp .env.example .env
+          composer install --no-interaction --prefer-dist
+          php artisan key:generate --force
+          npm ci
+          npm run build
+          npm install --no-save --package-lock=false playwright@1.62.1
+          npx playwright install --with-deps chromium
+          python3 -m pip install -r tools/qa/requirements.txt
+          mkdir -p "$QA_ARTIFACT_DIR"
+      - name: PHP, schema, concurrency and lint
+        run: |
+          composer validate --strict
+          php vendor/bin/pint --test
+          php artisan test --no-ansi > "$QA_ARTIFACT_DIR/php-tests.txt" 2>&1
+          python3 tools/qa/test_release_bundle.py
+          python3 tests/Support/verify-license-vectors.py
+      - name: Isolated Livewire browser matrix
+        run: python3 tools/qa/browser_matrix.py --backend local --output "$QA_ARTIFACT_DIR/browser"
+      - name: Package and rehearse candidate (not deployment)
+        run: |
+          python3 tools/qa/release_bundle.py --output "$QA_ARTIFACT_DIR/release" > "$QA_ARTIFACT_DIR/release-build.json"
+          php tools/qa/rehearse-release.php "$QA_ARTIFACT_DIR/release/trader-garuda-candidate.tar.gz" "$QA_ARTIFACT_DIR/release-smoke.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: software-qa-${{ github.sha }}
+          path: ${{ runner.temp }}/tg-qa
+          retention-days: 14

@@ -1,8 +1,8 @@
 'use strict';
 const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');const crypto=require('node:crypto');
-const origin='http://127.0.0.1:8081';const out='/workspace/.tg-cache/tg011-browser';fs.mkdirSync(out,{recursive:true});
+const origin=require('./environment.cjs').base;const out=require('./environment.cjs').artifactPath('tg011-browser');fs.mkdirSync(out,{recursive:true});
 function otp(){const n=Buffer.alloc(8);n.writeBigUInt64BE(BigInt(Math.floor(Date.now()/30000)));const d=crypto.createHmac('sha1',Buffer.from('12345678901234567890')).update(n).digest();return ((d.readUInt32BE(d[d.length-1]&15)&0x7fffffff)%1000000).toString().padStart(6,'0');}
-(async()=>{const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];try{
+(async()=>{const browser=await chromium.launch({executablePath:require('./environment.cjs').chromiumPath,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];try{
  const page=await browser.newPage({viewport:{width:1280,height:900}});page.setDefaultTimeout(10000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(origin+'/login');await page.locator('#email').fill('layout-admin@example.invalid');await page.locator('#password').fill('test-only-password');
  await Promise.all([page.waitForURL('**/admin/2fa/challenge'),page.locator('button.auth-submit[type=submit]').click()]);await page.locator('#otp').fill(otp());await Promise.all([page.waitForURL('**/admin'),page.locator('button.auth-submit[type=submit]').click()]);
@@ -16,7 +16,7 @@ function otp(){const n=Buffer.alloc(8);n.writeBigUInt64BE(BigInt(Math.floor(Date
  results.push('Create product through Livewire UI; sales remain disabled');
  await tab('FAQ');await fill('faqForm.question','Synthetic question');await fill('faqForm.answer','<p>Synthetic answer.</p>');await page.getByRole('button',{name:'Simpan FAQ',exact:true}).click();await saved('FAQ tersimpan');assert.equal(await page.getByRole('heading',{name:'Synthetic question',exact:true}).count(),1);
  await tab('Preview & cara pakai');await page.getByRole('button',{name:'Tambah langkah',exact:true}).click();await fill('steps.0.body','<p>Synthetic installation step.</p>');await page.getByRole('button',{name:'Simpan panduan',exact:true}).click();await saved('Langkah panduan tersimpan');
- const png=fs.readFileSync('/workspace/.tg-cache/tg011-image.png');await page.locator('#editor-image').setInputFiles({name:'synthetic.png',mimeType:'image/png',buffer:png});await page.getByText('Transfer selesai.',{exact:false}).first().waitFor();
+ const png=fs.readFileSync(require('./environment.cjs').fixturePath('qa-image.png'));await page.locator('#editor-image').setInputFiles({name:'synthetic.png',mimeType:'image/png',buffer:png});await page.getByText('Transfer selesai.',{exact:false}).first().waitFor();
  await fill('mediaForm.alt_text','Synthetic screenshot');await page.getByRole('button',{name:'Tambah media',exact:true}).click();await saved('Media tersimpan');await page.locator('.editor-media-list img').waitFor();
  await page.getByText('Transfer selesai.',{exact:false}).first().waitFor({state:'hidden'});results.push('FAQ, tutorial and actual image upload/re-encode/save');
  await tab('Performa');await page.locator('#editor-performanceForm-test_type').selectOption('backtest');await page.locator('#editor-performanceForm-account_environment').selectOption('demo');
