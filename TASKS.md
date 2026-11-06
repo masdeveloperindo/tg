@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-001–TG-003 menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-021–TG-022 juga selesai; backend TG-019 selesai, tetapi penerimaan TG-019/TG-020 terblokir source EA dan PoC terminal. Bukti terbaru: `technical/validation/TG019-TG022.md`. TG-001–TG-003 masih menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -128,20 +128,22 @@ Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Ad
   - **Selesai jika:** File hanya bisa diunduh pemilik lisensi berhak melalui URL sementara dan cek authorization; checksum dan tes akses silang lulus.
 
 - [ ] **TG-019 — API lisensi v1, nonce, rate limit, signature** `P0`
+  - **Status:** backend dan test vector PHP→Python selesai; BLOCKED untuk penerimaan penuh sampai verifikasi vector di EA nyata. Lihat `technical/validation/TG019-TG022.md`.
   - **Pemilik peran:** Backend + MQL5 Dev. **Dependensi:** TG-003,TG-017. **Gate:** G-10,G-11.
   - **Selesai jika:** Endpoint benar-benar memverifikasi key+produk+akun+expiry; replay/invalid/mismatch ditolak; test vector signature dapat diverifikasi EA nyata.
   - **Artefak teknis wajib:** `technical/API_CONTRACT.md` + test fixture signed Ed25519 dan nonce TTL 10 menit.
 
 - [ ] **TG-020 — Integrasi EA MT5 ke API dan uji offline** `P0`
+  - **Status:** BLOCKED; source EA, verifier pure MQL5 dan terminal MT5 belum tersedia. Handoff/test matrix: `mt5/INTEGRATION.md`; tidak ada klaim PoC simulasi.
   - **Pemilik peran:** MQL5 Dev + QA. **Dependensi:** TG-018,TG-019. **Gate:** G-10,G-11,G-12.
   - **Selesai jika:** Uji terminal MT5 nyata: valid, expired, salah akun, revoke, suspend, WebRequest allowlist, timeout, offline grace <=48 jam dan tidak lewat expiry; indikator terkunci bila tanpa PoC.
   - **Artefak teknis wajib:** Log uji terminal MT5 + pure MQL5 Ed25519 verify yang lulus, bukan simulated status.
 
-- [ ] **TG-021 — Client Produk Saya, key, unduhan & riwayat verifikasi** `P0`
+- [x] **TG-021 — Client Produk Saya, key, unduhan & riwayat verifikasi** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-017,TG-018. **Gate:** G-04,G-19.
   - **Selesai jika:** Status dan sisa hari lisensi benar; salin key/unduh hanya untuk pemilik; 50 verifikasi terakhir terbatas data sendiri.
 
-- [ ] **TG-022 — Refund manual dan perubahan akun MT5 terkontrol** `P0`
+- [x] **TG-022 — Refund manual dan perubahan akun MT5 terkontrol** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-016,TG-017. **Gate:** G-17.
   - **Selesai jika:** Refund uang tercatat terpisah dari revoke; perubahan akun butuh persetujuan admin & audit; transaksi tidak merusak order/lisensi.
 
@@ -277,7 +279,7 @@ Bukti uji aplikasi Laravel dan terminal EA nyata wajib ada sebelum uang sungguha
 | TG-006 | DONE | `feat/laravel-foundation` (working tree) | 171 tests / 1294 assertions, 30 domain tables, rollback, 38 FK, EXPLAIN, 2-connection lock; `technical/validation/TG006.md` | Review agent + validasi MySQL 8.4 lokal | 2026-11-04 |
 | TG-007 | DONE | `feat/laravel-foundation` (working tree) | 265 tests / 1946 assertions, register/login/TOTP/recovery/reset/policy/CSRF/idle PASS; `technical/validation/TG007.md` | Review keamanan agent + MySQL lokal | 2026-11-04 |
 | TG-016–TG-018 | DONE (software) | `feat/laravel-foundation` | 343 tests/2771 assertions; race MySQL,8 browser checks; `technical/validation/TG016-TG018.md` | MySQL8.4 + Chromium lokal | 2026-11-06 |
-| TG-019 | TODO | — | — | — | — |
+| TG-019 | BLOCKED (PoC EA) | `feat/laravel-foundation` | Backend/signature/nonce/rate limit PASS; vector EA nyata belum tersedia; `technical/validation/TG019-TG022.md` | PHP/MySQL + Python | 2026-11-06 |
 | TG-027 | TODO | — | — | — | — |
 | TG-044 | BLOCKED | — | Seluruh gate P0 belum diuji | — | — |
 
@@ -306,3 +308,6 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 | TG-012 | DONE | `feat/laravel-foundation` | 311 tests/2566 assertions;12 browser cases, published-only/SEO/privacy; `technical/validation/TG012.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |
 
 | TG-013–TG-015 | DONE (software) | `feat/laravel-foundation` | 331 tests/2692 assertions; dua worker MySQL,8 browser checks; `technical/validation/TG013-TG015.md` | MySQL8.4 + Chromium lokal | 2026-11-05 |
+
+| TG-020 | BLOCKED | `feat/laravel-foundation` | `mt5/INTEGRATION.md`; source EA/verifier MQL5/terminal tidak tersedia | Menunggu owner + MQL5 Dev | 2026-11-06 |
+| TG-021–TG-022 | DONE (software) | `feat/laravel-foundation` | 363 tests/3191 assertions,9 browser checks; `technical/validation/TG019-TG022.md` | MySQL8.4 + Chromium | 2026-11-06 |

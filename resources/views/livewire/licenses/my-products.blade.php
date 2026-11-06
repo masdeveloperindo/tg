@@ -1,0 +1,23 @@
+<div>
+<p class="eyebrow">AREA CLIENT / PRODUK SAYA</p><h1>{{ $license ? $license->product->name : 'Produk Saya.' }}</h1>
+@include('livewire.auth.partials.feedback')
+@if(!$license)
+<ul class="auth-client-list">@forelse($licenses as $row)<li class="auth-client-row"><div><h2>{{ $row->product->name }}</h2><p>Akun {{ $row->mt5_account }} · {{ $row->status->value==='active' && !$row->expires_at->isFuture() ? 'expired' : $row->status->value }}</p></div><x-ui.button :href="route('member.produk.licenseId',$row->id)">Lihat lisensi</x-ui.button></li>@empty<li>Belum ada produk berlisensi. Lisensi terbit setelah admin memeriksa pembayaran.</li>@endforelse</ul>{{ $licenses->links() }}
+@else
+@php($active=$license->status->value==='active' && $license->expires_at->isFuture())
+<x-ui.panel title="Lisensi dan akun MT5">
+<p>Status: <strong>{{ $license->status->value==='active' && !$active ? 'expired' : $license->status->value }}</strong></p><p>Akun {{ $license->mt5_account }} · {{ $license->mt5_server }} · {{ $license->account_type->value }}</p>
+<p>Berlaku sampai {{ $license->expires_at->subSecond()->timezone('Asia/Jakarta')->format('d M Y H:i:s') }} WIB</p><p>Sisa hari: {{ max(0,(int)ceil(now()->diffInSeconds($license->expires_at,false)/86400)) }}</p>
+<div x-data="{ copied: false, failed: false }"><label for="license-key">Key lisensi pribadi</label><input id="license-key" x-ref="key" type="text" readonly value="{{ $license->key_ciphertext }}" class="auth-input" autocomplete="off" spellcheck="false"><button type="button" class="auth-secondary" @click="copied=false;failed=false;try{await navigator.clipboard.writeText($refs.key.value);copied=true}catch(e){$refs.key.focus();$refs.key.select();failed=true}">Salin key</button><p x-show="copied" x-cloak role="status">Key berhasil disalin.</p><p x-show="failed" x-cloak role="status">Pilih dan salin key secara manual.</p></div>
+@can('download',$license)<x-ui.button :href="route('licenses.download.request',$license->id)" variant="lime">Unduh EX5 privat</x-ui.button>@endcan
+<p>Sisa perubahan akun tahun ini: {{ $remainingChanges }}</p>
+@if($active && $remainingChanges > 0 && !$changes->contains(fn($row)=>$row->status->value==='pending'))<x-ui.button wire:click="openChange">Ajukan ganti akun MT5</x-ui.button>@endif
+@if($license->status->value==='active' && (!$active || now()->gte($license->expires_at->timezone('Asia/Jakarta')->subDay()->startOfDay()->subDays(30))))<x-ui.button :href="route('checkout.slug',['slug'=>$license->product->slug,'renewal'=>$license->id])">Perpanjang lisensi</x-ui.button>@endif
+<p>Jaga key tetap pribadi. Saat EA offline, perubahan izin dapat tertunda. Hubungi admin jika akun telah berubah.</p>
+</x-ui.panel>
+<x-ui.panel title="Permintaan perubahan akun">@forelse($changes as $change)<p>{{ $change->new_account }} · {{ $change->new_server }} · {{ $change->status->value }}</p>@empty<p>Belum ada permintaan.</p>@endforelse</x-ui.panel>
+<x-ui.panel title="50 verifikasi terakhir"><p>Terakhir terhubung: {{ $lastSeen?->timezone('Asia/Jakarta')->format('d M Y H:i:s').($lastSeen ? ' WIB' : 'Belum ada koneksi terverifikasi') }}</p><p>Hasil verifikasi terakhir: {{ $logs->first()?->result ?? 'Belum ada' }}</p><details><summary>Lihat Riwayat</summary><ul class="auth-client-list">@forelse($logs as $log)<li>{{ $log->created_at->timezone('Asia/Jakarta')->format('d M Y H:i:s') }} WIB · {{ $log->result }} · Versi {{ $log->product_version ?? '—' }}</li>@empty<li>Belum ada verifikasi API tercatat.</li>@endforelse</ul></details></x-ui.panel>
+<x-ui.button :href="route('member.produk')">Semua produk saya</x-ui.button>
+@endif
+@if($changing)<x-ui.modal id="account-change" title="Ajukan ganti akun MT5" description="Maksimal satu perubahan per tahun layanan. Admin memeriksa permintaan; persetujuan mengganti akun yang diizinkan. Key dan tipe real/demo tetap sama." wire:loading.class="auth-is-busy" wire:target="requestChange,cancel" x-on:modal-cancel="$wire.cancel()"><p>Akun saat ini: {{ $license->mt5_account }} · {{ $license->mt5_server }}. Sisa perubahan: {{ $remainingChanges }}.</p>@include('livewire.auth.partials.feedback')<form wire:submit="requestChange" class="auth-form"><x-ui.editor-field model="account" label="Nomor akun MT5 baru" maxlength="24" /><x-ui.editor-field model="server" label="Nama server MT5 baru" maxlength="100" /><div class="auth-modal-actions"><button type="button" class="auth-secondary" wire:click="cancel" wire:loading.attr="disabled">Batal</button><button type="submit" class="button button-lime" wire:loading.attr="disabled">Kirim permintaan</button><x-ui.loading target="requestChange" label="Mengirim permintaan…" /></div></form></x-ui.modal>@endif
+</div>

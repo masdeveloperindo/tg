@@ -1,6 +1,6 @@
 # Development lokal — Trader Garuda
 
-Panduan ini mencakup TG-004–TG-018: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
+Panduan ini mencakup TG-004–TG-018, backend TG-019 dan TG-021–TG-022: fondasi Laravel 13, Livewire 4, Tailwind CSS 4, database, autentikasi, layout bersama, build aset dan pengujian. Baca `AGENTS.md`, `SCOPE_OF_WORK.md` dan kontrak di `technical/` sebelum mengembangkan modul berikutnya. Gunakan checkout yang sudah ada; setiap cloud task telah terisolasi, sehingga tidak perlu membuat Git worktree tanpa permintaan pengguna.
 
 ## Prasyarat
 
@@ -199,3 +199,23 @@ Rincian hasil dan browser test-only router: [`technical/validation/TG013-TG015.m
 Invoice lunas pemilik menyediakan unduhan EX5 versi aktif melalui URL signed maksimal5 menit, dibatasi expiry. Setiap unduhan memeriksa owner, status, fingerprint lisensi, versi produk, ukuran dan SHA-256. Storage harus di luar public; file tidak dieksekusi server. Suspend/revoke menutup permintaan unduhan berikutnya; byte yang sudah ditransmisikan tidak dapat ditarik. Revocation EA offline masih memerlukan API dan PoC terminal TG-019/TG-020.
 
 Bukti dan fixture sintetis: [`technical/validation/TG016-TG018.md`](technical/validation/TG016-TG018.md). Tidak ada migration baru dalam kelompok ini. Flag penjualan produksi tetapfalse; menjalankan tes tidak mengaktifkan bisnis.
+
+## API lisensi TG-019 dan handoff TG-020
+
+API stateless: `POST /api/v1/licenses/verify`, HTTPS JSON maksimal4KiB. Semua verdict bisnis HTTP200 memakai Ed25519 atas byte JSON persis; validasi error generik422, nonce replay409, rate limit429 dan kegagalan signer503. Endpoint deactivate tetap404. Format lengkap ada di `technical/API_CONTRACT.md`.
+
+Runtime PHP memerlukan ext-sodium (sudah tersedia di image development). Konfigurasi `TG_LICENSE_ED25519_KID` dan `TG_LICENSE_ED25519_PRIVATE_KEY_PATH` diisi operator dengan pasangan yang disetujui; path file harus di luar public, dapat dibaca proses app, mode0600/0400 tanpa akses group/other. Isi file adalah base64 secret key Ed25519 libsodium64byte; bukan seed32byte atau PEM. Server memeriksa konsistensi secret/public. Tidak ada key runtime bawaan, pembangkitan key produksi otomatis, atau perubahan .env existing. Public key harus dipin di EA sebelum pergantian kid; jangan memakai key RFC8032 fixture untuk runtime.
+
+Rate limit60/jam per fingerprint key dan120/jam per IP; cache bucket memakai HMAC, bukan key/IP mentah. Nonce base64url canonical minimal16byte, skew timestamp ±300detik; SHA-256 nonce di-insert unik atomik dengan TTL10menit. `php artisan tg:prune-api-nonces` dry run; `--apply` hanya menghapus yang expired, scheduler TG-035 masih terpisah. Aplikasi membaca status lisensi langsung dari DB, bukan cache verdict lama. `license_logs` menyimpan hasil, versi, account masked, hash IP dan requestID; tidak menyimpan raw key/nonce/IP.
+
+Tes memakai signer sementara di luar webroot yang dihapus sesudah tes. Reproduksi vector: `APP_ENV=testing DB_DATABASE=tg_test DB_URL= php tests/Support/generate-license-vectors.php` dalam container app. Verifikasi independen: `python3 tests/Support/verify-license-vectors.py` (paket cryptography diperlukan). Semua fixture memakai public test material. Ini membuktikan PHP→Python, bukan PHP→MQL5. Source EA, pure MQL5 verifier dan terminal belum tersedia; `mt5/INTEGRATION.md` berisi checklist integrasi dan test matrix. TG-019/TG-020 belum memenuhi penerimaan penuh; sales flag tetapfalse.
+
+## Produk Saya dan operasi manual TG-021–TG-022
+
+`/member/produk` dan detail `/member/produk/{licenseId}` hanya client pemilik aktif. Detail menampilkan key (tidak disimpan dalam public property Livewire), expiry/sisa hari, status, unduhan sesuai policy, terakhir terhubung dan50verifikasi melalui Lihat Riwayat. Copy key mengikuti hasil Promise clipboard; bila ditolak, teks dipilih untuk salin manual. IP,nonce,signature dan log client lain tidak ditampilkan.
+
+Pengajuan ganti akun membutuhkan akun/server baru; tipe real/demo dan key tetap. Satu request pending per lisensi, dengan row lock lisensi. Persetujuan admin wajib reauth, alasan, cek identity snapshot/uniqueness dan status aktif/belum expired. Default satu perpindahan disetujui per tahun layanan kalender WIB. Renewal dini tidak mereset kuota tahun berjalan; rejection tidak memakan kuota. Audit menyimpan period_year dan hash identity, bukan nomor akun. Akun order historis tetap; request ulang intent sama atau approval lama tidak mengembalikan akun sebelumnya. URL download lama berubah fingerprint; terminal lama ditolak API pada verifikasi online berikutnya. Batas offline tetap menunggu PoC.
+
+Detail pesanan admin memiliki rencana refund initiated, lalu completed hanya setelah checkbox transfer manual dan referensi. Metode saat ini manual_bank; jumlah parsial boleh tetapi total initiated+completed tidak melebihi nilai paid order, memakai BCMath dan lock order. Rejected melepas reservasi, bukan menyatakan dana terkirim. Tidak ada transfer bank/API eksternal; refund tidak mengubah paid historis, status lisensi, key atau ledger rebate. Revoke diputuskan terpisah. Audit dalam transaksi yang sama; respons hilang menggunakan Cek Status GET, bukan intent baru.
+
+Bukti aktual: [`technical/validation/TG019-TG022.md`](technical/validation/TG019-TG022.md). Fixture browser `seed-license-operations.php` dan `license-operations.cjs` mengikuti router e2e/tg_test yang terisolasi dari aplikasi normal. Tidak ada migration baru dalam kelompok ini.

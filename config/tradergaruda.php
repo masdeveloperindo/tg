@@ -7,5 +7,6 @@ return [
     // Sales remain closed until the relevant EA/indicator integration PoC passes.
     'license_sales_enabled' => false,
     'indicator_sales_enabled' => false,
+    'license_signing_kid' => env('TG_LICENSE_ED25519_KID'),
     'license_private_key_path' => env('TG_LICENSE_ED25519_PRIVATE_KEY_PATH'),
 ];

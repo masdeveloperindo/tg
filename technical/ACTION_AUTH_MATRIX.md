@@ -63,3 +63,9 @@
 ## 5. Definition of Done
 
 Aksi A01–A23 diuji dengan 403/404 untuk role salah, 422 untuk input invalid, retry/timeout, dua request paralel (yang relevan), dan hasil ledger/status yang konsisten. Setiap action punya screenshot/hasil test yang dapat diaudit di task terkait, tetapi **HTML demo tidak menjadi bukti aplikasi production siap**.
+
+## Realisasi TG-021/TG-022
+
+A04 memakai `ManageRefund`: order paid, initiated reservasi, completed hanya transfer manual terverifikasi+referensi, rejected membebaskan reservasi. Sum initiated/completed dibatasi amount paid dalam lock order; retry terminal tidak menjalankan transfer/mutasi baru. Revoke terpisah.
+
+A06/A07 memakai `ChangeAccount`: owner aktif mengajukan akun+server, satu pending di bawah lock license; admin reauth memutuskan di modal. Identity hash saat request harus masih cocok, triple unik, satu approved per tahun kalender layanan WIB (PRD LIC-07). Audit period_year tetap tahun saat approval, sehingga renewal sebelum Januari tidak mengulang kuota. Key dan paid order historis tidak ditulis ulang. Test matrix dan bukti: `validation/TG019-TG022.md`.

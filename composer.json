@@ -13,6 +13,7 @@
         "php": "^8.4",
         "ext-bcmath": "*",
         "ext-gd": "*",
+        "ext-sodium": "*",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.0"

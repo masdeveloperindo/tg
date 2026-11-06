@@ -12,6 +12,7 @@ use App\Livewire\Catalog\Products;
 use App\Livewire\Fulfillment\AdminLicenses;
 use App\Livewire\Fulfillment\AdminOrders;
 use App\Livewire\Home;
+use App\Livewire\Licenses\MyProducts;
 use App\Livewire\Orders\CheckoutPage;
 use App\Livewire\Products\Editor;
 use App\Livewire\Products\Index;
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
         Route::get('/pesanan/{kode}', App\Livewire\Orders\Detail::class)->name('pesanan.kode');
         Route::get('/member/produk/{license}/download', [LicenseDownloadController::class, 'request'])->whereNumber('license')->name('licenses.download.request');
         Route::get('/download/{license}/{version}', [LicenseDownloadController::class, 'download'])->whereNumber(['license', 'version'])->name('licenses.download');
+        Route::get('/member/produk', MyProducts::class)->name('member.produk');
+        Route::get('/member/produk/{licenseId}', MyProducts::class)->whereNumber('licenseId')->name('member.produk.licenseId');
         Route::get('/member/pesanan', App\Livewire\Orders\Index::class)->name('member.pesanan');
         Route::get('/member', fn () => view('auth.member', ['renewals' => app(SaleInfo::class)->renewals()]))->name('member');
         Route::get('/member/profil', Auth\ChangePassword::class)->name('member.profile');

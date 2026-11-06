@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -57,6 +58,12 @@ class AdminLicenses extends Component
         $service->change($this->licenseId, $this->target, $this->reason, $this->intent);
         $this->reset('target', 'intent', 'reason');
         session()->flash('status', 'Status lisensi telah diperiksa oleh server.');
+    }
+
+    #[On('license-account-updated')]
+    public function refreshAccount(): void
+    {
+        Gate::authorize('viewAny', User::class);
     }
 
     public function render()

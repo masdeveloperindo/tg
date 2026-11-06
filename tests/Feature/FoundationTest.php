@@ -57,7 +57,6 @@ class FoundationTest extends TestCase
     public static function unimplementedEndpoints(): array
     {
         return [
-            'license verification' => ['POST', '/api/v1/licenses/verify'],
             'license deactivation' => ['POST', '/api/v1/licenses/deactivate'],
             'health details' => ['GET', '/health'],
             'default framework health' => ['GET', '/up'],

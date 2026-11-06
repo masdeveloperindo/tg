@@ -112,3 +112,16 @@ Keputusan UX: server MT5 dan real/demo diminta satu kali karena schema/API wajib
 **343 tes / 2.771 assertion PASS**,206 file lint, build dan8 pemeriksaan browser PASS tanpa error JS. Dua worker MySQL membuktikan satu lisensi dan audit pembayaran untuk konfirmasi bersamaan; respons browser yang hilang setelah commit pulih melalui Cek Status GET. Setelah fingerprint diperkuat dengan timestamp perubahan,3 tes unduhan/14assertion serta browser lulus. Bukti: [`TG016-TG018.md`](technical/validation/TG016-TG018.md).
 
 Tidak ada migration baru atau transaksi/transfer/chat nyata. Flag penjualan tetapfalse. TG-001–TG-003 dan PoC EA/indikator tetap eksternal; suspend/revoke aplikasi bukan bukti penghentian EA offline. Berikutnya TG-019, lalu integrasi terminal TG-020. **SOFTWARE READY FOR HANDOFF: NO; GO-LIVE: NO.**
+
+## Progres 6 November 2026 — TG-019–TG-022
+
+| Task | Hasil software | Penerimaan penuh |
+| --- | --- | --- |
+| TG-019 | API stateless, validasi identitas/expiry/status/versi, Ed25519, nonce atomik TTL10menit, rate limit, telemetry aman dan test vector PHP→Python selesai | BLOCKED: belum ada verifikasi vector dalam EA nyata |
+| TG-020 | Handoff dan test matrix nyata disiapkan di `mt5/INTEGRATION.md` | BLOCKED: source EA, verifier MQL5, MetaEditor dan terminal belum tersedia |
+| TG-021 | Produk Saya pemilik, key/copy, download, status/sisa hari, terakhir terhubung dan50verifikasi opsional | DONE (software) |
+| TG-022 | Refund manual terpisah dari revoke; request akun+persetujuan/penolakan admin, kuota satu per tahun, audit dan transaksi idempoten | DONE (software) |
+
+**363 tes/3191assertions PASS**,224file lint, Composer strict validate, Vite build,4vector Ed25519 independen Python dan9pemeriksaan browser tanpa error JS. Konkurensi memakai dua proses/koneksi MySQL nyata: satu verdict untuk nonce sama, refund tidak melampaui dana, satu pending akun. Browser membuang respons completed setelah commit; GET menemukan satu catatan tanpa mengubah paid/active. Bukti: [`TG019-TG022.md`](technical/validation/TG019-TG022.md).
+
+Tidak ada migration baru atau transaksi/transfer/chat nyata. Penjualan tetapfalse, private signer produksi tidak dibuat/diisi. Key test dan EX5 sintetis; key pada screenshot dimask. TG-019/TG-020 sengaja belum dicentang karena acceptance mensyaratkan EA/terminal nyata. **SOFTWARE READY FOR HANDOFF: NO; GO-LIVE: NO.**

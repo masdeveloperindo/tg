@@ -12,6 +12,10 @@ final class Audit
     public static function record(User $actor, string $action, Model $subject, array $summary): void
     {
         $schemas = [
+            'license.account_change_requested' => ['resource_id', 'intent_sha256', 'before_sha256'],
+            'license.account_change_decided' => ['resource_id', 'approved', 'reason_provided', 'period_year'],
+            'refund.initiated' => ['resource_id', 'reason_provided'],
+            'refund.decided' => ['completed', 'reference_provided'],
             'order.payment_confirmed' => ['funds_checked', 'reference_provided', 'note_provided', 'resource_id'],
             'order.rejected' => ['reason_provided'],
             'license.issued' => ['coverage_year', 'resource_id'],
@@ -46,7 +50,7 @@ final class Audit
                 'reason_code' => in_array($value, ['security_review', 'client_request', 'policy_violation', 'manual_correction'], true),
                 'role' => in_array($value, ['client', 'admin'], true),
                 'status' => in_array($value, ['active', 'disabled', 'draft', 'published', 'archived'], true),
-                'coverage_year', 'resource_id', 'step_count', 'sessions_revoked', 'version_count', 'media_count', 'faq_count', 'performance_count' => is_int($value) && $value >= 0,
+                'period_year', 'coverage_year', 'resource_id', 'step_count', 'sessions_revoked', 'version_count', 'media_count', 'faq_count', 'performance_count' => is_int($value) && $value >= 0,
                 default => is_bool($value),
             };
             if ($valid) {

@@ -127,3 +127,11 @@ Untuk HTTP 200, semua status bisnis **harus** ditandatangani. Respons 4xx/5xx ti
 Artefak wajib setelah implementasi: `tests/fixtures/license_signature_valid.json`, `license_signature_tampered.json`, `license_signature_wrong_nonce.json`, `license_signature_unknown_kid.json`, dengan public key dan byte payload hex/base64, signature yang nyata, tanpa private key produksi. Cross-language suite PHP sign → MQL5 verify sukses, perubahan 1 byte gagal, replay ditolak server, salah akun/expired/suspend/revoke ditolak, network offline diuji di terminal MT5 nyata. **Contoh envelope di dokumen ini bukan test vector kriptografis siap pakai.**
 
 Referensi teknis: https://www.mql5.com/en/docs/network/webrequest ; https://laravel.com/docs/13.x/deployment (atau dokumentasi Laravel 13 terkini).
+
+## Implementasi backend TG-019 — 6 November 2026
+
+Backend verify sudah berjalan dengan libsodium Ed25519. Key runtime: `TG_LICENSE_ED25519_KID` dan file `TG_LICENSE_ED25519_PRIVATE_KEY_PATH`, base64 secret libsodium64byte, di luar public dengan mode0600/0400; tanpa konfigurasi sah, tidak pernah mengeluarkan verdict unsigned. Semua HTTP200 ditandatangani termasuk penolakan. Validasi hanya menerima field kontrak; key8grup hex, versi numerik2atau3komponen (contoh1.0/1.0.0), account string dan canonical base64url nonce. Min version memakai min_supported_version versi aktif, fallback ke versi aktif; tidak ada versi aktif yang released menghasilkan update_required. Disabled/forced-password owner dan indikator tanpa PoC menghasilkan invalid.
+
+Nonce unik dipersist sebelum transaksi verdict; respons hilang tidak mengizinkan replay. Log+aktivasi dan pembacaan license dikunci agar bersaing aman dengan perubahan akun/status; hanya valid memperbarui last_seen. Tidak ada cache verdict yang bisa melampaui revoke. Endpoint deactivate tetap404. Health monitoring privat belum ditambahkan pada kelompok ini.
+
+Empat JSON fixture nyata berada di `tests/fixtures/`; hanya valid diterima, tampered/wrong_nonce/unknown_kid ditolak PHP dan Python. **Cross-language PHP→MQL5 dan offline grace di terminal belum diuji. TG-019 belum memenuhi acceptance penuh dan TG-020 tetapBLOCKED.** Jangan mengaktifkan penjualan dari bukti PHP→Python. Lihat [`validation/TG019-TG022.md`](validation/TG019-TG022.md) dan [`mt5/INTEGRATION.md`](../mt5/INTEGRATION.md).

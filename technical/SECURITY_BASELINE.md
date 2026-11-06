@@ -95,3 +95,11 @@ Konfirmasi pembayaran mengunci order lalu lisensi dalam transaksi yang sama deng
 File privat diperiksa canonical path di luar public, pola UUID, ukuran dan SHA-256 pada handle terkunci yang sama dengan stream. URL signed maksimal5 menit tidak membawa key/path; GET tetap memeriksa sesi pemilik, hak download, expiry, status, fingerprint state dan versi aktif produk yang sesuai. Respons no-store/private/nosniff. Perubahan status menutup request baru; stream yang sudah terkirim dan akses EA offline memerlukan batas tersendiri. Tidak mengklaim PoC offline/revocation selesai.
 
 Bukti: [`validation/TG016-TG018.md`](validation/TG016-TG018.md).
+
+## Implementasi TG-019/TG-021/TG-022 — 6 November 2026
+
+Verify stateless membatasi HTTPS/JSON/body4KiB, rate60/key/jam dan120/IP/jam (bucket HMAC), timestamp±300detik dan nonce canonical minimal128bit. Unique SHA-256 nonce dan TTL10menit mencegah replay pada dua worker; cleanup dry run default tidak menghapus live window. Signer Ed25519 memerlukan private file terbatas di luar public, tidak menerima public key dari request. Semua verdict200 signed; kesalahan request tidak mengungkap keberadaan identitas. License row lock memastikan state/aktivasi konsisten; telemetry tidak berisi raw key/nonce/IP. Tidak ada klaim verifier MQL5/offline grace lulus.
+
+Produk Saya scoped pemilik di setiap render/action, no-store/private, key tidak masuk property publik Livewire, log maksimal50 tanpa metadata sensitif. Clipboard hanya melaporkan sukses setelah writeText selesai. Account changes mengunci license→request, memeriksa hash identity sebelum approval, unique triple dan limit satu approval/tahunWIB. Intent request dan keputusan terminal aman terhadap retry lama. Refund mengunci order→refund, menghitung reserved+completed dengan BCMath, mewajibkan bukti referensi/cek transfer sebelum completed, serta tidak mengubah lisensi/order paid historis. Semua audit atomik dan metadata terbatasi.
+
+Bukti [`validation/TG019-TG022.md`](validation/TG019-TG022.md); TG-019/TG-020 menunggu EA/terminal nyata, flag penjualan tetapfalse.
