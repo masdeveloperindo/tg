@@ -64,7 +64,7 @@ class LayoutTest extends TestCase
         $document = $this->assertDocument($response);
 
         $this->assertPrivate($response, $document);
-        $this->assertPortalNavigation($document, $activeRoute, ['home', 'member', 'member.profile', 'member.pesanan', 'member.produk']);
+        $this->assertPortalNavigation($document, $activeRoute, ['home', 'member', 'member.profile', 'member.pesanan', 'member.produk', 'member.rebate', 'member.rebate.akun', 'member.penarikan']);
 
         foreach (['admin', 'admin.clients', 'admin.reauth', 'admin.2fa.setup', 'admin.2fa.challenge'] as $adminRoute) {
             $this->assertSame(0, $document->query('//a[@href="'.route($adminRoute).'"]')->length);
@@ -89,7 +89,7 @@ class LayoutTest extends TestCase
 
         $this->assertPrivate($response, $document);
         $this->assertPortalNavigation($document, $activeRoute, [
-            'home', 'admin', 'admin.pesanan', 'admin.lisensi', 'admin.produk', 'admin.clients', 'admin.reauth', 'password.change',
+            'home', 'admin', 'admin.pesanan', 'admin.lisensi', 'admin.broker', 'admin.rebate', 'admin.rebate.akun', 'admin.penarikan', 'admin.produk', 'admin.clients', 'admin.reauth', 'password.change',
         ]);
         $this->assertSame(0, $document->query('//a[@href="'.route('member').'"]')->length);
     }

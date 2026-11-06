@@ -12,6 +12,17 @@ final class Audit
     public static function record(User $actor, string $action, Model $subject, array $summary): void
     {
         $schemas = [
+            'broker.saved' => ['rate_before', 'rate_after', 'effective_before', 'effective_after', 'content_changed'],
+            'ib.account_attached' => ['proof_provided'],
+            'ib.account_decided' => ['approved', 'proof_checked', 'reason_provided'],
+            'rebate.credited' => ['resource_id'],
+            'rebate.corrected' => ['resource_id'],
+            'rebate.payout_settings' => ['content_changed'],
+            'withdrawal.requested' => ['resource_id'],
+            'withdrawal.cancelled' => [],
+            'withdrawal.processing' => ['transfer_checked', 'reference_provided', 'reason_provided'],
+            'withdrawal.paid' => ['transfer_checked', 'reference_provided', 'reason_provided'],
+            'withdrawal.rejected' => ['transfer_checked', 'reference_provided', 'reason_provided'],
             'license.account_change_requested' => ['resource_id', 'intent_sha256', 'before_sha256'],
             'license.account_change_decided' => ['resource_id', 'approved', 'reason_provided', 'period_year'],
             'refund.initiated' => ['resource_id', 'reason_provided'],
@@ -45,6 +56,8 @@ final class Audit
         foreach ($schemas[$action] as $key) {
             $value = $summary[$key] ?? null;
             $valid = match ($key) {
+                'rate_before', 'rate_after' => is_string($value) && preg_match('/\A[0-9]{1,14}\.[0-9]{4}\z/', $value) === 1,
+                'effective_before', 'effective_after' => is_string($value) && preg_match('/\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z/', $value) === 1,
                 'intent_sha256', 'before_sha256', 'after_sha256' => is_string($value) && preg_match('/^[a-f0-9]{64}$/', $value) === 1,
                 'before_status','after_status' => in_array($value, ['active', 'suspended', 'revoked'], true),
                 'reason_code' => in_array($value, ['security_review', 'client_request', 'policy_violation', 'manual_correction'], true),

@@ -69,3 +69,9 @@ Aksi A01–A23 diuji dengan 403/404 untuk role salah, 422 untuk input invalid, r
 A04 memakai `ManageRefund`: order paid, initiated reservasi, completed hanya transfer manual terverifikasi+referensi, rejected membebaskan reservasi. Sum initiated/completed dibatasi amount paid dalam lock order; retry terminal tidak menjalankan transfer/mutasi baru. Revoke terpisah.
 
 A06/A07 memakai `ChangeAccount`: owner aktif mengajukan akun+server, satu pending di bawah lock license; admin reauth memutuskan di modal. Identity hash saat request harus masih cocok, triple unik, satu approved per tahun kalender layanan WIB (PRD LIC-07). Audit period_year tetap tahun saat approval, sehingga renewal sebelum Januari tidak mengulang kuota. Key dan paid order historis tidak ditulis ulang. Test matrix dan bukti: `validation/TG019-TG022.md`.
+
+## Realisasi Fase 3
+
+A08–A17 memakai service di App/Actions/Rebates; mutasi admin memerlukan reauth (lebih ketat daripada minimum pada aksi nonfinansial). A09 meminta akun serta referensi bukti broker; unique broker/account dan row lock menjaga satu klaim, keputusan terminal dengan note terpisah. A11 menerima kredit positif, A12 menerima target akhir nonnegative lalu membuat reversal+replacement; referensi unik dan row lama immutable. Seluruh mutasi uang mengunci wallet dahulu, termasuk current reads untuk dedup/saldo.
+
+A13 memakai quote authenticated/encrypted5menit dengan snapshot owner/FX/minimum/IDR/tujuan/intent; request ulang mengembalikan row lama. A14 menahan reserve; A15 membutuhkan checkbox transfer+reference+tanggalWIB, pay-once; UI menawarkan pay setelah processing. A16/A17 melepas reserve hanya pada transisi sah, alasan reject wajib, cancel hanya requested. Browser unknown-response memakai GET, bukan mengulang intent baru. Validasi lengkap: validation/TG023-TG030.md.

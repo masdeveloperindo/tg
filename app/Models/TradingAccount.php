@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TradingAccount extends DomainModel
 {
-    protected $hidden = ['evidence_note'];
+    protected $hidden = ['evidence_note', 'verification_note'];
 
     protected function casts(): array
     {

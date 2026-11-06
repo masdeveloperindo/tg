@@ -103,3 +103,11 @@ Verify stateless membatasi HTTPS/JSON/body4KiB, rate60/key/jam dan120/IP/jam (bu
 Produk Saya scoped pemilik di setiap render/action, no-store/private, key tidak masuk property publik Livewire, log maksimal50 tanpa metadata sensitif. Clipboard hanya melaporkan sukses setelah writeText selesai. Account changes mengunci license→request, memeriksa hash identity sebelum approval, unique triple dan limit satu approval/tahunWIB. Intent request dan keputusan terminal aman terhadap retry lama. Refund mengunci order→refund, menghitung reserved+completed dengan BCMath, mewajibkan bukti referensi/cek transfer sebelum completed, serta tidak mengubah lisensi/order paid historis. Semua audit atomik dan metadata terbatasi.
 
 Bukti [`validation/TG019-TG022.md`](validation/TG019-TG022.md); TG-019/TG-020 menunggu EA/terminal nyata, flag penjualan tetapfalse.
+
+## Fase 3 — IB/rebate/pencairan
+
+Semua service mutasi admin memakai fresh actor + TOTP/reauth, setiap client render/action scoped pemilik aktif. URL broker HTTPS allowlisted; logo decode/re-encode/UUID pada storage privat. Rate history terstruktur; bukti IB, memo, tujuan, referensi transfer dan alasan bebas tidak disalin ke audit/log. Bukti pemilik dan hasil review tersimpan terpisah, tidak ditampilkan silang.
+
+Uang memakai DECIMAL/BCMath; wallet anchor dibuat race-safe dan dikunci sebelum ledger/withdrawal. Duplicate receipt dan saldo memakai current reads dengan row lock, termasuk saat transaction caller sudah memiliki snapshot lama. Credits unik akun/reference, koreksi append-only reversal+replacement dengan available>=0. Quote client encrypted/authenticated mengikat owner, intent, amount, destination, FX/minimum/IDR dan expiry; amount/destination tidak diambil ulang dari browser saat submit. Rechecking pause dan available terjadi di lock; tujuan encrypted at rest, masked pada list, full admin detail memerlukan reauth.
+
+UI meminta processing sebelum transfer manual; processing menutup cancel client. Paid/rejected terminal, retry tidak mendebit ulang/melepas reserve dua kali; audit gagal membatalkan seluruh mutasi. Reconciliation read-only melaporkan mismatch tanpa auto-fix. Risiko human double-transfer di bank tidak diklaim terselesaikan oleh aplikasi yang hanya mencatat transfer manual. Bukti software/concurrency/browser: validation/TG023-TG030.md; bukan kelulusan audit dana produksi.

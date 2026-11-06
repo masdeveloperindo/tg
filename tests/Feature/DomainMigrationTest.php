@@ -66,7 +66,13 @@ class DomainMigrationTest extends TestCase
             $this->assertCount(35, $this->tables());
             $this->assertSame(1, $this->renewalForeignKeyCount());
 
-            // The newest migration removes quote references before the original cyclic FK.
+            // Phase 3 adds only a nullable review note; rollback preserves financial history.
+            $this->assertTrue(Schema::hasColumn('trading_accounts', 'verification_note'));
+            $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
+            $this->assertFalse(Schema::hasColumn('trading_accounts', 'verification_note'));
+            $this->assertTrue(Schema::hasTable('checkout_quotes'));
+
+            // The quote migration removes its references before the original cyclic FK.
             $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
             $this->assertFalse(Schema::hasTable('checkout_quotes'));
             $this->assertFalse(Schema::hasColumn('orders', 'checkout_quote_id'));

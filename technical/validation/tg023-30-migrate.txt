@@ -1,0 +1,3 @@
+INFO  Running migrations.
+
+  2026_11_06_000001_add_ib_verification_note .................... 24.54ms DONE

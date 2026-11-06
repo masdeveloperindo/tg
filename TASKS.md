@@ -3,7 +3,7 @@
 **Paket:** v1.7.1 (software development only) (tambahan task untuk PRD v1.6, 4 November 2026)  
 **Batas kerja wajib:** `SCOPE_OF_WORK.md`; tidak ada task provisioning atau operasi infrastruktur.  
 **Sumber utama:** `PRD.md`, `PROMPT.md`, `PRODUCTION_GATE.md`, `technical/`, `.env.example`, `html-reference/`.  
-**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-021–TG-022 juga selesai; backend TG-019 selesai, tetapi penerimaan TG-019/TG-020 terblokir source EA dan PoC terminal. Bukti terbaru: `technical/validation/TG019-TG022.md`. TG-001–TG-003 masih menunggu input eksternal; task lain belum selesai.
+**Baseline paket awal:** semua task belum dikerjakan. **Progres sekarang:** TG-004–TG-018 selesai secara software; bukti di `technical/validation/FOUNDATION.md`, `technical/validation/TG006.md` dan `technical/validation/TG007.md`. TG-021–TG-030 juga selesai secara software; backend TG-019 selesai, tetapi penerimaan TG-019/TG-020 terblokir source EA dan PoC terminal. Bukti terbaru: `technical/validation/TG023-TG030.md`. TG-001–TG-003 masih menunggu input eksternal; task lain belum selesai.
 
 ## Cara pakai
 
@@ -151,38 +151,38 @@ Prioritaskan alur client Pilih EA → Pesan → Transfer → Chat Pribadi → Ad
 
 IB opsional, tetapi bila client ikut, daftar broker, hasil rebate dan pencairan harus lengkap, konsisten dan aman.
 
-- [ ] **TG-023 — Admin broker dan promosi IB publik** `P1`
+- [x] **TG-023 — Admin broker dan promosi IB publik** `P1`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-006,TG-008. **Gate:** G-13.
   - **Selesai jika:** Admin kelola logo, URL referral, syarat, rate berlaku; kalkulator berlabel estimasi dan tidak menjanjikan profit.
 
-- [ ] **TG-024 — Broker IB Saya: tautkan akun dan verifikasi admin** `P0`
+- [x] **TG-024 — Broker IB Saya: tautkan akun dan verifikasi admin** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-007,TG-023. **Gate:** G-13.
   - **Selesai jika:** Client boleh gabung beberapa broker, status Menunggu/Disetujui/Ditolak dan bukti kepemilikan; IB tetap opsional bagi pembeli EA.
 
-- [ ] **TG-025 — Ledger rebate immutable dan koreksi** `P0`
+- [x] **TG-025 — Ledger rebate immutable dan koreksi** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-006,TG-024. **Gate:** G-14.
   - **Selesai jika:** Input admin dengan source_reference unik, larang duplikasi, koreksi menambah reversal entry; semua mengacu akun IB terverifikasi.
   - **Artefak teknis wajib:** `technical/DATABASE_SCHEMA.md` ledger append-only, unique account/source ref dan koreksi.
 
-- [ ] **TG-026 — Client Hasil Rebate per broker & periode** `P0`
+- [x] **TG-026 — Client Hasil Rebate per broker & periode** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-025. **Gate:** G-13,G-14.
   - **Selesai jika:** Total lot/rebate, saldo tersedia, pending, paid dan mutasi akurat dari DB; filter broker/akun dan empty state jelas.
 
-- [ ] **TG-027 — Reservasi saldo pada permintaan pencairan** `P0`
+- [x] **TG-027 — Reservasi saldo pada permintaan pencairan** `P0`
   - **Pemilik peran:** Backend Dev. **Dependensi:** TG-025,TG-001. **Gate:** G-15.
   - **Selesai jika:** Validasi min/batas saldo; row lock + idempotency; dua pengajuan paralel tidak membuat saldo minus; kurs IDR snapshot.
   - **Artefak teknis wajib:** `technical/DATABASE_SCHEMA.md` wallet row lock, min payout, snapshot kurs, idempotency.
 
-- [ ] **TG-028 — Client ajukan pencairan + riwayat status** `P0`
+- [x] **TG-028 — Client ajukan pencairan + riwayat status** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-027,TG-009. **Gate:** G-15,G-18.
   - **Selesai jika:** Modal menunjukkan nominal USD/IDR dan rekening tujuan; status Diajukan/Diproses/Dibayar/Ditolak; tidak ada keberhasilan sebelum commit.
 
-- [ ] **TG-029 — Admin proses transfer dan penolakan pencairan** `P0`
+- [x] **TG-029 — Admin proses transfer dan penolakan pencairan** `P0`
   - **Pemilik peran:** Full-stack Dev. **Dependensi:** TG-027,TG-028. **Gate:** G-16,G-15.
   - **Selesai jika:** Transfer manual dicatat ref/bukti; Pay once; menolak me-release reserve tepat sekali; client melihat status aktual.
   - **Artefak teknis wajib:** `technical/ACTION_AUTH_MATRIX.md` A14–A16, bukti transfer manual dan pay-once.
 
-- [ ] **TG-030 — Audit konsistensi saldo end-to-end** `P0`
+- [x] **TG-030 — Audit konsistensi saldo end-to-end** `P0`
   - **Pemilik peran:** QA + Backend Dev. **Dependensi:** TG-025,TG-029. **Gate:** G-13,G-14,G-15,G-16.
   - **Selesai jika:** Test kredit, koreksi, dua akun, dua broker, reserved, rejected, paid, retry dan timeout; ledger = dashboard client & admin.
 
@@ -311,3 +311,5 @@ Jumlah tetap **44 task**; status awal seluruhnya TODO, progres aktual mengikuti 
 
 | TG-020 | BLOCKED | `feat/laravel-foundation` | `mt5/INTEGRATION.md`; source EA/verifier MQL5/terminal tidak tersedia | Menunggu owner + MQL5 Dev | 2026-11-06 |
 | TG-021–TG-022 | DONE (software) | `feat/laravel-foundation` | 363 tests/3191 assertions,9 browser checks; `technical/validation/TG019-TG022.md` | MySQL8.4 + Chromium | 2026-11-06 |
+
+| TG-023–TG-030 | DONE (software) | `feat/laravel-foundation` | 381 tests/3421 assertions; 248 lint; 15 browser checks; 2-worker money races; `technical/validation/TG023-TG030.md` | MySQL8.4 + Chromium, rekonsiliasi read-only | 2026-11-06 |

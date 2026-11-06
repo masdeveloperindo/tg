@@ -309,6 +309,7 @@ Akun IB ditaut client, diverifikasi manual admin.
 | `account_number` | `VARCHAR(24) NOT NULL` |
 | `status` | `VARCHAR(16) NOT NULL CHECK pending/approved/rejected` |
 | `evidence_note` | `TEXT NULL` |
+| `verification_note` | `TEXT NULL`, hasil review admin terpisah dari bukti awal (TG-024) |
 | `verified_at` | `DATETIME(6) NULL` |
 | `verified_by` | `BIGINT UNSIGNED NULL FK users.id RESTRICT` |
 | `created_at` | `DATETIME(6)` |
@@ -663,3 +664,13 @@ Baseline30 tabel domain diperluas dengan checkout_quotes: UUID primary key, FK u
 orders menambah checkout_quote_id UUID nullable/UNIQUE/FK RESTRICT dan payment_method_id VARCHAR(64) nullable. Order lama tetap valid. Jumlah tabel saat ini35 termasuk 4 framework; 42 FK. Empat FK baru diverifikasi bersama kontrak FK baseline. Rollback melepas referensi order→quote sebelum menghapus quotes, lalu migration deferred domain melepaskan siklus order/lisensi. Tes fresh/rollback/reset/remigrate PASS.
 
 Intent UUID adalah pengenal receipt privat, bukan license key. Receipt dipilih dengan user_id server; unique order per quote dan per user/intent melengkapi row lock user→quote→product→license. Payment snapshot tidak masuk audit atau serialisasi model umum. History finansial/retensi tetap keputusan owner/legal.
+
+## Realisasi Fase 3 — TG-023–TG-030
+
+Migration additive 2026_11_06 menambah verification_note nullable pada trading_accounts; tidak menambah tabel/FK atau menimpa evidence_note. Broker di-disable, bukan dihapus; audit menyimpan perubahan tarif/tanggal efektif. Trading account unique broker/account dipertahankan walau ditolak untuk mencegah klaim pemilik berbeda; review historis tidak ditulis ulang.
+
+Setiap mutasi kredit/koreksi/request/cancel/process/reject/paid mengunci wallets(user_id) dahulu. Perhitungan uang dan duplicate receipt memakai current locking reads agar snapshot repeatable-read yang terbentuk sebelum menunggu wallet tidak memakai saldo lama. Snapshot tampilan saldo/laporan diambil dalam transaksi konsisten.
+
+Rebate correction membuat reversal signed amount/lots dan replacement nonnegative target, masing-masing correction_of_id ke sumber yang sama. Tidak UPDATE/DELETE ledger. Source_reference kredit maksimal100 karakter; input referensi tidak menerima colon, sehingga suffix internal :reversal/:replacement tetap unik dalam batas128. Koreksi lanjutan memilih leaf replacement. Available tidak boleh negatif sesudah koreksi maupun reservasi. Basis saldo tetap ledger net dikurangi requested/processing dan paid, bukan kolom cache wallet.
+
+Tujuan withdrawal berisi JSON method/provider/holder/number pada cast encrypted. Quote encrypted/authenticated5menit menghasilkan snapshot immutable saat request; unique user/idempotency mengembalikan receipt saat retry, termasuk setelah expiry/pause. No migration dibutuhkan untuk quote karena token sudah authenticated dan seluruh receipt tersimpan pada withdrawals. Paid hanya setelah referensi, checkbox verifikasi dan timestamp transfer manual; audit atomik dan transisi terminal menjaga reserve terlepas sekali. Bukti: validation/TG023-TG030.md.

@@ -125,3 +125,11 @@ Tidak ada migration baru atau transaksi/transfer/chat nyata. Flag penjualan teta
 **363 tes/3191assertions PASS**,224file lint, Composer strict validate, Vite build,4vector Ed25519 independen Python dan9pemeriksaan browser tanpa error JS. Konkurensi memakai dua proses/koneksi MySQL nyata: satu verdict untuk nonce sama, refund tidak melampaui dana, satu pending akun. Browser membuang respons completed setelah commit; GET menemukan satu catatan tanpa mengubah paid/active. Bukti: [`TG019-TG022.md`](technical/validation/TG019-TG022.md).
 
 Tidak ada migration baru atau transaksi/transfer/chat nyata. Penjualan tetapfalse, private signer produksi tidak dibuat/diisi. Key test dan EX5 sintetis; key pada screenshot dimask. TG-019/TG-020 sengaja belum dicentang karena acceptance mensyaratkan EA/terminal nyata. **SOFTWARE READY FOR HANDOFF: NO; GO-LIVE: NO.**
+
+## Progres 6 November 2026 — Fase 3 TG-023–TG-030
+
+**DONE untuk software:** pengelolaan broker/logo/referral/tarif efektif; akun IB multi-broker dan verifikasi manual; ledger rebate append-only dengan reversal+replacement; laporan client per akun/broker/periode; snapshot kurs/minimum/tujuan pencairan; reserve, cancel, process, reject dan pay-once; audit serta rekonsiliasi read-only. IB tidak memerlukan EA.
+
+**381 tests /3421 assertions PASS**,248 file lint, Vite build dan15 browser checks tanpa error JS. Dua proses MySQL dengan snapshot lama membuktikan wallet lock/current reads untuk duplicate kredit, reserve, paid/reject, cancel/process dan koreksi/request. Browser mencakup upload/logo, modal validasi/Escape, dua broker/akun, koreksi, preview USD/IDR, response hilang setelah commit dan riwayat paid/cancelled/rejected pada360/768/1280. Rekonsiliasi setelah browser: satu wallet owner,0mismatch. Bukti: [`TG023-TG030.md`](technical/validation/TG023-TG030.md).
+
+Migration additive verification_note diterapkan ke development tanpa reset; tabel/FK tetap. Modal bersama dilindungi wire:ignore.self agar tidak tertutup saat upload/validasi. Tidak ada data broker, kurs, minimum atau tujuan rekening nyata yang diisi; payout memerlukan enabled/minimum/kurs owner dan verifikasi IB. Tidak ada transfer/komunikasi eksternal yang dijalankan. Integrasi EA tetap ditunda sesuai arahan user; Fase4 berikutnya. **SOFTWARE READY FOR HANDOFF: NO; GO-LIVE: NO.**

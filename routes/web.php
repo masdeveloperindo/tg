@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Orders\SaleInfo;
+use App\Http\Controllers\BrokerLogoController;
 use App\Http\Controllers\LicenseDownloadController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProductAssetController;
@@ -16,6 +17,12 @@ use App\Livewire\Licenses\MyProducts;
 use App\Livewire\Orders\CheckoutPage;
 use App\Livewire\Products\Editor;
 use App\Livewire\Products\Index;
+use App\Livewire\Rebates\Accounts;
+use App\Livewire\Rebates\AdminAccounts;
+use App\Livewire\Rebates\AdminWithdrawals;
+use App\Livewire\Rebates\Ledger;
+use App\Livewire\Rebates\Results;
+use App\Livewire\Rebates\Withdrawals;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +34,7 @@ Route::middleware('throttle:120,1')->group(function (): void {
     Route::get('/produk/performa/{performance}/gambar', [PublishedAssetController::class, 'performance'])->whereNumber('performance')->name('produk.performance.image');
     Route::get('/produk/panduan/{step}/gambar', [PublishedAssetController::class, 'step'])->whereNumber('step')->name('produk.step.image');
     Route::get('/produk/{slug}', Detail::class)->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')->name('produk.slug');
+    Route::get('/broker/logo/{broker}', BrokerLogoController::class)->whereNumber('broker')->name('broker.logo');
     Route::get('/broker', Brokers::class)->name('broker');
 });
 
@@ -45,6 +53,9 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
         Route::get('/pesanan/{kode}', App\Livewire\Orders\Detail::class)->name('pesanan.kode');
         Route::get('/member/produk/{license}/download', [LicenseDownloadController::class, 'request'])->whereNumber('license')->name('licenses.download.request');
         Route::get('/download/{license}/{version}', [LicenseDownloadController::class, 'download'])->whereNumber(['license', 'version'])->name('licenses.download');
+        Route::get('/member/rebate', Results::class)->name('member.rebate');
+        Route::get('/member/rebate/akun', Accounts::class)->name('member.rebate.akun');
+        Route::get('/member/penarikan', Withdrawals::class)->name('member.penarikan');
         Route::get('/member/produk', MyProducts::class)->name('member.produk');
         Route::get('/member/produk/{licenseId}', MyProducts::class)->whereNumber('licenseId')->name('member.produk.licenseId');
         Route::get('/member/pesanan', App\Livewire\Orders\Index::class)->name('member.pesanan');
@@ -62,6 +73,11 @@ Route::middleware(['auth', 'active', 'admin.session', 'auth.session', 'password.
 
                 return view('auth.admin');
             })->name('admin');
+            Route::get('/admin/broker', App\Livewire\Rebates\Brokers::class)->name('admin.broker');
+            Route::get('/admin/rebate', Ledger::class)->name('admin.rebate');
+            Route::get('/admin/rebate/akun', AdminAccounts::class)->name('admin.rebate.akun');
+            Route::get('/admin/penarikan', AdminWithdrawals::class)->name('admin.penarikan');
+            Route::get('/admin/penarikan/{id}', AdminWithdrawals::class)->whereNumber('id')->name('admin.penarikan.id');
             Route::get('/admin/pesanan', AdminOrders::class)->name('admin.pesanan');
             Route::get('/admin/pesanan/{id}', AdminOrders::class)->whereNumber('id')->name('admin.pesanan.id');
             Route::get('/admin/lisensi', AdminLicenses::class)->name('admin.lisensi');
