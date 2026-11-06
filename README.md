@@ -51,3 +51,5 @@ Bukti database TG-006: [migrasi, constraint, model dan hasil pengujian](technica
 Bukti TG-007: [autentikasi, TOTP, recovery dan reset manual](technical/validation/TG007.md). Admin pertama dibuat manual melalui `docker compose run --rm app php artisan tg:create-admin`; tidak ada akun/password bawaan.
 
 Fase 5: [runner QA/CI dan kandidat rilis](tools/qa/README.md), [bukti pengujian dan batas kelulusan](technical/validation/TG038-TG044.md), [UAT owner](technical/UAT_CHECKLIST.md). Kandidat tidak di-deploy dan tidak merupakan persetujuan go-live.
+
+Sudah memiliki database lokal? Ikuti [LOCAL_SETUP.md](LOCAL_SETUP.md) untuk menjalankan PHP langsung dengan MySQL existing, tanpa menyiapkan database Docker baru.
